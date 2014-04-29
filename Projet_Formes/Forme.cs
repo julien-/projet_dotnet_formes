@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Projet_Formes
+{
+    abstract class Forme
+    {
+        protected string _nom;
+        protected int _groupe = -1;
+
+        public Forme(string nom)
+        {
+            this._nom = nom;
+        }
+
+        public string Nom
+        {
+            get
+            {
+                return this._nom;
+            }
+            set
+            {
+                this._nom = value;
+            }
+        }
+
+        public virtual void Write()
+        {
+            Console.Out.WriteLine("Nom : " + this._nom);
+        }
+
+        public abstract void translation(float x, float y);
+        public abstract void homothetie(int coeff);
+
+    }
+}
