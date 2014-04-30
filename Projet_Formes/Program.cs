@@ -81,7 +81,7 @@ namespace Projet_Formes
             //rectdao.create(rect1);
 
             DAO<Ellipse> elipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
-            elipsedao.create(elipse1);
+            elipsedao.create(elipse1); //requete dans la BDD
         }
     }
 }

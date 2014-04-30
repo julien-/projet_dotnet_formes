@@ -10,9 +10,11 @@ namespace Projet_Formes
     {
         protected string _nom;
         protected int _groupe = -1;
+        protected int _id = 0;
 
-        public Forme(string nom)
+        public Forme(int id, string nom)
         {
+            this._id = id;
             this._nom = nom;
         }
 
@@ -27,6 +29,19 @@ namespace Projet_Formes
                 this._nom = value;
             }
         }
+
+        public int Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+
 
         public virtual void Write()
         {

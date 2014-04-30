@@ -12,7 +12,7 @@ namespace Projet_Formes
         protected Point _point2;
         protected string _couleur;
 
-        public Forme_simple(string nom, Point point1, Point point2, string couleur) : base (nom)
+        public Forme_simple(int id, string nom, Point point1, Point point2, string couleur) : base (id, nom)
         {
             this._point1 = point1;
             this._point2 = point2;
@@ -58,6 +58,7 @@ namespace Projet_Formes
         public override void Write()
         {
             base.Write();
+            Console.Out.WriteLine("Id : " + this._id);
             Console.Out.WriteLine("Couleur : " + this._couleur);
             Console.Out.WriteLine("Point1 (" + this._point1.X + "," + this._point1.Y + ")");
             Console.Out.WriteLine("Point2 (" + this._point2.X + "," + this._point2.Y + ")");

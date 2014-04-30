@@ -10,7 +10,7 @@ namespace Projet_Formes
     {
         protected Forme_simple []_tabforme;
 
-        public Forme_composee(string nom, Forme_simple []tabforme) : base(nom)
+        public Forme_composee(int id, string nom, Forme_simple []tabforme) : base(id, nom)
         {
             this._tabforme = tabforme;
         }
