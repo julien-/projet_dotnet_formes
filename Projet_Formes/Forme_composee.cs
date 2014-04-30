@@ -41,7 +41,7 @@ namespace Projet_Formes
             }
         }
 
-        public override void translation(float x, float y)
+        public override void translation(int x, int y)
         {
             for (int z = 0; z < this._tabforme.Length; z++)
             {

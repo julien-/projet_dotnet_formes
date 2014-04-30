@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace Projet_Formes
             
         }
 
-        public override void translation(float x, float y)
+        public override void translation(int x, int y)
         {
             base.translation(x, y);
 

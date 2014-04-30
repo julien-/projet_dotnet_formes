@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,7 +65,7 @@ namespace Projet_Formes
             Console.Out.WriteLine("Point2 (" + this._point2.X + "," + this._point2.Y + ")");
         }
 
-        public override void translation(float x, float y)
+        public override void translation(int x, int y)
         {
             this._point1.X = this._point1.X + x;
             this._point1.Y = this._point1.Y + y;

@@ -36,7 +36,6 @@
             this.segmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.polygoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,18 +48,21 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nouveauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sauvegarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fichierToolStripMenuItem,
             this.dessinerToolStripMenuItem,
             this.groupeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -129,15 +131,6 @@
             this.groupeToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
             this.groupeToolStripMenuItem.Text = "Groupe";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 31);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(765, 510);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -180,7 +173,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nom";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -233,7 +225,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Zoom";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -308,37 +299,74 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(184, 5);
+            this.label10.Location = new System.Drawing.Point(307, 5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(112, 20);
             this.label10.TabIndex = 3;
             this.label10.Text = "Nombre points:";
             this.label10.Visible = false;
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(309, 5);
+            this.textBox3.Location = new System.Drawing.Point(425, 5);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(22, 22);
             this.textBox3.TabIndex = 4;
             this.textBox3.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(12, 31);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(753, 503);
+            this.panel1.TabIndex = 5;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
+            // fichierToolStripMenuItem
+            // 
+            this.fichierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nouveauToolStripMenuItem,
+            this.sauvegarderToolStripMenuItem,
+            this.importerToolStripMenuItem});
+            this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
+            this.fichierToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.fichierToolStripMenuItem.Text = "Fichier";
+            // 
+            // nouveauToolStripMenuItem
+            // 
+            this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.nouveauToolStripMenuItem.Text = "Nouveau";
+            // 
+            // sauvegarderToolStripMenuItem
+            // 
+            this.sauvegarderToolStripMenuItem.Name = "sauvegarderToolStripMenuItem";
+            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.sauvegarderToolStripMenuItem.Text = "Sauvegarder";
+            // 
+            // importerToolStripMenuItem
+            // 
+            this.importerToolStripMenuItem.Name = "importerToolStripMenuItem";
+            this.importerToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.importerToolStripMenuItem.Text = "Importer";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1075, 546);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -356,7 +384,6 @@
         private System.Windows.Forms.ToolStripMenuItem segmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem polygoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupeToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -365,14 +392,17 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.ColorDialog colorDialog2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStripMenuItem fichierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nouveauToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sauvegarderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importerToolStripMenuItem;
 
     }
 }
