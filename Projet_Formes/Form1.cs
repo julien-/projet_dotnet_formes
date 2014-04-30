@@ -49,29 +49,29 @@ namespace Projet_Formes
 
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Ellipse nouvelle_forme = new Ellipse("Ellipse", point1, point2, couleur);
+            //Ellipse nouvelle_forme = new Ellipse("Ellipse", point1, point2, couleur);
         }
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Triangle nouvelle_forme = new Triangle("Triangle", point1, point2, couleur, tabcoord);
+            //Triangle nouvelle_forme = new Triangle("Triangle", point1, point2, couleur, tabcoord);
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Rectangle nouvelle_forme = new Rectangle("Rectangle", point1, point2, couleur);
+            //Rectangle nouvelle_forme = new Rectangle("Rectangle", point1, point2, couleur);
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Segment nouvelle_forme = new Segment("Segment", point1, point2, couleur);
+            //Segment nouvelle_forme = new Segment("Segment", point1, point2, couleur);
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Triangle nouvelle_forme = new Triangle("Triangle", point1, point2, couleur, tabcoord);
-            label10.Visible = true;
-            textBox3.Visible = true;
+            //Polygone nouvelle_forme = new Polygone("Triangle", point1, point2, couleur, tabcoord);
+            //label10.Visible = true;
+            //textBox3.Visible = true;
         }
     }
 }

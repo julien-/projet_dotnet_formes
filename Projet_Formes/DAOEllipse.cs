@@ -11,9 +11,9 @@ namespace Projet_Formes
     {
         public override void create(Ellipse entry)
         {
-            String Requete = @"INSERT INTO ellipse(id) VALUES (1);";
-            this._command.CommandText = Requete;
 
+            this._command.CommandText = @"INSERT INTO ellipse(id) VALUES (@id);";
+            this._command.Parameters.AddWithValue("@id", entry.Id);
 
             try
             {

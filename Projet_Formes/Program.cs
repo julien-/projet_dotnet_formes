@@ -45,7 +45,7 @@ namespace Projet_Formes
 
             //test elipse
 
-            Ellipse elipse1 = new Ellipse(nomelipse, point1, point2, couleur);
+            Ellipse elipse1 = new Ellipse(0, nomelipse, point1, point2, couleur);
 
             elipse1.Write();
 
@@ -55,7 +55,7 @@ namespace Projet_Formes
 
             //test polygone
 
-            Polygone pol1 = new Polygone(nompoly, point3, point4, couleur, tabcoord);
+            Polygone pol1 = new Polygone(1, nompoly, point3, point4, couleur, tabcoord);
 
             pol1.Write();
 
@@ -65,7 +65,7 @@ namespace Projet_Formes
 
             //test groupe
             Forme_simple[] tabformes = new Forme_simple[] { pol1, elipse1 };
-            Forme_composee groupe1 = new Forme_composee("groupe1", tabformes);
+            Forme_composee groupe1 = new Forme_composee(2, "groupe1", tabformes);
 
             groupe1.Write();
 
@@ -75,7 +75,7 @@ namespace Projet_Formes
 
             Console.ReadLine();
 
-            Rectangle rect1 = new Rectangle(nomrectangle, point3, point4, couleur);
+            Rectangle rect1 = new Rectangle(3, nomrectangle, point3, point4, couleur);
 
             //DAO<Rectangle> rectdao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAORectangle();
             //rectdao.create(rect1);
