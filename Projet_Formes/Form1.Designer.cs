@@ -45,12 +45,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.colorDialog2 = new System.Windows.Forms.ColorDialog();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
@@ -88,6 +88,7 @@
             this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
             this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.ellipseToolStripMenuItem.Text = "Ellipse";
+            this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.ellipseToolStripMenuItem_Click);
             // 
             // triangleToolStripMenuItem
             // 
@@ -95,6 +96,7 @@
             this.triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
             this.triangleToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.triangleToolStripMenuItem.Text = "Triangle";
+            this.triangleToolStripMenuItem.Click += new System.EventHandler(this.triangleToolStripMenuItem_Click);
             // 
             // rectangleToolStripMenuItem
             // 
@@ -102,6 +104,7 @@
             this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
             this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.rectangleToolStripMenuItem.Text = "Rectangle";
+            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.rectangleToolStripMenuItem_Click);
             // 
             // segmentToolStripMenuItem
             // 
@@ -109,6 +112,7 @@
             this.segmentToolStripMenuItem.Name = "segmentToolStripMenuItem";
             this.segmentToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.segmentToolStripMenuItem.Text = "Segment";
+            this.segmentToolStripMenuItem.Click += new System.EventHandler(this.segmentToolStripMenuItem_Click);
             // 
             // polygoneToolStripMenuItem
             // 
@@ -116,6 +120,7 @@
             this.polygoneToolStripMenuItem.Name = "polygoneToolStripMenuItem";
             this.polygoneToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.polygoneToolStripMenuItem.Text = "Polygone";
+            this.polygoneToolStripMenuItem.Click += new System.EventHandler(this.polygoneToolStripMenuItem_Click);
             // 
             // groupeToolStripMenuItem
             // 
@@ -305,9 +310,9 @@
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(184, 5);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(109, 20);
+            this.label10.Size = new System.Drawing.Size(112, 20);
             this.label10.TabIndex = 3;
-            this.label10.Text = "Nombre points";
+            this.label10.Text = "Nombre points:";
             this.label10.Visible = false;
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 

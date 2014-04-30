@@ -47,6 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractDAOFactory.cs" />
+    <Compile Include="AbstractDessinFactory.cs" />
+    <Compile Include="DAO.cs" />
+    <Compile Include="DAOEllipse.cs" />
+    <Compile Include="DAOFactory.cs" />
+    <Compile Include="DAOPolygone.cs" />
+    <Compile Include="DAOSegment.cs" />
+    <Compile Include="DAOTriangle.cs" />
+    <Compile Include="DessinEllipse.cs" />
+    <Compile Include="Dessiner.cs" />
+    <Compile Include="DessinFactory.cs" />
+    <Compile Include="DessinPolygone.cs" />
+    <Compile Include="DessinRectangle.cs" />
+    <Compile Include="DessinSegment.cs" />
+    <Compile Include="DessinTriangle.cs" />
+    <Compile Include="SingletonConnexion.cs" />
+    <Compile Include="DAORectangle.cs" />
     <Compile Include="Ellipse.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -63,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Segment.cs" />
+    <Compile Include="Triangle.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,7 +10,7 @@ namespace Projet_Formes
     {
         protected Point []_tabcoord;
 
-        public Polygone(string nom, Point point1, Point point2, int couleur, Point []tabcoord) : base (nom, point1, point2, couleur)
+        public Polygone(string nom, Point point1, Point point2, string couleur, Point []tabcoord) : base (nom, point1, point2, couleur)
         {
             this._tabcoord = tabcoord;
         }

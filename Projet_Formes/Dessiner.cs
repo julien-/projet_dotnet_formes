@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Projet_Formes
 {
-    class Rectangle : Forme_simple
+    public abstract class Dessiner<T>
     {
-           public Rectangle(string nom, Point point1, Point point2, string couleur) : base (nom, point1, point2, couleur){}
+        public abstract void dessiner(T entry);
     }
 }

@@ -10,9 +10,9 @@ namespace Projet_Formes
     {
         protected Point _point1;
         protected Point _point2;
-        protected int _couleur;
+        protected string _couleur;
 
-        public Forme_simple(string nom, Point point1, Point point2, int couleur) : base (nom)
+        public Forme_simple(string nom, Point point1, Point point2, string couleur) : base (nom)
         {
             this._point1 = point1;
             this._point2 = point2;
@@ -43,7 +43,7 @@ namespace Projet_Formes
             }
         }
 
-        public int Couleur
+        public string Couleur
         {
             get
             {
