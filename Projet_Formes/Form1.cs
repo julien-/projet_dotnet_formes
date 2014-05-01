@@ -83,9 +83,15 @@ namespace Projet_Formes
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             //point1 = e.Location;
-
+            
+            //Clic gauche
             if (e.Button == MouseButtons.Left)
+            {
                 k = 1;
+                //Valeur fictive du nom de la forme
+                String nom = "blabla";
+                this.textBox_nom.Text = nom;
+            }
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -104,6 +110,15 @@ namespace Projet_Formes
                 
             }
             point1 = point2;
+        }
+
+        private void panel_couleur_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                panel_couleur.BackColor = colorDialog1.Color;
+                textBox_nom.Text = colorDialog1.Color.Name;
+            }
         }
 
     }
