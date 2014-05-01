@@ -9,38 +9,24 @@ namespace Projet_Formes
 {
     class Forme_simple : Forme
     {
-        protected Point _point1;
-        protected Point _point2;
+        protected List<Point> _liste_points;
         protected string _couleur;
 
-        public Forme_simple(int id, string nom, Point point1, Point point2, string couleur) : base (id, nom)
+        public Forme_simple(int id, string nom, List<Point> liste_points, string couleur) : base (id, nom)
         {
-            this._point1 = point1;
-            this._point2 = point2;
+            this._liste_points = liste_points;
             this._couleur = couleur;
         }
 
-        public Point Point1
+        public List<Point> Liste_points
         {
             get
             {
-                return this._point1;
+                return this._liste_points;
             }
             set
             {
-                this._point1 = value;
-            }
-        }
-
-        public Point Point2
-        {
-            get
-            {
-                return this._point2;
-            }
-            set
-            {
-                this._point2 = value;
+                this._liste_points = value;
             }
         }
 
@@ -61,17 +47,19 @@ namespace Projet_Formes
             base.Write();
             Console.Out.WriteLine("Id : " + this._id);
             Console.Out.WriteLine("Couleur : " + this._couleur);
-            Console.Out.WriteLine("Point1 (" + this._point1.X + "," + this._point1.Y + ")");
-            Console.Out.WriteLine("Point2 (" + this._point2.X + "," + this._point2.Y + ")");
+            foreach (Point liste_points in _liste_points)
+            {
+                Console.WriteLine("Point (" + liste_points.X + "," + liste_points.Y + ")");
+            }
         }
 
         public override void translation(int x, int y)
         {
-            this._point1.X = this._point1.X + x;
-            this._point1.Y = this._point1.Y + y;
-
-            this._point2.X = this._point2.X + x;
-            this._point2.Y = this._point2.Y + y;
+            foreach (Point liste_points in _liste_points)
+            {
+                liste_points.X += x;
+                liste_points.Y += y;
+            }
         }
 
         public override void homothetie(int coeff)

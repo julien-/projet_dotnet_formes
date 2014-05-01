@@ -9,6 +9,6 @@ namespace Projet_Formes
 {
     class Rectangle : Forme_simple
     {
-           public Rectangle(int id, string nom, Point point1, Point point2, string couleur) : base (id, nom, point1, point2, couleur){}
+        public Rectangle(int id, string nom, List<Point> liste_points, string couleur) : base(id, nom, liste_points, couleur) { }
     }
 }

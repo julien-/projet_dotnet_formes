@@ -8,44 +8,42 @@ namespace Projet_Formes
 {
     class Forme_composee : Forme
     {
-        protected Forme_simple []_tabforme;
+        protected List<Forme_simple> _liste_formes;
 
-        public Forme_composee(int id, string nom, Forme_simple []tabforme) : base(id, nom)
+        public Forme_composee(int id, string nom, List<Forme_simple> liste_formes)
+            : base(id, nom)
         {
-            this._tabforme = tabforme;
+            this._liste_formes = liste_formes;
         }
 
-        public Forme_simple[] Tabforme
+        public List<Forme_simple> Liste_formes
         {
             get
             {
-                return this._tabforme;
+                return this._liste_formes;
             }
             set
             {
-                this._tabforme = value;
+                this._liste_formes = value;
             }
         }
 
         public override void Write()
         {
-            
             base.Write();
             Console.Out.WriteLine("----------------------------");
-            for (int x = 0; x < this._tabforme.Length; x++)
+            foreach (Forme_simple liste_formes in _liste_formes)
             {
-                int numero = x+1;
-                Console.Out.WriteLine("   Forme " + numero);
-                this._tabforme[x].Write();
+                liste_formes.Write();
                 Console.Out.WriteLine("----------------------------");
             }
         }
 
         public override void translation(int x, int y)
         {
-            for (int z = 0; z < this._tabforme.Length; z++)
+            foreach (Forme_simple liste_formes in _liste_formes)
             {
-                this._tabforme[z].translation(x, y);
+                liste_formes.translation(x, y);
             }
         }
 
