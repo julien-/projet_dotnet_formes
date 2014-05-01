@@ -84,21 +84,18 @@ namespace Projet_Formes
                                 @"CREATE TABLE IF NOT EXISTS formecompos (
                                     id int(11) NOT NULL,
                                     id_forme int(11) NOT NULL,
-                                    PRIMARY KEY (id)
+                                    PRIMARY KEY (id, id_forme)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
                                 //forme simple
                                 @"CREATE TABLE IF NOT EXISTS formesimple (
                                   id int(11) NOT NULL,
                                   couleur varchar(60) NOT NULL,
-                                  x1 int(11) NOT NULL,
-                                  y1 int(11) NOT NULL,
-                                  x2 int(11) NOT NULL,
-                                  y2 int(11) NOT NULL,
                                   PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
                                 //ellipse
                                 @"CREATE TABLE IF NOT EXISTS ellipse (
-                                id int(11) NOT NULL
+                                id int(11) NOT NULL,
+                                PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
                                 //polygone
                                 @"CREATE TABLE IF NOT EXISTS polygone (
@@ -130,6 +127,8 @@ namespace Projet_Formes
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
 
                                 @"ALTER TABLE formesimple ADD CONSTRAINT FOREIGN KEY (id) REFERENCES forme(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE formecompos ADD CONSTRAINT FOREIGN KEY (id) REFERENCES forme(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE formecompos ADD CONSTRAINT FOREIGN KEY (id_forme) REFERENCES forme(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
                                 @"ALTER TABLE ellipse ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
                                 @"ALTER TABLE point ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
                                 @"ALTER TABLE polygone ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
