@@ -9,6 +9,12 @@ namespace Projet_Formes
 {
     class Triangle : Polygone
     {
-        public Triangle(int id, string nom, List<Point> liste_points, string couleur) : base(id, nom, liste_points, couleur) { }
+        public Triangle(int id, string nom, List<Point> liste_points, string couleur) : base(id, nom, liste_points, couleur) 
+        {
+            this._nombre_points = 3;
+
+            if (!liste_points.Count.Equals(_nombre_points))
+                throw new System.ArgumentException("Nombre de points invalide");
+        }
     }
 }

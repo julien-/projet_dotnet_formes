@@ -22,9 +22,9 @@ namespace Projet_Formes
         {
             test();
 
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());            
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());            
         }
 
         static void test()
@@ -96,28 +96,28 @@ namespace Projet_Formes
 
             Console.ReadLine();
 
-            //Test Base de donnée
+            /*//Test Base de donnée
 
             DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
-            ellipsedao.create(ellipse1);
+            //ellipsedao.create(ellipse1);
 
             ellipse1.Nom = "ellipse2";
 
-            //ellipsedao.update(ellipse1);
+            ellipsedao.update(ellipse1);
 
             DAO<Rectangle> rectangledao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAORectangle();
-            rectangledao.create(rectangle1);
+            //rectangledao.create(rectangle1);
 
             rectangle1.Nom = "rectangle2";
 
             rectangledao.update(rectangle1);
 
             DAO<Polygone> polygonedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOPolygone();
-            polygonedao.create(polygone1);
+            //polygonedao.create(polygone1);
 
             polygone1.Nom = "polygone2";
 
-            polygonedao.update(polygone1);
+            polygonedao.update(polygone1);*/
         }
     }
 }

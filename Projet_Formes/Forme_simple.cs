@@ -10,6 +10,7 @@ namespace Projet_Formes
     class Forme_simple : Forme
     {
         protected List<Point> _liste_points;
+        protected int _nombre_points;
         protected string _couleur;
 
         public Forme_simple(int id, string nom, List<Point> liste_points, string couleur) : base (id, nom)
