@@ -8,7 +8,7 @@ namespace Projet_Formes
 {
     class Ellipse : Forme_simple
     {
-        public Ellipse(int id, string nom, Point point1, Point point2, string couleur) : base (id, nom, point1, point2, couleur){}
+        public Ellipse(int id, string nom, string couleur, List<Point> listpoint) : base (id, nom, couleur, listpoint){}
     }
 
 

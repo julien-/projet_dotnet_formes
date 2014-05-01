@@ -8,29 +8,15 @@ namespace Projet_Formes
 {
     class Polygone : Forme_simple
     {
-        protected Point []_tabcoord;
 
-        public Polygone(int id, string nom, Point point1, Point point2, string couleur, Point []tabcoord) : base (id, nom, point1, point2, couleur)
+        public Polygone(int id, string nom, string couleur, List<Point> tabcoord) : base (id, nom , couleur, tabcoord)
         {
-            this._tabcoord = tabcoord;
-        }
-
-        public Point []Tabcoord
-        {
-            get
-            {
-                return this._tabcoord;
-            }
-            set
-            {
-                this._tabcoord = value;
-            }
         }
 
         public override void Write()
         {
             base.Write();
-            for (int x = 0; x < this._tabcoord.Length; x++)
+            for (int x = 0; x < this._tabcoord.Count; x++)
             {
                 int Number = x + 3;
                 Console.Out.WriteLine("Point" + Number + " (" + this._tabcoord[x].X + "," + this._tabcoord[x].Y + ")");
@@ -42,7 +28,7 @@ namespace Projet_Formes
         {
             base.translation(x, y);
 
-            for (int z = 0; z < this._tabcoord.Length; z++)
+            for (int z = 0; z < this._tabcoord.Count; z++)
             {
                 this._tabcoord[z].X = this._tabcoord[z].X + x;
                 this._tabcoord[z].Y = this._tabcoord[z].Y + y;

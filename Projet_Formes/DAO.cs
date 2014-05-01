@@ -13,8 +13,11 @@ namespace Projet_Formes
         public MySqlCommand _command = SingletonConnexion.InitCommand();
 
         public abstract void create(T entry);
+
         public abstract void delete(T entry);
+
         public abstract void update(T entry);
-        //protected abstract T find(int id);
+
+        public abstract T find(int id);
     }
 }

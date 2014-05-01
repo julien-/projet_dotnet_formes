@@ -27,7 +27,7 @@ namespace Projet_Formes
             _cmd = new MySqlCommand();
             try
             {
-                //CCreation de la connexion
+                //Creation de la connexion
                 _cmd.Connection = _connection;
 
                 //On se connecte
@@ -90,18 +90,12 @@ namespace Projet_Formes
                                 @"CREATE TABLE IF NOT EXISTS formesimple (
                                   id int(11) NOT NULL,
                                   couleur varchar(60) NOT NULL,
-                                  point1 int(11) NOT NULL,
-                                  point2 int(11) NOT NULL,
-                                  id_type int(11) NOT NULL,
+                                  x1 int(11) NOT NULL,
+                                  y1 int(11) NOT NULL,
+                                  x2 int(11) NOT NULL,
+                                  y2 int(11) NOT NULL,
                                   PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
-                                //point
-                                @"CREATE TABLE IF NOT EXISTS point (
-                                id int(11) NOT NULL,
-                                x int(11) NOT NULL,
-                                y int(11) NOT NULL,
-                                PRIMARY KEY (id)
-                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;", 
                                 //ellipse
                                 @"CREATE TABLE IF NOT EXISTS ellipse (
                                 id int(11) NOT NULL
@@ -109,7 +103,6 @@ namespace Projet_Formes
                                 //polygone
                                 @"CREATE TABLE IF NOT EXISTS polygone (
                                 id int(11) NOT NULL,
-                                id_point int(11) NOT NULL,
                                 PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;", 
                                 //rectangle
@@ -126,8 +119,23 @@ namespace Projet_Formes
                                 @"CREATE TABLE IF NOT EXISTS triangle (
                                 id int(11) NOT NULL,
                                 PRIMARY KEY (id)
-                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+                                //point
+                                @"CREATE TABLE IF NOT EXISTS point (
+                                id int(11) NOT NULL,
+                                ordre int(11) NOT NULL,
+                                x int(11) NOT NULL,
+                                y int(11) NOT NULL,
+                                PRIMARY KEY (id, ordre)
+                                ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
 
+                                @"ALTER TABLE formesimple ADD CONSTRAINT FOREIGN KEY (id) REFERENCES forme(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE ellipse ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE point ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE polygone ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE rectangle ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE segment ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
+                                @"ALTER TABLE triangle ADD CONSTRAINT FOREIGN KEY (id) REFERENCES formesimple(id) ON DELETE CASCADE ON UPDATE RESTRICT;",
             };
 
             foreach (String r in tabRequete)

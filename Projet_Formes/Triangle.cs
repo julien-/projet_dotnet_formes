@@ -8,6 +8,6 @@ namespace Projet_Formes
 {
     class Triangle : Polygone
     {
-        public Triangle(int id, string nom, Point point1, Point point2, string couleur, Point []tabcoord) : base (id, nom, point1, point2, couleur, tabcoord){}
+        public Triangle(int id, string nom, string couleur, List<Point> tabcoord) : base (id, nom, couleur, tabcoord){}
     }
 }
