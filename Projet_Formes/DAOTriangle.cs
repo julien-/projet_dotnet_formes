@@ -16,12 +16,12 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.TabCoord[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.TabCoord[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.TabCoord[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.TabCoord[1].Y);
-            this._command.Parameters.AddWithValue("@x3", entry.TabCoord[2].X);
-            this._command.Parameters.AddWithValue("@y3", entry.TabCoord[2].Y);
+            this._command.Parameters.AddWithValue("@x1", entry.Liste_points[0].X);
+            this._command.Parameters.AddWithValue("@y1", entry.Liste_points[0].Y);
+            this._command.Parameters.AddWithValue("@x2", entry.Liste_points[1].X);
+            this._command.Parameters.AddWithValue("@y2", entry.Liste_points[1].Y);
+            this._command.Parameters.AddWithValue("@x3", entry.Liste_points[2].X);
+            this._command.Parameters.AddWithValue("@y3", entry.Liste_points[2].Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
@@ -85,10 +85,12 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.TabCoord[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.TabCoord[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.TabCoord[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.TabCoord[1].Y);
+            this._command.Parameters.AddWithValue("@x1", entry.Liste_points[0].X);
+            this._command.Parameters.AddWithValue("@y1", entry.Liste_points[0].Y);
+            this._command.Parameters.AddWithValue("@x2", entry.Liste_points[1].X);
+            this._command.Parameters.AddWithValue("@y2", entry.Liste_points[1].Y);
+            this._command.Parameters.AddWithValue("@x3", entry.Liste_points[2].X);
+            this._command.Parameters.AddWithValue("@y3", entry.Liste_points[2].Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
@@ -98,7 +100,8 @@ namespace Projet_Formes
                 @"UPDATE formesimple SET couleur = @couleur WHERE id = @id;", 
                 //point
                 @"UPDATE point SET x = @x1, y = @y1 WHERE id = @id AND ordre = 1;",
-                @"UPDATE point SET x = @x2, y = @y2 WHERE id = @id AND ordre = 2;"
+                @"UPDATE point SET x = @x2, y = @y2 WHERE id = @id AND ordre = 2;",
+                @"UPDATE point SET x = @x3, y = @y3 WHERE id = @id AND ordre = 3;"
             };
 
 
@@ -167,7 +170,7 @@ namespace Projet_Formes
                 listepoint.Add(new Point(x2, y2));
                 listepoint.Add(new Point(x3, y3));
                 //Resultat
-                return new Triangle(id, nom, couleur, listepoint);
+                return new Triangle(id, nom, listepoint, couleur);
 
             }
             catch (MySqlException ex)

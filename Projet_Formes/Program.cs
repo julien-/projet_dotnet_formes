@@ -98,7 +98,7 @@ namespace Projet_Formes
 
             //Test Base de donnée
 
-            /*DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
+            DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
             ellipsedao.create(ellipse1);
 
             ellipse1.Nom = "ellipse2";
@@ -110,14 +110,14 @@ namespace Projet_Formes
 
             rectangle1.Nom = "rectangle2";
 
-            //rectangledao.update(rectangle1);
+            rectangledao.update(rectangle1);
 
             DAO<Polygone> polygonedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOPolygone();
             polygonedao.create(polygone1);
 
             polygone1.Nom = "polygone2";
 
-            //polygonedao.update(polygone1);*/
+            polygonedao.update(polygone1);
         }
     }
 }

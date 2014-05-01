@@ -27,7 +27,7 @@ namespace Projet_Formes
             tabRequete.Add(@"INSERT INTO polygone(id) VALUES (@id);");
             //point
             int i = 1;
-            foreach (Point p in entry.TabCoord)
+            foreach (Point p in entry.Liste_points)
             {
                 tabRequete.Add(@"INSERT INTO point(id, ordre, x, y) VALUES (@id, "+i+", "+p.X+", "+p.Y+");");
                 i++;
@@ -91,7 +91,7 @@ namespace Projet_Formes
             tabRequete.Add(@"UPDATE formesimple SET couleur = @couleur WHERE id = @id;");
             //point
             int i = 1;
-            foreach (Point p in entry.TabCoord)
+            foreach (Point p in entry.Liste_points)
             {
                 tabRequete.Add(@"UPDATE point SET x = " + p.X + ", y = " + p.Y + " WHERE id = @id AND ordre = " + i + ";");
                 i++;
@@ -185,7 +185,7 @@ namespace Projet_Formes
                 }
 
                 //Resultat
-                return new Polygone(id, nom, couleur, list_point);
+                return new Polygone(id, nom, list_point, couleur);
             }
             catch (MySqlException ex)
             {

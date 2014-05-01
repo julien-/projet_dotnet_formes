@@ -18,10 +18,10 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.TabCoord[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.TabCoord[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.TabCoord[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.TabCoord[1].Y);
+            this._command.Parameters.AddWithValue("@x1", entry.Liste_points[0].X);
+            this._command.Parameters.AddWithValue("@y1", entry.Liste_points[0].Y);
+            this._command.Parameters.AddWithValue("@x2", entry.Liste_points[1].X);
+            this._command.Parameters.AddWithValue("@y2", entry.Liste_points[1].Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
@@ -84,10 +84,10 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.TabCoord[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.TabCoord[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.TabCoord[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.TabCoord[1].Y);
+            this._command.Parameters.AddWithValue("@x1", entry.Liste_points[0].X);
+            this._command.Parameters.AddWithValue("@y1", entry.Liste_points[0].Y);
+            this._command.Parameters.AddWithValue("@x2", entry.Liste_points[1].X);
+            this._command.Parameters.AddWithValue("@y2", entry.Liste_points[1].Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
@@ -158,7 +158,7 @@ namespace Projet_Formes
                 listepoint.Add(new Point(x1, y1));
                 listepoint.Add(new Point(x2, y2));
                 //Resultat
-                return new Rectangle(id, nom, couleur, listepoint);
+                return new Rectangle(id, nom, listepoint, couleur);
 
             }
             catch (MySqlException ex)
