@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,42 +9,26 @@ namespace Projet_Formes
 {
     class Forme_simple : Forme
     {
-        protected List<Point> _tabcoord;
+        protected List<Point> _liste_points;
         protected string _couleur;
 
-       
-
-        public Forme_simple(int id, string nom, string couleur, List<Point> tabcoord)
-            : base(id, nom)
+        public Forme_simple(int id, string nom, List<Point> liste_points, string couleur) : base (id, nom)
         {
-            this._tabcoord = tabcoord;
+            this._liste_points = liste_points;
             this._couleur = couleur;
         }
 
-        //public Point Point1
-        //{
-        //    get
-        //    {
-        //        return this._tabcoord.ElementAt(0);
-        //    }
-        //    set
-        //    {
-
-        //        this._tabcoord[0] = value;
-        //    }
-        //}
-
-        //public Point Point2
-        //{
-        //    get
-        //    {
-        //        return this._tabcoord.ElementAt(1);
-        //    }
-        //    set
-        //    {
-        //        this._tabcoord[1] = value;
-        //    }
-        //}
+        public List<Point> Liste_points
+        {
+            get
+            {
+                return this._liste_points;
+            }
+            set
+            {
+                this._liste_points = value;
+            }
+        }
 
         public string Couleur
         {
@@ -57,36 +42,24 @@ namespace Projet_Formes
             }
         }
 
-
-        public List<Point> TabCoord
-        {
-            get
-            {
-                return this._tabcoord;
-            }
-            set
-            {
-
-                this._tabcoord = value;
-            }
-        }
-
         public override void Write()
         {
             base.Write();
             Console.Out.WriteLine("Id : " + this._id);
             Console.Out.WriteLine("Couleur : " + this._couleur);
-            Console.Out.WriteLine("Point1 (" + this._tabcoord[0].X + "," + this._tabcoord[0].Y + ")");
-            Console.Out.WriteLine("Point2 (" + this._tabcoord[1].X + "," + this._tabcoord[1].Y + ")");
+            foreach (Point liste_points in _liste_points)
+            {
+                Console.WriteLine("Point (" + liste_points.X + "," + liste_points.Y + ")");
+            }
         }
 
-        public override void translation(float x, float y)
+        public override void translation(int x, int y)
         {
-            this._tabcoord[0].X = this._tabcoord[0].X + x;
-            this._tabcoord[0].Y = this._tabcoord[0].Y + y;
-
-            this._tabcoord[1].X = this._tabcoord[1].X + x;
-            this._tabcoord[1].Y = this._tabcoord[1].Y + y;
+            foreach (Point liste_points in _liste_points)
+            {
+                liste_points.X += x;
+                liste_points.Y += y;
+            }
         }
 
         public override void homothetie(int coeff)

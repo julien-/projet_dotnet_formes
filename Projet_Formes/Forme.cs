@@ -48,7 +48,7 @@ namespace Projet_Formes
             Console.Out.WriteLine("Nom : " + this._nom);
         }
 
-        public abstract void translation(float x, float y);
+        public abstract void translation(int x, int y);
         public abstract void homothetie(int coeff);
 
     }
