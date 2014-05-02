@@ -43,13 +43,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.textBox_nom = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label_groupe_actif = new System.Windows.Forms.Label();
+            this.panel_couleur = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel_couleur = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -165,10 +165,10 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox_nom, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label_groupe_actif, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel_couleur, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(578, 25);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
@@ -207,6 +207,15 @@
             this.label2.Text = "Couleur";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // textBox_nom
+            // 
+            this.textBox_nom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_nom.Location = new System.Drawing.Point(80, 23);
+            this.textBox_nom.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_nom.Name = "textBox_nom";
+            this.textBox_nom.Size = new System.Drawing.Size(141, 20);
+            this.textBox_nom.TabIndex = 6;
+            // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -221,29 +230,28 @@
             this.label6.Text = "Groupe actif";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox_nom
+            // label_groupe_actif
             // 
-            this.textBox_nom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_nom.Location = new System.Drawing.Point(80, 23);
-            this.textBox_nom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox_nom.Name = "textBox_nom";
-            this.textBox_nom.Size = new System.Drawing.Size(141, 20);
-            this.textBox_nom.TabIndex = 6;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label_groupe_actif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(80, 134);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(141, 67);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "label9";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label9.Visible = false;
+            this.label_groupe_actif.AutoSize = true;
+            this.label_groupe_actif.Location = new System.Drawing.Point(80, 134);
+            this.label_groupe_actif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_groupe_actif.Name = "label_groupe_actif";
+            this.label_groupe_actif.Size = new System.Drawing.Size(141, 67);
+            this.label_groupe_actif.TabIndex = 10;
+            this.label_groupe_actif.Text = "Aucun";
+            this.label_groupe_actif.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel_couleur
+            // 
+            this.panel_couleur.BackColor = System.Drawing.Color.White;
+            this.panel_couleur.Location = new System.Drawing.Point(81, 70);
+            this.panel_couleur.Name = "panel_couleur";
+            this.panel_couleur.Size = new System.Drawing.Size(139, 61);
+            this.panel_couleur.TabIndex = 11;
+            this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
             // 
             // label10
             // 
@@ -260,7 +268,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(319, 4);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(18, 20);
             this.textBox3.TabIndex = 4;
@@ -270,22 +278,13 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(9, 25);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(565, 409);
             this.panel1.TabIndex = 5;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
-            // 
-            // panel_couleur
-            // 
-            this.panel_couleur.BackColor = System.Drawing.Color.White;
-            this.panel_couleur.Location = new System.Drawing.Point(81, 70);
-            this.panel_couleur.Name = "panel_couleur";
-            this.panel_couleur.Size = new System.Drawing.Size(139, 61);
-            this.panel_couleur.TabIndex = 11;
-            this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
             // 
             // Form1
             // 
@@ -297,9 +296,11 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -322,7 +323,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label_groupe_actif;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Panel panel1;

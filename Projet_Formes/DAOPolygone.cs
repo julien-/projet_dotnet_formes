@@ -23,14 +23,12 @@ namespace Projet_Formes
             tabRequete.Add(@"INSERT INTO forme(id, nom) VALUES (@id, @nom);");
             //forme simple
             tabRequete.Add(@"INSERT INTO formesimple(id, couleur) VALUES (@id, @couleur);");
-            //ellipse
+            //polygone
             tabRequete.Add(@"INSERT INTO polygone(id) VALUES (@id);");
             //point
-            int i = 1;
-            foreach (Point p in entry.Liste_points)
-            {
-                tabRequete.Add(@"INSERT INTO point(id, ordre, x, y) VALUES (@id, "+i+", "+p.X+", "+p.Y+");");
-                i++;
+            for (int i = 1; i <= entry.Tableau_points.Length; i++)
+            { 
+                tabRequete.Add(@"INSERT INTO point(id, ordre, x, y) VALUES (@id, "+i+", "+entry.Tableau_points[i-1].X+", "+entry.Tableau_points[i-1].Y+");");
             }
 
             foreach (String r in tabRequete)
@@ -90,12 +88,11 @@ namespace Projet_Formes
             //forme simple
             tabRequete.Add(@"UPDATE formesimple SET couleur = @couleur WHERE id = @id;");
             //point
-            int i = 1;
-            foreach (Point p in entry.Liste_points)
+            for (int i = 1; i <= entry.Tableau_points.Length; i++)
             {
-                tabRequete.Add(@"UPDATE point SET x = " + p.X + ", y = " + p.Y + " WHERE id = @id AND ordre = " + i + ";");
-                i++;
+                tabRequete.Add(@"UPDATE point SET x = " + entry.Tableau_points[i - 1].X + ", y = " + entry.Tableau_points[i - 1].Y + " WHERE id = @id AND ordre = " + i + ";");
             }
+            
 
 
             foreach (String r in tabRequete)
@@ -119,7 +116,6 @@ namespace Projet_Formes
 
         public override Polygone find(int id)
         {
-            //public T find(int id) {
             MySqlDataReader rdr = null;
 
             //Définition des variables
@@ -135,7 +131,7 @@ namespace Projet_Formes
                 rdr = this._command.ExecuteReader();
                 //Extraction des données
                 rdr.Read();
-                int nb = rdr.GetInt32(0);
+                int nb = rdr.GetInt32(0);   //Nombre de points
 
 
                 //Construction de la requete
@@ -152,7 +148,7 @@ namespace Projet_Formes
                 //AND e.id = @id
                 //AND ordre = 1;
                 String requete = @"SELECT nom, couleur, x AS x1, y AS y1, x2, y2";
-                for (int i = 3; i <= nb; i++) //Commence a 3 car Point 1 et 2 déjà fais
+                for (int i = 3; i <= nb; i++) //Commence a 3 car Point 1 et 2 déjà traités dans la requete principale
                 {
                     requete += ", x" + i + ", y" + i;
                 }
@@ -176,16 +172,18 @@ namespace Projet_Formes
 
                 String nom = rdr.GetString(0);
                 String couleur = rdr.GetString(1);
-                int count = rdr.FieldCount;
-                List<Point> list_point = new List<Point>();
+                //int count = rdr.FieldCount; //nombre de points
+                Point[] tab_point = new Point[nb];
 
-                for (int i = 2; i < count; i += 2)
+                int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
+                for (int i = 0; i <= nb; i += 2) //de 2 en 2, car x et y en meme temps
                 {
-                    list_point.Add(new Point(rdr.GetInt32(i), rdr.GetInt32(i + 1)));
+                    tab_point[j] = new Point(rdr.GetInt32(i), rdr.GetInt32(i + 1));
+                    j++;
                 }
 
                 //Resultat
-                return new Polygone(id, nom, list_point, couleur);
+                return new Polygone(id, nom, couleur, tab_point);
             }
             catch (MySqlException ex)
             {

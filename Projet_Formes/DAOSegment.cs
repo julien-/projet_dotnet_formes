@@ -16,10 +16,10 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Liste_points[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.Liste_points[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.Liste_points[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.Liste_points[1].Y);
+            this._command.Parameters.AddWithValue("@x1", entry.Point1.X);
+            this._command.Parameters.AddWithValue("@y1", entry.Point1.Y);
+            this._command.Parameters.AddWithValue("@x2", entry.Point2.X);
+            this._command.Parameters.AddWithValue("@y2", entry.Point2.Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
@@ -81,10 +81,10 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Liste_points[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.Liste_points[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.Liste_points[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.Liste_points[1].Y);
+            this._command.Parameters.AddWithValue("@x1", entry.Point1.X);
+            this._command.Parameters.AddWithValue("@y1", entry.Point1.Y);
+            this._command.Parameters.AddWithValue("@x2", entry.Point2.X);
+            this._command.Parameters.AddWithValue("@y2", entry.Point2.Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
@@ -151,11 +151,10 @@ namespace Projet_Formes
                 int x2 = rdr.GetInt32(4);
                 int y2 = rdr.GetInt32(5);
 
-                List<Point> listepoint = new List<Point>();
-                listepoint.Add(new Point(x1, y1));
-                listepoint.Add(new Point(x2, y2));
+                Point p1 = new Point(x1, y1);
+                Point p2 = new Point(x2, y2);
                 //Resultat
-                return new Segment(id, nom, listepoint, couleur);
+                return new Segment(id, nom, couleur, p1, p2);
 
             }
             catch (MySqlException ex)

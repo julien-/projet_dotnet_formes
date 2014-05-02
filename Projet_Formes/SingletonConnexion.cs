@@ -95,6 +95,8 @@ namespace Projet_Formes
                                 //ellipse
                                 @"CREATE TABLE IF NOT EXISTS ellipse (
                                 id int(11) NOT NULL,
+                                hauteur int(11) NOT NULL,
+                                largeur int(11) NOT NULL,
                                 PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
                                 //polygone
@@ -105,6 +107,8 @@ namespace Projet_Formes
                                 //rectangle
                                 @"CREATE TABLE IF NOT EXISTS rectangle (
                                 id int(11) NOT NULL,
+                                hauteur int(11) NOT NULL,
+                                largeur int(11) NOT NULL,
                                 PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
                                 //segment
