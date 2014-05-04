@@ -89,7 +89,7 @@ namespace Projet_Formes
                                 //forme simple
                                 @"CREATE TABLE IF NOT EXISTS formesimple (
                                   id int(11) NOT NULL,
-                                  couleur varchar(60) NOT NULL,
+                                  couleur int(11) NOT NULL,
                                   PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
                                 //ellipse

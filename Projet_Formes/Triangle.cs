@@ -9,7 +9,7 @@ namespace Projet_Formes
 {
     class Triangle : Polygone
     {
-        public Triangle(int id, string nom, string couleur, Point[] tab_points) : base(id, nom, couleur, tab_points) 
+        public Triangle(int id, string nom, int couleur, Point[] tab_points) : base(id, nom, couleur, tab_points) 
         {
             this._nb_points = 3;
 

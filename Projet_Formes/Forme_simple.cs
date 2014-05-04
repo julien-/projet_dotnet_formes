@@ -9,14 +9,14 @@ namespace Projet_Formes
 {
     class Forme_simple : Forme
     {
-        protected string _couleur;
+        protected int _couleur;
 
-        public Forme_simple(int id, string nom, string couleur) : base (id, nom)
+        public Forme_simple(int id, string nom, int couleur) : base (id, nom)
         {
             this._couleur = couleur;
         }
 
-        public string Couleur
+        public int Couleur
         {
             get
             {

@@ -50,6 +50,5 @@ namespace Projet_Formes
 
         public abstract void translation(int x, int y);
         public abstract void homothetie(int coeff);
-
     }
 }

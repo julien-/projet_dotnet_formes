@@ -172,7 +172,7 @@ namespace Projet_Formes
 
 
                 String nom = rdr.GetString(0);
-                String couleur = rdr.GetString(1);
+                int couleur = rdr.GetInt32(1);
                 //int count = rdr.FieldCount; //nombre de points
                 Point[] tab_point = new Point[nb];
 

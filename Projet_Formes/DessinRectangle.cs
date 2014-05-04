@@ -11,7 +11,7 @@ namespace Projet_Formes
     {
         public override void dessiner(Rectangle entry, Graphics g)
         {
-            SolidBrush brush = new SolidBrush(Color.Black);
+            SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
             g.FillRectangle(brush, entry.Point1.X, entry.Point1.Y, entry.Largeur, entry.Hauteur);
         }
     }

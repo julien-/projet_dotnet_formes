@@ -158,7 +158,7 @@ namespace Projet_Formes
                 rdr.Read();
 
                 String nom = rdr.GetString(0);
-                String couleur = rdr.GetString(1);
+                int couleur = rdr.GetInt32(1);
                 int x1 = rdr.GetInt32(2);
                 int y1 = rdr.GetInt32(3);
                 int x2 = rdr.GetInt32(4);

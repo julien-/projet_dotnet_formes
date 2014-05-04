@@ -12,7 +12,7 @@ namespace Projet_Formes
         protected Point _point1;
         protected Point _point2;
 
-        public Segment(int id, string nom, string couleur, Point point1, Point point2) : base(id, nom, couleur) 
+        public Segment(int id, string nom, int couleur, Point point1, Point point2) : base(id, nom, couleur) 
         {
             this._point1 = point1;
             this._point2 = point2;

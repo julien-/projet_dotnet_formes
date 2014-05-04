@@ -11,7 +11,7 @@ namespace Projet_Formes
     {
         public override void dessiner(Triangle entry, Graphics g)
         {
-            SolidBrush brush = new SolidBrush(Color.Black);
+            SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
             g.FillPolygon(brush, entry.Tableau_points);
         }
     }

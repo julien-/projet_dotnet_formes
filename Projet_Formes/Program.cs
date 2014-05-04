@@ -20,7 +20,7 @@ namespace Projet_Formes
         
         static void Main()
         {
-            //test();
+           //test();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -34,7 +34,7 @@ namespace Projet_Formes
 
             string nom_ellipse = "elipse1";
 
-            string couleur_ellipse = "white";
+            int couleur_ellipse = 55555;
 
             Point point1 = new Point(12, 13);
             int longueur_ell = 12;
@@ -47,7 +47,7 @@ namespace Projet_Formes
 
             string nom_polygone = "polygone1";
 
-            string couleur_polygone = "white";
+            int couleur_polygone = 15464;
 
             Point point3 = new Point(16, 17);
             Point point4 = new Point(18, 19);
@@ -61,7 +61,7 @@ namespace Projet_Formes
 
             string nom_rectangle = "rectangle1";
 
-            string couleur_rectangle = "white";
+            int couleur_rectangle = 4646;
 
             Point point6 = new Point(22, 23);
             int longueur_rect = 12;
@@ -89,8 +89,8 @@ namespace Projet_Formes
             Console.ReadLine();
 
             //Test Base de donnée
-
-            /*DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
+            /*
+            DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
             ellipsedao.create(ellipse1);
 
             ellipse1.Nom = "ellipse2";
@@ -107,13 +107,14 @@ namespace Projet_Formes
             DAO<Polygone> polygonedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOPolygone();
             polygonedao.create(polygone1);
 
-            polygone1.Nom = "polygone2";*/
+            polygone1.Nom = "polygone2";
 
             //Dessiner<Polygone> polygonedessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinPolygone();
             //polygonedessin.dessiner(polygone1);
 
 
             //polygonedao.update(polygone1);
+            */
         }
     }
 }

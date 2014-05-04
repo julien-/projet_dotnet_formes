@@ -11,7 +11,7 @@ namespace Projet_Formes
     {
         public override void dessiner(Segment entry,  Graphics g)
         {
-            Pen pen = new Pen(Color.Black, 10);
+            Pen pen = new Pen(Color.FromArgb(entry.Couleur), 10);
             g.DrawLine(pen, entry.Point1.X, entry.Point1.Y, entry.Point2.X, entry.Point2.Y);
         }
     }

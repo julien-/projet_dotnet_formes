@@ -13,7 +13,7 @@ namespace Projet_Formes
         protected int _hauteur;
         protected int _largeur;
 
-        public Rectangle(int id, string nom, string couleur, Point point1, int hauteur, int largeur) : base(id, nom, couleur) 
+        public Rectangle(int id, string nom, int couleur, Point point1, int hauteur, int largeur) : base(id, nom, couleur) 
         {
             this._point1 = point1;
             this._hauteur = hauteur;
