@@ -63,7 +63,6 @@
     <Compile Include="DessinRectangle.cs" />
     <Compile Include="DessinSegment.cs" />
     <Compile Include="DessinTriangle.cs" />
-    <Compile Include="Point.cs" />
     <Compile Include="SingletonConnexion.cs" />
     <Compile Include="DAORectangle.cs" />
     <Compile Include="Ellipse.cs" />

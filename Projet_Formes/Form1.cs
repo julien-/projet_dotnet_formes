@@ -14,16 +14,19 @@ namespace Projet_Formes
     {
         Graphics g; //Bibliothèque pour dessiner des formes
 
-        Point point1 = new Point(0, 0);
-        Point point2 = new Point(0, 0);
+        Point point_depart = new Point(0, 0);
+        Point point_arrivee = new Point(0, 0);
+
+        Forme_simple nouvelle_forme;
         int id = 1;
         string couleur = "white";
-        Point []tabcoord = new Point[] { };
+        
         int nb_points_poly;
         int clicG_actif = 0;    //si le clic gauche est appuyé ou pas
         int clicD_actif = 0;    //si le clic droit est appuyé ou pas
         int id_groupe_actif = -1;   //-1 si non actif sinon valeur de l'id du groupe
         int zoom = 0;   //-1 si on retrecie, 0 si rien, 1 si on agrandit
+        bool bouton_Mouse_down;
 
         public Form1()
         {
@@ -57,61 +60,87 @@ namespace Projet_Formes
 
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Ellipse nouvelle_forme = new Ellipse(id, "Ellipse", point1, point2, couleur);
+            Ellipse nouvelle_forme = new Ellipse(id, "Ellipse", couleur, new Point(40, 40), 40, 20);
+            Dessiner<Ellipse> ellipsedessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinEllipse();
+            g = this.panel1.CreateGraphics();
+            ellipsedessin.dessiner(nouvelle_forme, g);
         }
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Triangle nouvelle_forme = new Triangle(id, "Triangle", point1, point2, couleur, tabcoord);
+            Point[] tabcoord = new Point[3] { new Point(3, 4), new Point(3, 200), new Point(140, 200) };
+            Triangle nouvelle_forme = new Triangle(id, "Triangle", couleur, tabcoord);
+            Dessiner<Triangle> triangledessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinTriangle();
+            g = this.panel1.CreateGraphics();
+            triangledessin.dessiner(nouvelle_forme, g);
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Rectangle nouvelle_forme = new Rectangle(id, "Rectangle", point1, point2, couleur);
+            Rectangle nouvelle_forme = new Rectangle(id, "Rectangle", couleur, new Point(40,40), 40, 20);
+            Dessiner<Rectangle> rectangledessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinRectangle();
+            g = this.panel1.CreateGraphics();
+            rectangledessin.dessiner(nouvelle_forme, g);
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Segment nouvelle_forme = new Segment(id, "Segment", point1, point2, couleur);
-            //Console.WriteLine("test" + nb_points_poly);
+            Segment nouvelle_forme = new Segment(id, "Segment", couleur, new Point(1, 2), new Point(3, 4));
+            Dessiner<Segment> segmentdessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinSegment();
+            g = this.panel1.CreateGraphics();
+            segmentdessin.dessiner(nouvelle_forme, g);
+            creer(nouvelle_forme);
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Polygone nouvelle_forme = new Polygone(id, "Polygone", point1, point2, couleur, tabcoord);
+            Point[] tabcoord = new Point[5] { new Point(3, 4), new Point(3, 200), new Point(140, 200), new Point(400, 200), new Point(180, 50) };
+            Polygone nouvelle_forme = new Polygone(id, "Polygone", couleur, tabcoord);
+            Dessiner<Polygone> polygonedessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinPolygone();
+            g = this.panel1.CreateGraphics();
+            polygonedessin.dessiner(nouvelle_forme, g);
             label10.Visible = true;
             textBox3.Visible = true;
+            creer(nouvelle_forme);
+        }
+
+        private void creer(Forme_simple forme)
+        {
+            Console.WriteLine(forme.GetType());
+            forme.Nom = "test";
+            forme.Write();
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            //point1 = e.Location;
-            
-            //Clic gauche
+            point_depart.X = e.Location.X;
+            point_depart.Y = e.Location.Y;
+
             if (e.Button == MouseButtons.Left)
-            {
-                clicG_actif = 1;
-                //Valeur fictive du nom de la forme
-                this.textBox_nom.Text = "blabla"; ;
-            }
+                bouton_Mouse_down = true;
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
-            clicG_actif = 0;
-        }
-
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (clicG_actif == 1)
+            if (bouton_Mouse_down)
             {
-                Pen p = new Pen(Color.Black, 10);
-                //point2 = e.Location;
+                bouton_Mouse_down = false;
+
+                Pen pen = new Pen(Color.Black, 10);
+                SolidBrush blueBrush = new SolidBrush(Color.Blue);
+                point_arrivee.X = e.Location.X;
+                point_arrivee.Y = e.Location.Y;
                 g = this.panel1.CreateGraphics();
-                //g.FillRectangle(p, point1.X, point1.Y, point2.X, point2.Y);
-                
+                int longueur = point_arrivee.X - point_depart.X;
+                int largeur = point_arrivee.Y - point_depart.Y;
+
+                //g.FillRectangle(blueBrush, point_depart.X , point_depart.Y , longueur, largeur);
+                //g.FillEllipse(blueBrush, point_depart.X, point_depart.Y, longueur, largeur);
+                //g.DrawLine(pen, point_depart.X, point_depart.Y, point_arrivee.X, point_arrivee.Y);
+
+                //panel1.Invalidate(); 
+
             }
-            point1 = point2;
         }
 
         private void panel_couleur_Click(object sender, EventArgs e)

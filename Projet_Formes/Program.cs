@@ -20,11 +20,11 @@ namespace Projet_Formes
         
         static void Main()
         {
-            test();
+            //test();
 
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());            
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());            
         }
 
         static void test()
@@ -90,7 +90,7 @@ namespace Projet_Formes
 
             //Test Base de donnée
 
-            DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
+            /*DAO<Ellipse> ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
             ellipsedao.create(ellipse1);
 
             ellipse1.Nom = "ellipse2";
@@ -107,9 +107,13 @@ namespace Projet_Formes
             DAO<Polygone> polygonedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOPolygone();
             polygonedao.create(polygone1);
 
-            polygone1.Nom = "polygone2";
+            polygone1.Nom = "polygone2";*/
 
-            polygonedao.update(polygone1);
+            //Dessiner<Polygone> polygonedessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinPolygone();
+            //polygonedessin.dessiner(polygone1);
+
+
+            //polygonedao.update(polygone1);
         }
     }
 }

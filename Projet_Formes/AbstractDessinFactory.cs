@@ -19,10 +19,10 @@ namespace Projet_Formes
         public abstract Dessiner<Triangle> getDessinTriangle();
         public abstract Dessiner<Polygone> getDessinPolygone();
 
-        public static AbstractDessinFactory getFactory(FactoryType type)
+        public static AbstractDessinFactory getFactory(FactoryDessin dessin)
         {
 
-            if (type.Equals(FactoryDessin.DESSIN_FACTORY))
+            if (dessin.Equals(FactoryDessin.DESSIN_FACTORY))
                 return new DessinFactory();
             return null;
         }
