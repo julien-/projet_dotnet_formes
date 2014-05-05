@@ -73,8 +73,8 @@ namespace Projet_Formes
 
         public override void maj(int x, int y)
         {
-            this.Largeur += x; //garde pas la valeur absolu car necessaire pour detecter
-            this.Hauteur += y;
+            this.Largeur = x;//garde pas la valeur absolu car necessaire pour detecter
+            this.Hauteur = y;
         }
 
         public override void translation(int x, int y)

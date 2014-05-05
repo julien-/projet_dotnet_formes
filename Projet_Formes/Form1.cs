@@ -16,6 +16,8 @@ namespace Projet_Formes
 
         Point point_depart = new Point(0, 0);
         Point point_arrivee = new Point(0, 0);
+
+        bool bouton_Mouse_down;
         
         Forme_simple forme_active;
         int id = 1;
@@ -102,13 +104,10 @@ namespace Projet_Formes
             if (forme != null)
             {
                 dessin.dessiner(forme, this.panel1.CreateGraphics());
-                Console.WriteLine(forme.GetType());
-                forme.Nom = "test";
-                forme.Write();
             }
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        /*private void panel1_MouseDown(object sender, MouseEventArgs e)
         {//Clic sur le panel de dessin
             point_depart = e.Location;
 
@@ -143,6 +142,7 @@ namespace Projet_Formes
                 if (this.forme_active != null)
                 {
                     this.forme_active.maj(point_arrivee.X - point_depart.X, point_arrivee.Y - point_depart.Y);
+                    this.forme_active.maj(point_depart);
                     representer(forme_active, dessinateur);
                 }
 
@@ -174,6 +174,43 @@ namespace Projet_Formes
 
             //panel1.Invalidate(); 
 
+        }*/
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            point_depart.X = e.Location.X;
+            point_depart.Y = e.Location.Y;
+
+            if (e.Button == MouseButtons.Left)
+                bouton_Mouse_down = true;
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (bouton_Mouse_down)
+            {
+                bouton_Mouse_down = false;
+
+                Pen pen = new Pen(Color.Black, 10);
+                SolidBrush blueBrush = new SolidBrush(Color.Blue);
+                point_arrivee.X = e.Location.X;
+                point_arrivee.Y = e.Location.Y;
+                g = this.panel1.CreateGraphics();
+                int largeur = point_arrivee.X - point_depart.X;
+                int hauteur = point_arrivee.Y - point_depart.Y;
+
+                forme_active.maj(point_depart);
+                forme_active.maj(largeur, hauteur);
+                representer(forme_active, dessinateur);
+
+
+                //g.FillRectangle(blueBrush, point_depart.X , point_depart.Y , longueur, largeur);
+                //g.FillEllipse(blueBrush, point_depart.X, point_depart.Y, longueur, largeur);
+                //g.DrawLine(pen, point_depart.X, point_depart.Y, point_arrivee.X, point_arrivee.Y);
+
+                //panel1.Invalidate(); 
+
+            }
         }
 
         private void panel_couleur_Click(object sender, EventArgs e)
