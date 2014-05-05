@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Projet_Formes
 {
@@ -38,7 +39,7 @@ namespace Projet_Formes
                 Console.Out.WriteLine("----------------------------");
             }
         }
-
+        public override void maj(int x, int y) { }
         public override void translation(int x, int y)
         {
             foreach (Forme_simple liste_formes in _liste_formes)

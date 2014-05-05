@@ -35,6 +35,8 @@ namespace Projet_Formes
             Console.Out.WriteLine("Couleur : " + this._couleur);    
         }
 
+        public override void maj(int x, int y) { }
+
         public override void translation(int x, int y){}
 
         public override void homothetie(int coeff){}

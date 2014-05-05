@@ -65,11 +65,19 @@ namespace Projet_Formes
             Console.WriteLine("Largeur : " + this._largeur);
         }
 
+        public override void maj(int x, int y)
+        {
+            this.Largeur += x; //garde pas la valeur absolu car necessaire pour detecter
+            this.Hauteur += y;
+        }
+
         public override void translation(int x, int y)
         {
             _point1.X += x;
             _point1.Y += y;
         }
+
+        
     }
 
 

@@ -141,7 +141,8 @@ namespace Projet_Formes
                 //if(PeutDessiner)
                 if (this.forme_active != null)
                 {
-                    
+                    this.forme_active.maj(point_arrivee.X - point_depart.X, point_arrivee.Y - point_depart.Y);
+                    representer(forme_active, dessinateur);
                 }
 
                 point_depart = point_arrivee;
