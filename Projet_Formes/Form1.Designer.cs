@@ -246,7 +246,7 @@
             // 
             // panel_couleur
             // 
-            this.panel_couleur.BackColor = System.Drawing.Color.White;
+            this.panel_couleur.BackColor = System.Drawing.Color.Black;
             this.panel_couleur.Location = new System.Drawing.Point(81, 70);
             this.panel_couleur.Name = "panel_couleur";
             this.panel_couleur.Size = new System.Drawing.Size(139, 61);

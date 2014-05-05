@@ -49,7 +49,8 @@ namespace Projet_Formes
             Console.Out.WriteLine("Nom : " + this._nom);
         }
 
-        public abstract void maj(int x, int y);
+        public abstract void maj(int x, int y); //en cours de dessin
+        public abstract void maj(Point p); //definition du premier point
         public abstract void translation(int x, int y);
         public abstract void homothetie(int coeff);
     }

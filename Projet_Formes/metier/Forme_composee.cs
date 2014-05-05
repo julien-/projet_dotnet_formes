@@ -39,7 +39,11 @@ namespace Projet_Formes
                 Console.Out.WriteLine("----------------------------");
             }
         }
+        
         public override void maj(int x, int y) { }
+        
+        public override void maj(Point p) { }
+
         public override void translation(int x, int y)
         {
             foreach (Forme_simple liste_formes in _liste_formes)

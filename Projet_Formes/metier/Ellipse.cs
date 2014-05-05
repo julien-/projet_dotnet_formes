@@ -64,6 +64,12 @@ namespace Projet_Formes
             Console.WriteLine("Hauteur : " + this._hauteur);
             Console.WriteLine("Largeur : " + this._largeur);
         }
+        
+        public override void maj(Point p)
+        {//Definition du premier point
+            this._point1 = p;
+        }
+
 
         public override void maj(int x, int y)
         {

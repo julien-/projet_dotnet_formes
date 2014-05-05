@@ -118,6 +118,7 @@ namespace Projet_Formes
                 clicD_actif = false;
                 Console.WriteLine("DEPART GAUCHE: (" + point_depart.X + "," + point_depart.Y + ")");
                 //if(PeutDessiner)
+                this.forme_active.maj(point_depart);
                 majPropriete(forme_active);
                 representer(forme_active, dessinateur);
                 //else //PEUT PAS DESSINER
