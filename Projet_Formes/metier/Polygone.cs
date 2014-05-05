@@ -59,5 +59,10 @@ namespace Projet_Formes
                 this._tab_points[i].Y += y;
             }
         }
+
+        public override void maj(Point[] tabpoints) 
+        {
+            this._tab_points = tabpoints;
+        }
     }
 }

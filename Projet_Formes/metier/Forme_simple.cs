@@ -40,5 +40,7 @@ namespace Projet_Formes
         public override void homothetie(int coeff){}
 
         public override void maj(Point point1, Point point2) { }
+
+        public override void maj(Point[] tabpoints) { }
     }
 }

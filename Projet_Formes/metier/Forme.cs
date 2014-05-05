@@ -54,5 +54,7 @@ namespace Projet_Formes
         public abstract void homothetie(int coeff);
 
         public abstract void maj(Point point1, Point point2);
+
+        public abstract void maj(Point[] tabpoints);
     }
 }

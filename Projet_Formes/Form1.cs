@@ -21,8 +21,12 @@ namespace Projet_Formes
         
         Forme_simple forme_active;
         int id = 1;
-        
+
+        //Gestion Polygones
+        int i = 0;
         int nb_points_poly;
+        Point[] tabcoord = new Point[] {};
+
         bool clicG_actif = false;    //si le clic gauche est appuyé ou pas
         bool clicD_actif = false;    //si le clic droit est appuyé ou pas
         bool PeutDessiner;    //creation ou selection de forme
@@ -70,10 +74,11 @@ namespace Projet_Formes
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Point[] tabcoord = new Point[3] { new Point(3, 4), new Point(3, 200), new Point(140, 200) };
+            this.tabcoord = new Point[3] { new Point(0, 0), new Point(0, 0), new Point(0, 0) };
             this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
             this.dessinateur = new DessinTriangle();
             this.id++;
+            this.nb_points_poly = 3;
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,9 +97,9 @@ namespace Projet_Formes
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Point[] tabcoord = new Point[5] { new Point(3, 4), new Point(3, 200), new Point(140, 200), new Point(400, 200), new Point(180, 50) };
             this.forme_active = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
             this.dessinateur = new DessinPolygone();
+            this.id++;
             label10.Visible = true;
             textBox3.Visible = true;
         }
@@ -109,23 +114,40 @@ namespace Projet_Formes
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
-            point_depart.X = e.Location.X;
-            point_depart.Y = e.Location.Y;
+            point_depart = e.Location;
+            Console.WriteLine(point_depart);
 
             if (e.Button == MouseButtons.Left)
                 bouton_Mouse_down = true;
+            else if (e.Button == MouseButtons.Right)
+            {
+                if (i == this.nb_points_poly - 1)
+                {
+                    tabcoord[i] = point_depart;
+                    forme_active.maj(tabcoord);
+                    representer(forme_active, dessinateur);
+                    this.i = 0;
+                }
+                else
+                {
+                    tabcoord[i] = point_depart;
+                    this.i++;
+                }
+            }
+
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             if (bouton_Mouse_down)
             {
+                point_arrivee = e.Location;
+
                 bouton_Mouse_down = false;
 
                 Pen pen = new Pen(Color.Black, 10);
                 SolidBrush blueBrush = new SolidBrush(Color.Blue);
-                point_arrivee.X = e.Location.X;
-                point_arrivee.Y = e.Location.Y;
+
                 g = this.panel1.CreateGraphics();
                 
 

@@ -39,8 +39,6 @@ namespace Projet_Formes
                 Console.Out.WriteLine("----------------------------");
             }
         }
-        
-        public override void maj(Point point1, Point point2) { }
 
         public override void translation(int x, int y)
         {
@@ -54,5 +52,9 @@ namespace Projet_Formes
         {
 
         }
+
+        public override void maj(Point point1, Point point2) { }
+
+        public override void maj(Point[] tabpoints) { }
     }
 }
