@@ -61,27 +61,31 @@ namespace Projet_Formes
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             textBox_nom.Clear();
-            this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
+            this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0);
             this.dessinateur = new DessinEllipse();
+            this.id++;
         }
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Point[] tabcoord = new Point[3] { new Point(3, 4), new Point(3, 200), new Point(140, 200) };
             this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
-            this.dessinateur =new DessinTriangle();
+            this.dessinateur = new DessinTriangle();
+            this.id++;
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.forme_active = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
             this.dessinateur = new DessinRectangle();
+            this.id++;
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.forme_active = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(1, 2), new Point(3, 4));
             this.dessinateur = new DessinSegment();
+            this.id++;
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,7 +119,6 @@ namespace Projet_Formes
                 Console.WriteLine("DEPART GAUCHE: (" + point_depart.X + "," + point_depart.Y + ")");
                 //if(PeutDessiner)
                 majPropriete(forme_active);
-                //creerAvecValeurParDefault(forme_active);
                 representer(forme_active, dessinateur);
                 //else //PEUT PAS DESSINER
             }
@@ -134,11 +137,12 @@ namespace Projet_Formes
             {//Clic Gauche
                 clicG_actif = true;
                 clicD_actif = false;
-
-
-                Console.WriteLine("MOUVEMENT GAUCHE: de (" + point_depart.X + "," + point_depart.Y + ") à (" + point_arrivee.X + "," + point_arrivee.Y + ")");
+                Console.WriteLine("MOUVEMENTclicgauche (" + (point_arrivee.X - point_depart.X) + "," + (point_arrivee.Y - point_depart.Y) + ")");
                 //if(PeutDessiner)
-
+                if (this.forme_active != null)
+                {
+                    
+                }
 
                 point_depart = point_arrivee;
             }
@@ -165,9 +169,6 @@ namespace Projet_Formes
             int longueur = point_arrivee.X - point_depart.X;
             int largeur = point_arrivee.Y - point_depart.Y;
 
-            //g.FillRectangle(blueBrush, point_depart.X , point_depart.Y , longueur, largeur);
-            //g.FillEllipse(blueBrush, point_depart.X, point_depart.Y, longueur, largeur);
-            //g.DrawLine(pen, point_depart.X, point_depart.Y, point_arrivee.X, point_arrivee.Y);
 
             //panel1.Invalidate(); 
 

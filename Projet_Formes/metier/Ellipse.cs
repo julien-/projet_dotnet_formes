@@ -13,14 +13,7 @@ namespace Projet_Formes
         protected int _hauteur;
         protected int _largeur;
 
-
-        public Ellipse(Forme_simple f) : base (f.Id, f.Nom, f.Couleur)
-        {
-            this._point1 = new Point(0, 0);
-            this._hauteur = 0;
-            this._largeur = 0;
-        }
-
+        
         public Ellipse(int id, string nom, int couleur, Point point1, int hauteur, int largeur) : base(id, nom, couleur)
         {
             this._point1 = point1;
