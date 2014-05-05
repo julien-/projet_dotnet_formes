@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Formes
 {
-    abstract class Forme
+    public abstract class Forme
     {
         protected string _nom;
         protected int _groupe = -1;

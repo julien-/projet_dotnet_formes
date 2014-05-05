@@ -7,8 +7,9 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    public abstract class Dessiner<T>
+    abstract class DessinFormeSimple
     {
-        public abstract void dessiner(T entry, Graphics g);
+        public abstract void dessiner(Forme_simple entry, Graphics g);
     }
+
 }

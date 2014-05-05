@@ -26,8 +26,8 @@ namespace Projet_Formes
         bool PeutDessiner;    //creation ou selection de forme
         int id_groupe_actif = -1;   //-1 si non actif sinon valeur de l'id du groupe
         int zoom = 0;   //-1 si on retrecie, 0 si rien, 1 si on agrandit
+        DessinFormeSimple dessinateur;
         
-
         public Form1()
         {
             InitializeComponent();
@@ -61,56 +61,43 @@ namespace Projet_Formes
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             textBox_nom.Clear();
-            Ellipse nouvelle_forme = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
-            //Creation de la fabrique
-            Dessiner<Ellipse> ellipsedessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinEllipse();
-            
-            
-            ellipsedessin.dessiner(nouvelle_forme, this.panel1.CreateGraphics());
-
-            this.forme_active = nouvelle_forme;
+            this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
+            this.dessinateur = new DessinEllipse();
         }
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Point[] tabcoord = new Point[3] { new Point(3, 4), new Point(3, 200), new Point(140, 200) };
-            Triangle nouvelle_forme = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
-            Dessiner<Triangle> triangledessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinTriangle();
-            g = this.panel1.CreateGraphics();
-            triangledessin.dessiner(nouvelle_forme, g);
+            this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
+            this.dessinateur =new DessinTriangle();
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Rectangle nouvelle_forme = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
-            Dessiner<Rectangle> rectangledessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinRectangle();
-            g = this.panel1.CreateGraphics();
-            rectangledessin.dessiner(nouvelle_forme, g);
+            this.forme_active = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
+            this.dessinateur = new DessinRectangle();
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Segment nouvelle_forme = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(1, 2), new Point(3, 4));
-            Dessiner<Segment> segmentdessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinSegment();
-            g = this.panel1.CreateGraphics();
-            segmentdessin.dessiner(nouvelle_forme, g);
+            this.forme_active = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(1, 2), new Point(3, 4));
+            this.dessinateur = new DessinSegment();
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Point[] tabcoord = new Point[5] { new Point(3, 4), new Point(3, 200), new Point(140, 200), new Point(400, 200), new Point(180, 50) };
-            Polygone nouvelle_forme = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
-            Dessiner<Polygone> polygonedessin = AbstractDessinFactory.getFactory(FactoryDessin.DESSIN_FACTORY).getDessinPolygone();
-            g = this.panel1.CreateGraphics();
-            polygonedessin.dessiner(nouvelle_forme, g);
+            this.forme_active = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
+            this.dessinateur = new DessinPolygone();
             label10.Visible = true;
             textBox3.Visible = true;
         }
 
-        private void creer(Forme_simple forme)
+        private void representer(Forme_simple forme, DessinFormeSimple dessin)
         {
             if (forme != null)
             {
+                dessin.dessiner(forme, this.panel1.CreateGraphics());
                 Console.WriteLine(forme.GetType());
                 forme.Nom = "test";
                 forme.Write();
@@ -128,7 +115,8 @@ namespace Projet_Formes
                 Console.WriteLine("DEPART GAUCHE: (" + point_depart.X + "," + point_depart.Y + ")");
                 //if(PeutDessiner)
                 majPropriete(forme_active);
-                creer(forme_active);
+                //creerAvecValeurParDefault(forme_active);
+                representer(forme_active, dessinateur);
                 //else //PEUT PAS DESSINER
             }
             if (e.Button == MouseButtons.Right)

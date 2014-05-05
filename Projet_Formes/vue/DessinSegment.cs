@@ -7,12 +7,13 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DessinSegment : Dessiner<Segment>
+    class DessinSegment : DessinFormeSimple
     {
-        public override void dessiner(Segment entry,  Graphics g)
+        public override void dessiner(Forme_simple entry, Graphics g)
         {
+            Segment s = (Segment)entry;
             Pen pen = new Pen(Color.FromArgb(entry.Couleur), 10);
-            g.DrawLine(pen, entry.Point1.X, entry.Point1.Y, entry.Point2.X, entry.Point2.Y);
+            g.DrawLine(pen, s.Point1.X, s.Point1.Y, s.Point2.X, s.Point2.Y);
         }
     }
 }

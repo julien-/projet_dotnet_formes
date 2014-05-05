@@ -7,12 +7,13 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DessinEllipse : Dessiner<Ellipse>
+    class DessinTriangle : DessinFormeSimple
     {
-        public override void dessiner(Ellipse entry, Graphics g)
+        public override void dessiner(Forme_simple entry, Graphics g)
         {
+            Triangle t = (Triangle)entry;
             SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
-            g.FillEllipse(brush, entry.Point1.X, entry.Point1.Y, entry.Largeur, entry.Hauteur);
+            g.FillPolygon(brush, t.Tableau_points);
         }
     }
 }

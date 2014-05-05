@@ -7,12 +7,13 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DessinRectangle : Dessiner<Rectangle>
+    class DessinEllipse : DessinFormeSimple
     {
-        public override void dessiner(Rectangle entry, Graphics g)
+        public override void dessiner(Forme_simple entry, Graphics g)
         {
+            Ellipse e = (Ellipse)entry;
             SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
-            g.FillRectangle(brush, entry.Point1.X, entry.Point1.Y, entry.Largeur, entry.Hauteur);
+            g.FillEllipse(brush, e.Point1.X, e.Point1.Y, e.Largeur, e.Hauteur);
         }
     }
 }

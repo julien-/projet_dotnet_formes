@@ -7,12 +7,13 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DessinPolygone : Dessiner<Polygone>
+    class DessinRectangle : DessinFormeSimple
     {
-        public override void dessiner(Polygone entry, Graphics g)
+        public override void dessiner(Forme_simple entry, Graphics g)
         {
+            Rectangle r = (Rectangle)entry;
             SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
-            g.FillPolygon(brush, entry.Tableau_points);
+            g.FillRectangle(brush, r.Point1.X, r.Point1.Y, r.Largeur, r.Hauteur);
         }
     }
 }

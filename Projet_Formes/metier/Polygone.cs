@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Formes
 {
-    class Polygone : Forme_simple
+    public class Polygone : Forme_simple
     {
         protected Point []_tab_points;
         protected int _nb_points;

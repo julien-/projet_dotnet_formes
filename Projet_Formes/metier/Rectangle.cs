@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Projet_Formes
 {
-    class Ellipse : Forme_simple
+    public class Rectangle : Forme_simple
     {
         protected Point _point1;
         protected int _hauteur;
         protected int _largeur;
-        
-        public Ellipse(int id, string nom, int couleur, Point point1, int hauteur, int largeur) : base(id, nom, couleur)
+
+        public Rectangle(int id, string nom, int couleur, Point point1, int hauteur, int largeur) : base(id, nom, couleur) 
         {
             this._point1 = point1;
             this._hauteur = hauteur;
@@ -70,6 +70,4 @@ namespace Projet_Formes
             _point1.Y += y;
         }
     }
-
-
 }

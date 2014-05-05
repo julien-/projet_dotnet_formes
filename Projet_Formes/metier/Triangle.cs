@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Formes
 {
-    class Triangle : Polygone
+    public class Triangle : Polygone
     {
         public Triangle(int id, string nom, int couleur, Point[] tab_points) : base(id, nom, couleur, tab_points) 
         {

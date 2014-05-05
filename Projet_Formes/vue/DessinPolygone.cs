@@ -7,12 +7,13 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DessinTriangle : Dessiner<Triangle>
+    class DessinPolygone : DessinFormeSimple
     {
-        public override void dessiner(Triangle entry, Graphics g)
+        public override void dessiner(Forme_simple entry, Graphics g)
         {
+            Polygone p = (Polygone)entry;
             SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
-            g.FillPolygon(brush, entry.Tableau_points);
+            g.FillPolygon(brush, p.Tableau_points);
         }
     }
 }
