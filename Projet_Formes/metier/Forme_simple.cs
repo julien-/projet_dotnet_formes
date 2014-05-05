@@ -35,12 +35,10 @@ namespace Projet_Formes
             Console.Out.WriteLine("Couleur : " + this._couleur);    
         }
 
-        public override void maj(int x, int y) { }
-
-        public override void maj(Point p) { }
-
         public override void translation(int x, int y){}
 
         public override void homothetie(int coeff){}
+
+        public override void maj(Point point1, Point point2) { }
     }
 }

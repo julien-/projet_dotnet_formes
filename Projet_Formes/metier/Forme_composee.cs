@@ -40,9 +40,7 @@ namespace Projet_Formes
             }
         }
         
-        public override void maj(int x, int y) { }
-        
-        public override void maj(Point p) { }
+        public override void maj(Point point1, Point point2) { }
 
         public override void translation(int x, int y)
         {

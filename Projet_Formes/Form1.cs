@@ -107,75 +107,6 @@ namespace Projet_Formes
             }
         }
 
-        /*private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {//Clic sur le panel de dessin
-            point_depart = e.Location;
-
-            if (e.Button == MouseButtons.Left)
-            {//Clic Gauche
-                clicG_actif = true;
-                clicD_actif = false;
-                Console.WriteLine("DEPART GAUCHE: (" + point_depart.X + "," + point_depart.Y + ")");
-                //if(PeutDessiner)
-                this.forme_active.maj(point_depart);
-                majPropriete(forme_active);
-                representer(forme_active, dessinateur);
-                //else //PEUT PAS DESSINER
-            }
-            if (e.Button == MouseButtons.Right)
-            {//Clic Droit
-                clicG_actif = false;
-                clicD_actif = true;
-            }
-        }
-
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {//Clic appuyé + Mouvement
-            point_arrivee = e.Location;
-
-            if (e.Button == MouseButtons.Left)
-            {//Clic Gauche
-                clicG_actif = true;
-                clicD_actif = false;
-                Console.WriteLine("MOUVEMENTclicgauche (" + (point_arrivee.X - point_depart.X) + "," + (point_arrivee.Y - point_depart.Y) + ")");
-                //if(PeutDessiner)
-                if (this.forme_active != null)
-                {
-                    this.forme_active.maj(point_arrivee.X - point_depart.X, point_arrivee.Y - point_depart.Y);
-                    this.forme_active.maj(point_depart);
-                    representer(forme_active, dessinateur);
-                }
-
-                point_depart = point_arrivee;
-            }
-            if (e.Button == MouseButtons.Right)
-            {//Clic Droit
-                clicG_actif = false;
-                clicD_actif = true;
-
-
-                point_depart = point_arrivee;    
-            }
-        }
-
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
-        {
-            clicG_actif = false;
-            clicD_actif = false;
-
-            Pen pen = new Pen(Color.Black, 10);
-            SolidBrush blueBrush = new SolidBrush(Color.Blue);
-            point_arrivee.X = e.Location.X;
-            point_arrivee.Y = e.Location.Y;
-            g = this.panel1.CreateGraphics();
-            int longueur = point_arrivee.X - point_depart.X;
-            int largeur = point_arrivee.Y - point_depart.Y;
-
-
-            //panel1.Invalidate(); 
-
-        }*/
-
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             point_depart.X = e.Location.X;
@@ -196,17 +127,13 @@ namespace Projet_Formes
                 point_arrivee.X = e.Location.X;
                 point_arrivee.Y = e.Location.Y;
                 g = this.panel1.CreateGraphics();
-                int largeur = point_arrivee.X - point_depart.X;
-                int hauteur = point_arrivee.Y - point_depart.Y;
+                
 
-                forme_active.maj(point_depart);
-                forme_active.maj(largeur, hauteur);
-                representer(forme_active, dessinateur);
-
-
-                //g.FillRectangle(blueBrush, point_depart.X , point_depart.Y , longueur, largeur);
-                //g.FillEllipse(blueBrush, point_depart.X, point_depart.Y, longueur, largeur);
-                //g.DrawLine(pen, point_depart.X, point_depart.Y, point_arrivee.X, point_arrivee.Y);
+                if (forme_active != null)
+                {
+                    forme_active.maj(point_depart, point_arrivee);
+                    representer(forme_active, dessinateur);
+                }
 
                 //panel1.Invalidate(); 
 

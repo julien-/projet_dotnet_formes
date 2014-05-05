@@ -64,18 +64,6 @@ namespace Projet_Formes
             Console.WriteLine("Hauteur : " + this._hauteur);
             Console.WriteLine("Largeur : " + this._largeur);
         }
-        
-        public override void maj(Point p)
-        {//Definition du premier point
-            this._point1 = p;
-        }
-
-
-        public override void maj(int x, int y)
-        {
-            this.Largeur = x;//garde pas la valeur absolu car necessaire pour detecter
-            this.Hauteur = y;
-        }
 
         public override void translation(int x, int y)
         {
@@ -83,7 +71,12 @@ namespace Projet_Formes
             _point1.Y += y;
         }
 
-        
+        public override void maj(Point point1, Point point2)
+        {
+            this._point1 = point1;
+            this._largeur = point2.X - point1.X;
+            this._hauteur = point2.Y - point1.Y;
+        }        
     }
 
 

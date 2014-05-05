@@ -56,5 +56,11 @@ namespace Projet_Formes
             _point2.X += x;
             _point2 .Y += y;
         }
+
+        public override void maj(Point point1, Point point2)
+        {
+            this._point1 = point1;
+            this._point2 = point2;
+        }  
     }
 }
