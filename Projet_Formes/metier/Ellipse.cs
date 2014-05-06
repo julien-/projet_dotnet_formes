@@ -73,8 +73,10 @@ namespace Projet_Formes
 
         public override void homothetie(int zoom)
         {
-            this._largeur += zoom;
-            this._hauteur += zoom;
+            this._point1.X -= zoom;
+            this._point1.Y -= zoom;
+            this._largeur += 2*zoom;
+            this._hauteur += 2*zoom;
         }
 
         public override void maj(Point point1, Point point2)
@@ -84,6 +86,4 @@ namespace Projet_Formes
             this._hauteur = point2.Y - point1.Y;
         }        
     }
-
-
 }

@@ -11,10 +11,46 @@ namespace Projet_Formes
     {
         public Triangle(int id, string nom, int couleur, Point[] tab_points) : base(id, nom, couleur, tab_points) 
         {
-            this._nb_points = 3;
-
-            if (!tab_points.Length.Equals(_nb_points))
+            if (!tab_points.Length.Equals(3))
                 throw new System.ArgumentException("Nombre de points invalide");
+        }
+
+        public override void homothetie(int zoom)
+        {
+            //recherche du centre du triangle
+            Point centre = new Point(0, 0);
+
+            for (int i = 0; i < 3; i++)
+            {
+                centre.X += this._tab_points[i].X;
+                centre.Y += this._tab_points[i].Y;
+            }
+            centre.X /= 3;
+            centre.Y /= 3;
+
+            //HOMOTHETIE
+            for (int i = 0; i < 3; i++)
+            {
+                //Gestion des X
+                if (this._tab_points[i].X < centre.X)
+                {//partie gauche
+                    this._tab_points[i].X -= zoom;
+                }
+                else
+                {//partie droite
+                    this._tab_points[i].X += zoom;
+                }
+
+                //Gestion des Y
+                if (this._tab_points[i].Y < centre.Y)
+                {//partie haute
+                    this._tab_points[i].Y -= zoom;
+                }
+                else
+                {//partie basse
+                    this._tab_points[i].Y += zoom;
+                }
+            }
         }
     }
 }

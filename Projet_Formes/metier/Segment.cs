@@ -61,6 +61,44 @@ namespace Projet_Formes
         {
             this._point1 = point1;
             this._point2 = point2;
-        }  
+        }
+
+        public override void homothetie(int zoom)
+        {
+            //recherche du centre du segment
+            Point centre = new Point(0, 0);
+            centre.X += this._point1.X;
+            centre.Y += this._point1.Y;
+            centre.X += this._point2.X;
+            centre.Y += this._point2.Y;
+            centre.X /= 2;
+            centre.Y /= 2;
+
+            //HOMETHETIE
+            //Gestion des X
+            if (this._point1.X < centre.X)
+            {//partie gauche
+                this._point1.X -= zoom;
+                this._point2.X += zoom;
+            }
+            else
+            {//partie droite
+                this._point1.X += zoom;
+                this._point2.X -= zoom;
+            }
+
+            //Gestion des Y
+            if (this._point1.Y < centre.Y)
+            {//partie haute
+                this._point1.Y -= zoom;
+                this._point2.Y += zoom;
+            }
+            else
+            {//partie basse
+                this._point1.Y += zoom;
+                this._point2.Y -= zoom;
+            }
+        }
+
     }
 }

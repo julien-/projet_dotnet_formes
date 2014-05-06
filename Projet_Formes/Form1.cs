@@ -107,10 +107,7 @@ namespace Projet_Formes
 
         private void representer(Forme_simple forme, DessinFormeSimple dessin)
         {
-            if (forme != null)
-            {
                 dessin.dessiner(forme, this.panel1.CreateGraphics());
-            }
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
