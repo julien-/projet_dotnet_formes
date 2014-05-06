@@ -101,7 +101,8 @@ namespace Projet_Formes
             this.dessinateur = new DessinPolygone();
             this.id++;
             label10.Visible = true;
-            textBox3.Visible = true;
+            textBoxNbPoints.Visible = true;
+            textBoxNbPoints.Focus();
         }
 
         private void representer(Forme_simple forme, DessinFormeSimple dessin)
@@ -115,6 +116,7 @@ namespace Projet_Formes
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             point_depart = e.Location;
+            labelNom.Focus();   //enleve le focus à textBoxNom
 
             if (e.Button == MouseButtons.Left)
                 bouton_Mouse_down = true;
@@ -193,6 +195,24 @@ namespace Projet_Formes
                     id_groupe_actif = -1;
                 }
             }
+            //+-: Zoom
+            if (e.KeyData == Keys.Add)
+            {
+                if (this.forme_active != null)
+                {
+                    this.forme_active.homothetie(1);
+
+                    representer(forme_active, dessinateur);
+                }
+            }
+            if (e.KeyData == Keys.Subtract)
+            {
+                if (this.forme_active != null)
+                {
+                    this.forme_active.homothetie(-1);
+                    representer(forme_active, dessinateur);
+                }
+            }
         }
 
 
@@ -210,11 +230,11 @@ namespace Projet_Formes
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.nb_points_poly = Convert.ToInt32(textBox3.Text);
-                textBox3.Text = "";
+                this.nb_points_poly = Convert.ToInt32(textBoxNbPoints.Text);
+                textBoxNbPoints.Text = "";
                 this.tabcoord = new Point[this.nb_points_poly];
                 label10.Visible = false;
-                textBox3.Visible = false;
+                textBoxNbPoints.Visible = false;
             }
         }
 

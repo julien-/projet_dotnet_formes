@@ -48,7 +48,7 @@ namespace Projet_Formes
             }
         }
 
-        public override void homothetie(int coeff)
+        public override void homothetie(int zoom)
         {
 
         }

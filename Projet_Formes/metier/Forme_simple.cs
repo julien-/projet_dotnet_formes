@@ -37,7 +37,7 @@ namespace Projet_Formes
 
         public override void translation(int x, int y){}
 
-        public override void homothetie(int coeff){}
+        public override void homothetie(int zoom){}
 
         public override void maj(Point point1, Point point2) { }
 
