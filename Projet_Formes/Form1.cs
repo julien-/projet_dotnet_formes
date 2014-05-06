@@ -74,11 +74,11 @@ namespace Projet_Formes
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.tabcoord = new Point[3] { new Point(0, 0), new Point(0, 0), new Point(0, 0) };
+            this.nb_points_poly = 3;
+            this.tabcoord = new Point[this.nb_points_poly];
             this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
             this.dessinateur = new DessinTriangle();
-            this.id++;
-            this.nb_points_poly = 3;
+            this.id++;   
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,7 +115,6 @@ namespace Projet_Formes
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             point_depart = e.Location;
-            Console.WriteLine(point_depart);
 
             if (e.Button == MouseButtons.Left)
                 bouton_Mouse_down = true;
@@ -205,6 +204,18 @@ namespace Projet_Formes
                 panel_couleur.BackColor = Color.FromArgb(forme.Couleur);
             }
 
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.nb_points_poly = Convert.ToInt32(textBox3.Text);
+                textBox3.Text = "";
+                this.tabcoord = new Point[this.nb_points_poly];
+                label10.Visible = false;
+                textBox3.Visible = false;
+            }
         }
 
     }
