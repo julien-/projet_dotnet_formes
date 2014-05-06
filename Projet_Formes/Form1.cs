@@ -13,6 +13,8 @@ namespace Projet_Formes
     public partial class Form1 : Form
     {
         Graphics g; //Bibliothèque pour dessiner des formes
+        Graphics g2; //Bibliothèque pour dessiner des formes
+        Bitmap bm;
 
         Point point_depart = new Point(0, 0);
         Point point_arrivee = new Point(0, 0);
@@ -37,6 +39,13 @@ namespace Projet_Formes
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            g = this.panel1.CreateGraphics();
+            bm = new Bitmap(this.panel1.Width, this.panel1.Height);
+            g2 = Graphics.FromImage(bm);
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -107,7 +116,15 @@ namespace Projet_Formes
 
         private void representer(Forme_simple forme, DessinFormeSimple dessin)
         {
-                dessin.dessiner(forme, this.panel1.CreateGraphics());
+            if (forme != null)
+            {
+                dessin.dessiner(forme, g2);
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            g.DrawImage(bm, 0, 0);
         }
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
@@ -124,6 +141,7 @@ namespace Projet_Formes
                     tabcoord[i] = point_depart;
                     forme_active.maj(tabcoord);
                     representer(forme_active, dessinateur);
+                    panel1.Invalidate();
                     this.i = 0;
                 }
                 else
@@ -132,7 +150,6 @@ namespace Projet_Formes
                     this.i++;
                 }
             }
-
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
@@ -153,10 +170,8 @@ namespace Projet_Formes
                 {
                     forme_active.maj(point_depart, point_arrivee);
                     representer(forme_active, dessinateur);
+                    panel1.Invalidate();
                 }
-
-                //panel1.Invalidate(); 
-
             }
         }
 
@@ -198,8 +213,8 @@ namespace Projet_Formes
                 if (this.forme_active != null)
                 {
                     this.forme_active.homothetie(1);
-
                     representer(forme_active, dessinateur);
+                    panel1.Invalidate();
                 }
             }
             //Dezoom
@@ -207,8 +222,10 @@ namespace Projet_Formes
             {
                 if (this.forme_active != null)
                 {
+                    g2.Clear(Color.White);
                     this.forme_active.homothetie(-1);
                     representer(forme_active, dessinateur);
+                    panel1.Invalidate();
                 }
             }
         }
