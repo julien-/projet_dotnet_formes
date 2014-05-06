@@ -195,8 +195,8 @@ namespace Projet_Formes
                     id_groupe_actif = -1;
                 }
             }
-            //+-: Zoom
-            if (e.KeyData == Keys.Add)
+            //Zoom
+            if (e.KeyData == Keys.Up)
             {
                 if (this.forme_active != null)
                 {
@@ -205,7 +205,8 @@ namespace Projet_Formes
                     representer(forme_active, dessinateur);
                 }
             }
-            if (e.KeyData == Keys.Subtract)
+            //Dezoom
+            if (e.KeyData == Keys.Down)
             {
                 if (this.forme_active != null)
                 {
