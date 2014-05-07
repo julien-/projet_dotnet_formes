@@ -42,6 +42,28 @@ namespace Projet_Formes
             }
         }
 
+        public int Largeur
+        {
+            get
+            {
+                if (this._point2.X > this._point1.X)
+                    return this._point2.X - this._point1.X;
+                else
+                    return this._point1.X - this._point2.X;
+            }
+        }
+
+        public int Hauteur
+        {
+            get
+            {
+                if (this._point2.Y > this._point1.Y)
+                    return this._point2.Y - this._point1.Y;
+                else
+                    return this._point1.Y - this._point2.Y;
+            }
+        }
+
         public override void Write()
         {
             base.Write();
@@ -49,12 +71,52 @@ namespace Projet_Formes
             Console.WriteLine("Point 2 : (" + this._point2.X + "," + this._point2.Y + ")");
         }
 
-        public override void translation(int x, int y)
+        public override void translation(Point point1, Point point2)
         {
-            _point1.X += x;
-            _point1.Y += y;
-            _point2.X += x;
-            _point2 .Y += y;
+            if ((point1.X >= this.Point1.X - 4 && point1.X <= this.Point1.X + 4) && (point1.Y >= this.Point1.Y - 4 && point1.Y <= this.Point1.Y + 4))
+            {
+                if (this._point2.X > this._point1.X)
+                {
+                    this._point2.X = point2.X + this.Largeur;
+                }
+                else
+                {
+                    this._point2.X = point2.X - this.Largeur;
+                }
+
+                if (this._point2.Y > this._point1.Y)
+                {
+                    this._point2.Y = point2.Y + this.Hauteur;
+                }
+                else
+                {
+                    this._point2.Y = point2.Y - this.Hauteur;
+                }
+
+                this._point1 = point2;
+            }
+            else if ((point1.X >= this.Point2.X - 4 && point1.X <= this.Point2.X + 4) && (point1.Y >= this.Point2.Y - 4 && point1.Y <= this.Point2.Y + 4))
+            {
+                if (this._point1.X > this._point2.X)
+                {
+                    this._point1.X = point2.X + this.Largeur;
+                }
+                else
+                {
+                    this._point1.X = point2.X - this.Largeur;
+                }
+
+                if (this._point1.Y > this._point2.Y)
+                {
+                    this._point1.Y = point2.Y + this.Hauteur;
+                }
+                else
+                {
+                    this._point1.Y = point2.Y - this.Hauteur;
+                }
+
+                this._point2 = point2;
+            }
         }
 
         public override void maj(Point point1, Point point2)
@@ -97,6 +159,25 @@ namespace Projet_Formes
             {//partie basse
                 this._point1.Y += zoom;
                 this._point2.Y -= zoom;
+            }
+        }
+
+        public override Boolean recuperer(int x, int y)
+        {
+            if ((x >= this.Point1.X - 4 && x <= this.Point1.X + 4) && (y >= this.Point1.Y - 4 && y <= this.Point1.Y + 4))
+            {
+                Console.WriteLine("Point1 selectionné");
+                return true;
+            }
+            else if ((x >= this.Point2.X - 4 && x <= this.Point2.X + 4) && (y >= this.Point2.Y - 4 && y <= this.Point2.Y + 4))
+            {
+                Console.WriteLine("Point2 selectionné");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Aucun point selectionné");
+                return false;
             }
         }
 

@@ -26,11 +26,11 @@ namespace Projet_Formes
             }
         }
 
-        public override void translation(int x, int y)
+        public override void translation(Point point1, Point point2)
         {
             foreach (Forme_simple liste_formes in _liste_formes)
             {
-                liste_formes.translation(x, y);
+                liste_formes.translation(point1, point2);
             }
         }
 

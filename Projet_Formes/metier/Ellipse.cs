@@ -65,10 +65,10 @@ namespace Projet_Formes
             Console.WriteLine("Largeur : " + this._largeur);
         }
 
-        public override void translation(int x, int y)
+        public override void translation(Point point1, Point point2)
         {
-            _point1.X += x;
-            _point1.Y += y;
+            _point1.X = point2.X - (this.Largeur / 2);
+            _point1.Y = point2.Y - (this.Hauteur / 2);
         }
 
         public override void homothetie(int zoom)
@@ -84,6 +84,16 @@ namespace Projet_Formes
             this._point1 = point1;
             this._largeur = point2.X - point1.X;
             this._hauteur = point2.Y - point1.Y;
-        }        
+        }
+
+        public override Boolean recuperer(int x, int y)
+        {
+            if ((this._point1.Y + this._hauteur >= y) && (y >= this._point1.Y) && (this._point1.X <= x) && (x <= this._point1.X + this._largeur))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

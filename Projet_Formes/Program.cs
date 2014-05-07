@@ -82,7 +82,7 @@ namespace Projet_Formes
 
             groupe1.Write();
 
-            groupe1.translation(3, 3);
+            //groupe1.translation(3, 3);
 
             groupe1.Write();
 

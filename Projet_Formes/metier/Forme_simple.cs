@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Formes
 {
-    public class Forme_simple : Forme
+    public abstract class Forme_simple : Forme
     {
         protected int _couleur;
 
@@ -35,12 +35,14 @@ namespace Projet_Formes
             Console.Out.WriteLine("Couleur : " + this._couleur);    
         }
 
-        public override void translation(int x, int y){}
+        public override void translation(Point point1, Point point2) { }
 
         public override void homothetie(int zoom){}
 
         public override void maj(Point point1, Point point2) { }
 
         public override void maj(Point[] tabpoints) { }
+
+        public abstract Boolean recuperer(int x, int y);
     }
 }

@@ -38,12 +38,19 @@ namespace Projet_Formes
             }
         }
 
-        public override void translation(int x, int y)
+        public override void translation(Point point1, Point point2)
         {
-            for (int i = 0; i < _tab_points.Length; i++)
+            for (int i = 0; i < this._tab_points.Length; i++)
             {
-                this._tab_points[i].X += x;
-                this._tab_points[i].Y += y;
+                if ((point1.X >= this._tab_points[i].X - 4 && point1.X <= this._tab_points[i].X + 4) && (point1.Y >= this._tab_points[i].Y - 4 && point1.Y <= this._tab_points[i].Y + 4))
+                {
+                    this._tab_points[i] = point2;
+                }
+                else
+                {
+                    //this._tab_points[i].X = point2.X + ;
+                    //this._tab_points[i].Y = point2.Y + 10;
+                }
             }
         }
 
@@ -95,6 +102,20 @@ namespace Projet_Formes
             centre.Y /= this._tab_points.Length;
 
             return centre;
+        }
+
+        public override Boolean recuperer(int x, int y)
+        {
+            Boolean trouve = false;
+            for (int i = 0; i < this._tab_points.Length; i++)
+            {
+                if ((this._tab_points[i].X <= x + 2 || this._tab_points[i].X >= x + 2) && (this._tab_points[i].Y <= y + 2 || this._tab_points[i].Y >= y + 2))
+                {
+                    trouve = true;
+                    break;
+                }
+            }
+            return trouve;
         }
 
     }

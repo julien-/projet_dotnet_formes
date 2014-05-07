@@ -13,13 +13,14 @@ namespace Projet_Formes
     public partial class Form1 : Form
     {
         Graphics g; //Bibliothèque pour dessiner des formes
-        Graphics g2; //Bibliothèque pour dessiner des formes
+        Graphics g2; 
         Bitmap bm;
 
         Point point_depart = new Point(0, 0);
         Point point_arrivee = new Point(0, 0);
 
-        bool bouton_Mouse_down;
+        bool bouton_Mouse_left;
+        bool bouton_Mouse_middle;
 
         Forme_simple forme_active;
         int id = 1;
@@ -32,9 +33,6 @@ namespace Projet_Formes
         List<Forme_composee> ListGroupes = new List<Forme_composee>();
         List<Forme_simple> ListFormes = new List<Forme_simple>();
 
-        bool clicG_actif = false;    //si le clic gauche est appuyé ou pas
-        bool clicD_actif = false;    //si le clic droit est appuyé ou pas
-        bool PeutDessiner;    //creation ou selection de forme
         bool id_groupe_actif = false;   //-1 si non actif sinon valeur de l'id du groupe
         DessinFormeSimple dessinateur;
 
@@ -50,27 +48,7 @@ namespace Projet_Formes
             g2 = Graphics.FromImage(bm);
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -135,7 +113,7 @@ namespace Projet_Formes
             labelNom.Focus();   //enleve le focus à textBoxNom
 
             if (e.Button == MouseButtons.Left)
-                bouton_Mouse_down = true;
+                bouton_Mouse_left = true;
             else if (e.Button == MouseButtons.Right)
             {
                 if (i == this.nb_points_poly - 1)
@@ -152,24 +130,33 @@ namespace Projet_Formes
                     this.i++;
                 }
             }
+            else if (e.Button == MouseButtons.Middle)
+            {
+                bouton_Mouse_middle = true;
+                foreach (Forme_simple forme in ListFormes)
+                {
+                    if (forme.recuperer(point_depart.X, point_depart.Y))
+                    {
+                        forme_active = forme;
+                        break;
+                    }
+                }
+            }
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (bouton_Mouse_down)
+            point_arrivee = e.Location;
+            if (bouton_Mouse_left)
             {
-                point_arrivee = e.Location;
-
-                bouton_Mouse_down = false;
-
-                Pen pen = new Pen(Color.Black, 10);
-                SolidBrush blueBrush = new SolidBrush(Color.Blue);
+                bouton_Mouse_left = false;
 
                 g = this.panel1.CreateGraphics();
 
 
                 if (forme_active != null)
                 {
+                    ListFormes.Add(forme_active);
                     forme_active.maj(point_depart, point_arrivee);
                     representer(forme_active, dessinateur);
                     this.id_groupe_actif = false;
@@ -177,6 +164,13 @@ namespace Projet_Formes
                     majPropriete(this.forme_active);
                     panel1.Invalidate();
                 }
+            }
+            else if (bouton_Mouse_middle)
+            {
+                bouton_Mouse_middle = false;
+                forme_active.translation(point_depart, point_arrivee);
+                representer(forme_active, dessinateur);
+                panel1.Invalidate();
             }
         }
 
