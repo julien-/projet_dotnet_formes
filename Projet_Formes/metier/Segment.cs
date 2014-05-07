@@ -42,28 +42,6 @@ namespace Projet_Formes
             }
         }
 
-        public int Largeur
-        {
-            get
-            {
-                if (this._point2.X > this._point1.X)
-                    return this._point2.X - this._point1.X;
-                else
-                    return this._point1.X - this._point2.X;
-            }
-        }
-
-        public int Hauteur
-        {
-            get
-            {
-                if (this._point2.Y > this._point1.Y)
-                    return this._point2.Y - this._point1.Y;
-                else
-                    return this._point1.Y - this._point2.Y;
-            }
-        }
-
         public override void Write()
         {
             base.Write();
@@ -75,46 +53,15 @@ namespace Projet_Formes
         {
             if ((point1.X >= this.Point1.X - 4 && point1.X <= this.Point1.X + 4) && (point1.Y >= this.Point1.Y - 4 && point1.Y <= this.Point1.Y + 4))
             {
-                if (this._point2.X > this._point1.X)
-                {
-                    this._point2.X = point2.X + this.Largeur;
-                }
-                else
-                {
-                    this._point2.X = point2.X - this.Largeur;
-                }
-
-                if (this._point2.Y > this._point1.Y)
-                {
-                    this._point2.Y = point2.Y + this.Hauteur;
-                }
-                else
-                {
-                    this._point2.Y = point2.Y - this.Hauteur;
-                }
-
+                this._point2.X += (point2.X - point1.X);
+                this._point2.Y += (point2.Y - point1.Y);
                 this._point1 = point2;
             }
             else if ((point1.X >= this.Point2.X - 4 && point1.X <= this.Point2.X + 4) && (point1.Y >= this.Point2.Y - 4 && point1.Y <= this.Point2.Y + 4))
             {
-                if (this._point1.X > this._point2.X)
-                {
-                    this._point1.X = point2.X + this.Largeur;
-                }
-                else
-                {
-                    this._point1.X = point2.X - this.Largeur;
-                }
 
-                if (this._point1.Y > this._point2.Y)
-                {
-                    this._point1.Y = point2.Y + this.Hauteur;
-                }
-                else
-                {
-                    this._point1.Y = point2.Y - this.Hauteur;
-                }
-
+                this._point1.X += (point2.X - point1.X);
+                this._point1.Y += (point2.Y - point1.Y);
                 this._point2 = point2;
             }
         }

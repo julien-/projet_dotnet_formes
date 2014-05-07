@@ -13,14 +13,18 @@ namespace Projet_Formes
     public partial class Form1 : Form
     {
         Graphics g; //Bibliothèque pour dessiner des formes
-        Graphics g2; 
+        Graphics g2;
+        Graphics g3;
+
         Bitmap bm;
+        Bitmap bm2;
 
         Point point_depart = new Point(0, 0);
         Point point_arrivee = new Point(0, 0);
 
         bool bouton_Mouse_left;
         bool bouton_Mouse_middle;
+        bool selected;
 
         Forme_simple forme_active;
         int id = 1;
@@ -46,6 +50,8 @@ namespace Projet_Formes
             g = this.panel1.CreateGraphics();
             bm = new Bitmap(this.panel1.Width, this.panel1.Height);
             g2 = Graphics.FromImage(bm);
+            bm2 = new Bitmap(this.panel1.Width, this.panel1.Height);
+            g3 = Graphics.FromImage(bm2);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -57,8 +63,9 @@ namespace Projet_Formes
         {
             textBox_nom.Clear();
             this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0);
-            this.dessinateur = new DessinEllipse();
+            forme_active.Dessinateur = new DessinEllipse();
             this.id++;
+            ListFormes.Add(this.forme_active);
         }
 
         private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,29 +73,33 @@ namespace Projet_Formes
             this.nb_points_poly = 3;
             this.tabcoord = new Point[this.nb_points_poly];
             this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
-            this.dessinateur = new DessinTriangle();
+            forme_active.Dessinateur = new DessinTriangle();
             this.id++;
+            ListFormes.Add(this.forme_active);
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.forme_active = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(40, 40), 40, 20);
-            this.dessinateur = new DessinRectangle();
+            forme_active.Dessinateur = new DessinRectangle();
             this.id++;
+            ListFormes.Add(this.forme_active);
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.forme_active = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(1, 2), new Point(3, 4));
-            this.dessinateur = new DessinSegment();
+            forme_active.Dessinateur = new DessinSegment();
             this.id++;
+            ListFormes.Add(this.forme_active);
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.forme_active = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
-            this.dessinateur = new DessinPolygone();
+            forme_active.Dessinateur = new DessinPolygone();
             this.id++;
+            ListFormes.Add(this.forme_active);
             label10.Visible = true;
             textBoxNbPoints.Visible = true;
             textBoxNbPoints.Focus();
@@ -120,7 +131,7 @@ namespace Projet_Formes
                 {
                     tabcoord[i] = point_depart;
                     forme_active.maj(tabcoord);
-                    representer(forme_active, dessinateur);
+                    representer(forme_active, forme_active.Dessinateur);
                     panel1.Invalidate();
                     this.i = 0;
                 }
@@ -133,6 +144,7 @@ namespace Projet_Formes
             else if (e.Button == MouseButtons.Middle)
             {
                 bouton_Mouse_middle = true;
+                selected = true;
                 foreach (Forme_simple forme in ListFormes)
                 {
                     if (forme.recuperer(point_depart.X, point_depart.Y))
@@ -151,14 +163,10 @@ namespace Projet_Formes
             {
                 bouton_Mouse_left = false;
 
-                g = this.panel1.CreateGraphics();
-
-
                 if (forme_active != null)
                 {
-                    ListFormes.Add(forme_active);
                     forme_active.maj(point_depart, point_arrivee);
-                    representer(forme_active, dessinateur);
+                    representer(forme_active, forme_active.Dessinateur);
                     this.id_groupe_actif = false;
                     this.labelNomGroupeActif.Text = "Aucun";
                     majPropriete(this.forme_active);
@@ -169,7 +177,13 @@ namespace Projet_Formes
             {
                 bouton_Mouse_middle = false;
                 forme_active.translation(point_depart, point_arrivee);
-                representer(forme_active, dessinateur);
+                g2.Clear(Color.White);
+                panel1.Invalidate();
+
+                foreach (Forme_simple forme in ListFormes)
+                {
+                    forme.Dessinateur.dessiner(forme, g2);   
+                }
                 panel1.Invalidate();
             }
         }
@@ -210,25 +224,41 @@ namespace Projet_Formes
                     lierGroupeToolStripMenuItem.Text = "Lier la forme";
                 }
             }
-            //Zoom
-            if (e.KeyData == Keys.Up)
+            
+            if (selected)
             {
-                if (this.forme_active != null)
+                //Zoom
+                if (e.KeyData == Keys.Up)
                 {
-                    this.forme_active.homothetie(1);
-                    representer(forme_active, dessinateur);
-                    panel1.Invalidate();
+                    if (this.forme_active != null)
+                    {
+                        this.forme_active.homothetie(1);
+                        g2.Clear(Color.White);
+                        panel1.Invalidate();
+
+                        foreach (Forme_simple forme in ListFormes)
+                        {
+                            forme.Dessinateur.dessiner(forme, g2);
+                        }
+                        panel1.Invalidate();
+                    }
                 }
-            }
-            //Dezoom
-            if (e.KeyData == Keys.Down)
-            {
-                if (this.forme_active != null)
+                //Dezoom
+                if (e.KeyData == Keys.Down)
                 {
-                    g2.Clear(Color.White);
-                    this.forme_active.homothetie(-1);
-                    representer(forme_active, dessinateur);
-                    panel1.Invalidate();
+                    if (this.forme_active != null)
+                    {
+                        g2.Clear(Color.White);
+                        this.forme_active.homothetie(-1);
+                        g2.Clear(Color.White);
+                        panel1.Invalidate();
+
+                        foreach (Forme_simple forme in ListFormes)
+                        {
+                            forme.Dessinateur.dessiner(forme, g2);
+                        }
+                        panel1.Invalidate();
+                    }
                 }
             }
         }

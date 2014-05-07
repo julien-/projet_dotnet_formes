@@ -40,18 +40,20 @@ namespace Projet_Formes
 
         public override void translation(Point point1, Point point2)
         {
+            /*int pointselected = 0;
             for (int i = 0; i < this._tab_points.Length; i++)
             {
                 if ((point1.X >= this._tab_points[i].X - 4 && point1.X <= this._tab_points[i].X + 4) && (point1.Y >= this._tab_points[i].Y - 4 && point1.Y <= this._tab_points[i].Y + 4))
                 {
-                    this._tab_points[i] = point2;
+                    pointselected = i;
                 }
                 else
                 {
-                    //this._tab_points[i].X = point2.X + ;
-                    //this._tab_points[i].Y = point2.Y + 10;
+                    this._tab_points[i].X += (point2.X - point1.X);
+                    this._tab_points[i].Y += (point2.Y - point1.Y);
                 }
             }
+            this._tab_points[pointselected] = point2;*/
         }
 
         public override void maj(Point[] tabpoints) 
