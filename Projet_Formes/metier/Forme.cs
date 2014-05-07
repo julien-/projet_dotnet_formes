@@ -43,6 +43,17 @@ namespace Projet_Formes
             }
         }
 
+        public int IdGroupe
+        {
+            get
+            {
+                return this._groupe;
+            }
+            set
+            {
+                this._groupe = value;
+            }
+        }
 
         public virtual void Write()
         {

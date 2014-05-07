@@ -11,22 +11,8 @@ namespace Projet_Formes
     {
         protected List<Forme_simple> _liste_formes;
 
-        public Forme_composee(int id, string nom, List<Forme_simple> liste_formes)
-            : base(id, nom)
+        public Forme_composee(int id, string nom) : base(id, nom)
         {
-            this._liste_formes = liste_formes;
-        }
-
-        public List<Forme_simple> Liste_formes
-        {
-            get
-            {
-                return this._liste_formes;
-            }
-            set
-            {
-                this._liste_formes = value;
-            }
         }
 
         public override void Write()

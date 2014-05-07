@@ -78,7 +78,7 @@ namespace Projet_Formes
             liste_formes.Add(polygone1);
             liste_formes.Add(rectangle1);
 
-            Forme_composee groupe1 = new Forme_composee(1, nom_groupe, liste_formes);
+            Forme_composee groupe1 = new Forme_composee(1, nom_groupe);
 
             groupe1.Write();
 
