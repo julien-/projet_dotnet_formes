@@ -51,13 +51,13 @@
             this.textBox_nom = new System.Windows.Forms.TextBox();
             this.labelGroupeActif = new System.Windows.Forms.Label();
             this.panel_couleur = new System.Windows.Forms.Panel();
+            this.labelNomGroupeActif = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxNbPoints = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.labelCreationGroupe = new System.Windows.Forms.Label();
             this.textBoxCreationGroupe = new System.Windows.Forms.TextBox();
-            this.labelNomGroupeActif = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -170,8 +170,8 @@
             // ajouterUnGroupeToolStripMenuItem
             // 
             this.ajouterUnGroupeToolStripMenuItem.Name = "ajouterUnGroupeToolStripMenuItem";
-            this.ajouterUnGroupeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.ajouterUnGroupeToolStripMenuItem.Text = "Ajouter";
+            this.ajouterUnGroupeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.ajouterUnGroupeToolStripMenuItem.Text = "Créer un groupe";
             this.ajouterUnGroupeToolStripMenuItem.Click += new System.EventHandler(this.ajouterUnGroupeToolStripMenuItem_Click);
             // 
             // lierGroupeToolStripMenuItem
@@ -179,8 +179,8 @@
             this.lierGroupeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBoxGroupes});
             this.lierGroupeToolStripMenuItem.Name = "lierGroupeToolStripMenuItem";
-            this.lierGroupeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.lierGroupeToolStripMenuItem.Text = "Lier la forme";
+            this.lierGroupeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.lierGroupeToolStripMenuItem.Text = "Lier à un groupe";
             // 
             // toolStripComboBoxGroupes
             // 
@@ -196,8 +196,8 @@
             this.supprimerUnGroupeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SupprimerGroupetoolStripComboBox});
             this.supprimerUnGroupeToolStripMenuItem.Name = "supprimerUnGroupeToolStripMenuItem";
-            this.supprimerUnGroupeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.supprimerUnGroupeToolStripMenuItem.Text = "Supprimer";
+            this.supprimerUnGroupeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.supprimerUnGroupeToolStripMenuItem.Text = "Supprimer un groupe";
             // 
             // SupprimerGroupetoolStripComboBox
             // 
@@ -291,6 +291,17 @@
             this.panel_couleur.TabIndex = 11;
             this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
             // 
+            // labelNomGroupeActif
+            // 
+            this.labelNomGroupeActif.AutoSize = true;
+            this.labelNomGroupeActif.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNomGroupeActif.Location = new System.Drawing.Point(117, 166);
+            this.labelNomGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNomGroupeActif.Name = "labelNomGroupeActif";
+            this.labelNomGroupeActif.Size = new System.Drawing.Size(42, 15);
+            this.labelNomGroupeActif.TabIndex = 8;
+            this.labelNomGroupeActif.Text = "Aucun";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -316,7 +327,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel1.Location = new System.Drawing.Point(9, 25);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
@@ -347,17 +358,6 @@
             this.textBoxCreationGroupe.TabIndex = 7;
             this.textBoxCreationGroupe.Visible = false;
             this.textBoxCreationGroupe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxCreationGroupe_KeyDown);
-            // 
-            // labelNomGroupeActif
-            // 
-            this.labelNomGroupeActif.AutoSize = true;
-            this.labelNomGroupeActif.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNomGroupeActif.Location = new System.Drawing.Point(117, 166);
-            this.labelNomGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelNomGroupeActif.Name = "labelNomGroupeActif";
-            this.labelNomGroupeActif.Size = new System.Drawing.Size(42, 15);
-            this.labelNomGroupeActif.TabIndex = 8;
-            this.labelNomGroupeActif.Text = "Aucun";
             // 
             // Form1
             // 
