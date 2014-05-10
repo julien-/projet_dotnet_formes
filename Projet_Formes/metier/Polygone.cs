@@ -40,20 +40,28 @@ namespace Projet_Formes
 
         public override void translation(Point point1, Point point2)
         {
-            /*int pointselected = 0;
+            int pointselected = -1;
             for (int i = 0; i < this._tab_points.Length; i++)
             {
                 if ((point1.X >= this._tab_points[i].X - 4 && point1.X <= this._tab_points[i].X + 4) && (point1.Y >= this._tab_points[i].Y - 4 && point1.Y <= this._tab_points[i].Y + 4))
                 {
                     pointselected = i;
-                }
-                else
-                {
-                    this._tab_points[i].X += (point2.X - point1.X);
-                    this._tab_points[i].Y += (point2.Y - point1.Y);
+                    break;
                 }
             }
-            this._tab_points[pointselected] = point2;*/
+            
+            if (pointselected != -1)
+            {
+                for (int i = 0; i < this._tab_points.Length; i++)
+                {
+                    if (i != pointselected)
+                    {
+                        this._tab_points[i].X += (point2.X - point1.X);
+                        this._tab_points[i].Y += (point2.Y - point1.Y);
+                    }
+                }
+                this._tab_points[pointselected] = point2;
+            }
         }
 
         public override void maj(Point[] tabpoints) 
@@ -111,13 +119,22 @@ namespace Projet_Formes
             Boolean trouve = false;
             for (int i = 0; i < this._tab_points.Length; i++)
             {
-                if ((this._tab_points[i].X <= x + 2 || this._tab_points[i].X >= x + 2) && (this._tab_points[i].Y <= y + 2 || this._tab_points[i].Y >= y + 2))
+                if ((x >= this._tab_points[i].X - 4 && x <= this._tab_points[i].X + 4) && (y >= this._tab_points[i].Y - 4 && y <= this._tab_points[i].Y + 4))
                 {
                     trouve = true;
                     break;
                 }
             }
             return trouve;
+        }
+
+        public override void translation_comp(Point point1, Point point2)
+        {
+            for (int i = 0; i < this._tab_points.Length; i++)
+            {
+                this._tab_points[i].X = (point2.X - (point1.X - this._tab_points[i].X));
+                this._tab_points[i].Y = (point2.Y - (point1.Y - this._tab_points[i].Y));
+            }   
         }
 
     }

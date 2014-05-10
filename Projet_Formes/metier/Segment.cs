@@ -128,5 +128,13 @@ namespace Projet_Formes
             }
         }
 
+        public override void translation_comp(Point point1, Point point2)
+        {
+            this._point1.X = (point2.X - (point1.X - this._point1.X));
+            this._point1.Y = (point2.Y - (point1.Y - this._point1.Y));
+            this._point2.X = (point2.X - (point1.X - this._point2.X));
+            this._point2.Y = (point2.Y - (point1.Y - this._point2.Y));
+        }
+
     }
 }

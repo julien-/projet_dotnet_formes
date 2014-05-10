@@ -15,6 +15,18 @@ namespace Projet_Formes
         {
         }
 
+        public List<Forme_simple> Liste_formes
+        {
+            get
+            {
+                return this._liste_formes;
+            }
+            set
+            {
+                this._liste_formes = value;
+            }
+        }
+
         public override void Write()
         {
             base.Write();
@@ -28,15 +40,26 @@ namespace Projet_Formes
 
         public override void translation(Point point1, Point point2)
         {
+            Point point3 = new Point { };
             foreach (Forme_simple liste_formes in _liste_formes)
             {
-                liste_formes.translation(point1, point2);
+                if (liste_formes.recuperer(point1.X, point1.Y))
+                {
+                    liste_formes.translation(point1, point2);
+                }
+                else
+                {
+                    liste_formes.translation_comp(point1, point2);
+                }
             }
         }
 
         public override void homothetie(int zoom)
         {
-
+            foreach (Forme_simple liste_formes in _liste_formes)
+            {
+                liste_formes.homothetie(zoom);
+            }
         }
 
         public override void maj(Point point1, Point point2) { }

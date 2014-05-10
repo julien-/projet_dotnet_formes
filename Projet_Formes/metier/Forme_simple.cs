@@ -57,5 +57,7 @@ namespace Projet_Formes
         public override void maj(Point[] tabpoints) { }
 
         public abstract Boolean recuperer(int x, int y);
+
+        public abstract void translation_comp(Point point1, Point point2);
     }
 }

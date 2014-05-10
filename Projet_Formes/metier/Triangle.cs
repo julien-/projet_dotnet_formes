@@ -15,6 +15,16 @@ namespace Projet_Formes
                 throw new System.ArgumentException("Nombre de points invalide");
         }
 
+        /*public override void translation(Point point1, Point point2)
+        {
+            base.translation(point1, point2);
+        }*/
+
+        /*public override void maj(Point[] tabpoints)
+        {
+            base.maj(tabpoints);
+        }*/
+
         public override void homothetie(int zoom)
         {
             //recherche du centre du triangle
@@ -52,5 +62,9 @@ namespace Projet_Formes
                 }
             }
         }
+        /*public override Boolean recuperer(int x, int y)
+        {
+            return base.recuperer(x, y);
+        }*/
     }
 }
