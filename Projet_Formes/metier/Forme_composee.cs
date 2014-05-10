@@ -61,9 +61,5 @@ namespace Projet_Formes
                 liste_formes.homothetie(zoom);
             }
         }
-
-        public override void maj(Point point1, Point point2) { }
-
-        public override void maj(Point[] tabpoints) { }
     }
 }

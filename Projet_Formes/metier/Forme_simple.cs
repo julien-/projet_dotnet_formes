@@ -52,12 +52,12 @@ namespace Projet_Formes
 
         public override void homothetie(int zoom){}
 
-        public override void maj(Point point1, Point point2) { }
-
-        public override void maj(Point[] tabpoints) { }
-
         public abstract Boolean recuperer(int x, int y);
 
         public abstract void translation_comp(Point point1, Point point2);
+
+        public abstract void maj(Point point1, Point point2);
+
+        public abstract void maj(Point[] tabpoints);
     }
 }

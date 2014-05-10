@@ -79,13 +79,6 @@ namespace Projet_Formes
             this._hauteur += 2*zoom;
         }
 
-        public override void maj(Point point1, Point point2)
-        {
-            this._point1 = point1;
-            this._largeur = point2.X - point1.X;
-            this._hauteur = point2.Y - point1.Y;
-        }
-
         public override Boolean recuperer(int x, int y)
         {
             if ((this._point1.Y + this._hauteur >= y) && (y >= this._point1.Y) && (this._point1.X <= x) && (x <= this._point1.X + this._largeur))
@@ -101,5 +94,17 @@ namespace Projet_Formes
             this._point1.X = (point2.X - (point1.X - this._point1.X));
             this._point1.Y = (point2.Y - (point1.Y - this._point1.Y));
         }
+
+        public override void maj(Point point1, Point point2)
+        {
+            this._point1 = point1;
+            this._largeur = point2.X - point1.X;
+            this._hauteur = point2.Y - point1.Y;
+        }
+
+        public override void maj(Point[] tabpoints)
+        {
+        }
+
     }
 }

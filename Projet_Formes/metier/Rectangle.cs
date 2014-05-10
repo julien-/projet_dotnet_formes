@@ -70,13 +70,6 @@ namespace Projet_Formes
             _point1.Y = point2.Y - (this.Hauteur / 2);
         }
 
-        public override void maj(Point point1, Point point2)
-        {
-            this._point1 = point1;
-            this._largeur = point2.X - point1.X;
-            this._hauteur = point2.Y - point1.Y;
-        }
-
         public override void homothetie(int zoom)
         {
             this._point1.X -= zoom;
@@ -99,6 +92,17 @@ namespace Projet_Formes
         {
             this._point1.X = (point2.X - (point1.X - this._point1.X));
             this._point1.Y = (point2.Y - (point1.Y - this._point1.Y));
+        }
+
+        public override void maj(Point point1, Point point2)
+        {
+            this._point1 = point1;
+            this._largeur = point2.X - point1.X;
+            this._hauteur = point2.Y - point1.Y;
+        }
+
+        public override void maj(Point[] tabpoints)
+        {
         }
     }
 }

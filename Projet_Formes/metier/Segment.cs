@@ -66,12 +66,6 @@ namespace Projet_Formes
             }
         }
 
-        public override void maj(Point point1, Point point2)
-        {
-            this._point1 = point1;
-            this._point2 = point2;
-        }
-
         public override void homothetie(int zoom)
         {
             //recherche du centre du segment
@@ -136,5 +130,14 @@ namespace Projet_Formes
             this._point2.Y = (point2.Y - (point1.Y - this._point2.Y));
         }
 
+        public override void maj(Point point1, Point point2)
+        {
+            this._point1 = point1;
+            this._point2 = point2;
+        }
+
+        public override void maj(Point[] tabpoints)
+        {
+        }
     }
 }

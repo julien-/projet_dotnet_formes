@@ -64,11 +64,6 @@ namespace Projet_Formes
             }
         }
 
-        public override void maj(Point[] tabpoints) 
-        {
-            this._tab_points = tabpoints;
-        }
-
         public override void homothetie(int zoom)
         {
             //recherche du centre du triangle
@@ -135,6 +130,15 @@ namespace Projet_Formes
                 this._tab_points[i].X = (point2.X - (point1.X - this._tab_points[i].X));
                 this._tab_points[i].Y = (point2.Y - (point1.Y - this._tab_points[i].Y));
             }   
+        }
+
+        public override void maj(Point point1, Point point2)
+        {
+        }
+
+        public override void maj(Point[] tabpoints)
+        {
+            this._tab_points = tabpoints;
         }
 
     }

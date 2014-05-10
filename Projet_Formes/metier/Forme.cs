@@ -63,9 +63,5 @@ namespace Projet_Formes
         public abstract void translation(Point point1, Point point2);
 
         public abstract void homothetie(int zoom);
-
-        public abstract void maj(Point point1, Point point2);
-
-        public abstract void maj(Point[] tabpoints);
     }
 }
