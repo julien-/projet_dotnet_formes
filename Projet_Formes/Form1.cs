@@ -202,14 +202,9 @@ namespace Projet_Formes
                         majPropriete(forme_active);
                     }
                 }
-                g2.Clear(Color.White);
-                panel1.Invalidate();
 
-                foreach (Forme_simple forme in ListFormes)
-                {
-                    forme.Dessinateur.dessiner(forme, g2);   
-                }
-                panel1.Invalidate();
+                this.refreshPanel();
+                
                 selected = false;
             }
             majListeAjoutGroupes();
@@ -290,14 +285,7 @@ namespace Projet_Formes
                     {
                         this.forme_active.homothetie(1);
                     }
-                    g2.Clear(Color.White);
-                    panel1.Invalidate();
-
-                    foreach (Forme_simple forme in ListFormes)
-                    {
-                        forme.Dessinateur.dessiner(forme, g2);
-                    }
-                    panel1.Invalidate();
+                    this.refreshPanel();
                 }
             }
             //Dezoom
@@ -324,16 +312,31 @@ namespace Projet_Formes
                         //g2.Clear(Color.White);
                         this.forme_active.homothetie(-1);
                     }
-                    g2.Clear(Color.White);
-                    panel1.Invalidate();
 
-                    foreach (Forme_simple forme in ListFormes)
-                    {
-                        forme.Dessinateur.dessiner(forme, g2);
-                    }
-                    panel1.Invalidate();
+                    this.refreshPanel();
                 }
             }
+            //Suppression d'une forme ou d'un groupe
+            if (e.KeyData == Keys.Delete && this.forme_active != null && GroupeActif == -1)
+            {
+                Console.WriteLine("Suppression d'une forme simple");
+                this.ListFormes.Remove(this.forme_active);
+                if (this.forme_active.IdGroupe != -1)
+                {//Liée à un groupe
+                    int MASTERgroupe = this.forme_active.IdGroupe;
+                    while (MASTERgroupe != -1)
+                    {//Si il y a un MASTERgroupe
+                        this.ListGroupes.Find(item => item.Id == MASTERgroupe).Liste_formes.Remove(this.forme_active);   //suppresion de la liste du MASTERgroupe
+                        MASTERgroupe = this.ListGroupes.Find(item => item.Id == MASTERgroupe).IdGroupe;//si le groupe visité est lié
+                    }
+                }
+                //VISUEL
+                textBox_nom.Clear();//Nom
+                this.labelNomGroupeActif.Text = "Aucun";
+                this.forme_active = null;
+                this.refreshPanel();
+            }
+
         }
 
 
@@ -341,9 +344,9 @@ namespace Projet_Formes
         {//Affiche les propriétes de la forme dans la partie DROITE de l'application
             if (forme != null)
             {
-                textBox_nom.Text = forme.Nom;
-                panel_couleur.BackColor = Color.FromArgb(forme.Couleur);
-                if (forme.IdGroupe == -1)
+                textBox_nom.Text = forme.Nom;//Nom
+                panel_couleur.BackColor = Color.FromArgb(forme.Couleur);//Couleur
+                if (forme.IdGroupe == -1)//Groupe
                     labelNomGroupeActif.Text = "Aucun";
                 else
                     labelNomGroupeActif.Text = this.ListGroupes.Find(item => item.Id == forme.IdGroupe).Nom;
@@ -509,8 +512,18 @@ namespace Projet_Formes
                 this.toolStripComboBoxGroupes.SelectedText =  this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom;
             if (this.forme_active != null && this.forme_active.IdGroupe == -1)
                 this.toolStripComboBoxGroupes.SelectedText = "Aucun";
+        }
 
-                    
+        public void refreshPanel()
+        {
+            g2.Clear(Color.White);
+            panel1.Invalidate();
+
+            foreach (Forme_simple forme in ListFormes)
+            {
+                forme.Dessinateur.dessiner(forme, g2);
+            }
+            panel1.Invalidate();
         }
 
     }
