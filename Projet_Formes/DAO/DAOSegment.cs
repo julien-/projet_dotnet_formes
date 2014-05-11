@@ -8,26 +8,19 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DAOSegment : DAO <Segment>
+    class DAOSegment : DAOFormeSimple
     {
-        public override void create(Segment entry)
+        public override void create(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Point1.X);
-            this._command.Parameters.AddWithValue("@y1", entry.Point1.Y);
-            this._command.Parameters.AddWithValue("@x2", entry.Point2.X);
-            this._command.Parameters.AddWithValue("@y2", entry.Point2.Y);
+            base.create(entry);
+            Segment s = (Segment)entry;
+            this._command.Parameters.AddWithValue("@x1", s.Point1.X);
+            this._command.Parameters.AddWithValue("@y1", s.Point1.Y);
+            this._command.Parameters.AddWithValue("@x2", s.Point2.X);
+            this._command.Parameters.AddWithValue("@y2", s.Point2.Y);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
-                //forme
-                @"INSERT INTO forme(id, nom) VALUES (@id, @nom);", 
-                //forme simple
-                @"INSERT INTO formesimple(id, couleur) VALUES (@id, @couleur);",
                 //segment
                 @"INSERT INTO segment(id) VALUES (@id);",
                 //point
@@ -54,45 +47,17 @@ namespace Projet_Formes
             }
         }
 
-        public override void delete(Segment entry)
+        public override void update(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-
-            //Définition de la requete
-            this._command.CommandText = @"DELETE FROM forme WHERE id = @id;";
-
-            try
-            {
-                //Execution de la requete
-                this._command.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                throw ex;
-            }
-        }
-
-        public override void update(Segment entry)
-        {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Point1.X);
-            this._command.Parameters.AddWithValue("@y1", entry.Point1.Y);
-            this._command.Parameters.AddWithValue("@x2", entry.Point2.X);
-            this._command.Parameters.AddWithValue("@y2", entry.Point2.Y);
+            base.update(entry);
+            Segment s = (Segment)entry;
+            this._command.Parameters.AddWithValue("@x1", s.Point1.X);
+            this._command.Parameters.AddWithValue("@y1", s.Point1.Y);
+            this._command.Parameters.AddWithValue("@x2", s.Point2.X);
+            this._command.Parameters.AddWithValue("@y2", s.Point2.Y);
 
             //Définition des requetes
-            String[] tabRequete = new String[] {
-                //forme
-                @"UPDATE forme SET nom = @nom WHERE id = @id;", 
-                //forme simple
-                @"UPDATE formesimple SET couleur = @couleur WHERE id = @id;", 
+            String[] tabRequete = new String[] { 
                 //point
                 @"UPDATE point SET x = @x1, y = @y1 WHERE id = @id AND ordre = 1;",
                 @"UPDATE point SET x = @x2, y = @y2 WHERE id = @id AND ordre = 2;"
@@ -117,7 +82,7 @@ namespace Projet_Formes
             }
         }
 
-        public override Segment find(int id)
+        public override Forme_simple find(int id)
         {
             MySqlDataReader rdr = null;
 
@@ -130,11 +95,11 @@ namespace Projet_Formes
                                             FROM point
                                             WHERE id = @id
                                             AND ordre = 2
-                                            ) R1, forme f, formesimple fs, point p, segment
+                                            ) R1, forme f, formesimple fs, point p, segment e
                                         WHERE f.id = fs.id 
                                         AND fs.id = p.id
                                         AND fs.id = e.id 
-                                        AND segment.id = @id
+                                        AND e.id = @id
                                         AND ordre = 1;";
 
             try

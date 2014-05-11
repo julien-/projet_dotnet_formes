@@ -13,11 +13,12 @@ namespace Projet_Formes
 
     abstract class AbstractDAOFactory
     {
-        public abstract DAO<Rectangle> getDAORectangle();
-        public abstract DAO<Segment> getDAOSegment();
-        public abstract DAO<Ellipse> getDAOEllipse();
-        public abstract DAO<Triangle> getDAOTriangle();
-        public abstract DAO<Polygone> getDAOPolygone();
+        public abstract DAOFormeSimple getDAORectangle();
+        public abstract DAOFormeSimple getDAOSegment();
+        public abstract DAOFormeSimple getDAOEllipse();
+        public abstract DAOFormeSimple getDAOTriangle();
+        public abstract DAOFormeSimple getDAOPolygone();
+        public abstract DAOFormeComposee getDAOFormeComposee();
 
         public static AbstractDAOFactory getFactory(FactoryType type)
         {

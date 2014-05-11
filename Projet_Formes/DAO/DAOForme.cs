@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace Projet_Formes
 {
-    public abstract class DAO<T>
+    public abstract class DAOForme<T>
     {
         public MySqlConnection _connect = SingletonConnexion.InitConnection();
         public MySqlCommand _command = SingletonConnexion.InitCommand();

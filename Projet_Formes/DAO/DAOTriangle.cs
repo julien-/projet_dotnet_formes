@@ -8,38 +8,56 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DAOTriangle : DAO<Triangle>
+    class DAOTriangle : DAOFormeSimple
     {
-        public override void create(Triangle entry)
+        public override void create(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Tableau_points[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.Tableau_points[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.Tableau_points[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.Tableau_points[1].Y);
-            this._command.Parameters.AddWithValue("@x3", entry.Tableau_points[2].X);
-            this._command.Parameters.AddWithValue("@y3", entry.Tableau_points[2].Y);
+            base.create(entry);
+            Triangle t = (Triangle)entry;
+       
+            //Définition des requetes
+            List<String> tabRequete_triangle = new List<String>();
+            //triangle
+            tabRequete_triangle.Add(@"INSERT INTO triangle(id) VALUES (@id);");
+            //point
+            for (int i = 1; i <= t.Tableau_points.Length; i++)
+            {
+                tabRequete_triangle.Add(@"INSERT INTO point(id, ordre, x, y) VALUES (@id, " + i + ", " + t.Tableau_points[i - 1].X + ", " + t.Tableau_points[i - 1].Y + ");");
+            }
+
+            foreach (String r in tabRequete_triangle)
+            {
+                //Définition de la requete
+                this._command.CommandText = r;
+
+                try
+                {
+                    //Execution de la requete
+                    this._command.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine("Error: {0}", ex.ToString());
+                    throw ex;
+                }
+            }
+        }
+
+        public override void update(Forme_simple entry)
+        {
+            base.update(entry);
+            Triangle t = (Triangle)entry;
 
             //Définition des requetes
-            String[] tabRequete = new String[] {
-                //forme
-                @"INSERT INTO forme(id, nom) VALUES (@id, @nom);", 
-                //forme simple
-                @"INSERT INTO formesimple(id, couleur) VALUES (@id, @couleur);",
-                //triangle
-                @"INSERT INTO triangle(id) VALUES (@id);",
-                //point
-                @"INSERT INTO point(id, ordre, x, y) VALUES (@id, 1, @x1, @y1);",
-                @"INSERT INTO point(id, ordre, x, y) VALUES (@id, 2, @x2, @y2);",
-                @"INSERT INTO point(id, ordre, x, y) VALUES (@id, 3, @x3, @y3);"
-            };
+            List<String> tabRequete_triangle = new List<String>();
+ 
+            //point
+            for (int i = 1; i <= t.Tableau_points.Length; i++)
+            {
+                tabRequete_triangle.Add(@"UPDATE point SET x = " + t.Tableau_points[i - 1].X + ", y = " + t.Tableau_points[i - 1].Y + " WHERE id = @id AND ordre = " + i + ";");
+            }
 
-
-            foreach (String r in tabRequete)
+            foreach (String r in tabRequete_triangle)
             {
                 //Définition de la requete
                 this._command.CommandText = r;
@@ -58,121 +76,60 @@ namespace Projet_Formes
 
         }
 
-        public override void delete(Triangle entry)
-        {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-
-            //Définition de la requete
-            this._command.CommandText = @"DELETE FROM forme WHERE id = @id;";
-
-            try
-            {
-                //Execution de la requete
-                this._command.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                throw ex;
-            }
-        }
-
-        public override void update(Triangle entry)
-        {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Tableau_points[0].X);
-            this._command.Parameters.AddWithValue("@y1", entry.Tableau_points[0].Y);
-            this._command.Parameters.AddWithValue("@x2", entry.Tableau_points[1].X);
-            this._command.Parameters.AddWithValue("@y2", entry.Tableau_points[1].Y);
-            this._command.Parameters.AddWithValue("@x3", entry.Tableau_points[2].X);
-            this._command.Parameters.AddWithValue("@y3", entry.Tableau_points[2].Y);
-
-            //Définition des requetes
-            String[] tabRequete = new String[] {
-                //forme
-                @"UPDATE forme SET nom = @nom WHERE id = @id;", 
-                //forme simple
-                @"UPDATE formesimple SET couleur = @couleur WHERE id = @id;", 
-                //point
-                @"UPDATE point SET x = @x1, y = @y1 WHERE id = @id AND ordre = 1;",
-                @"UPDATE point SET x = @x2, y = @y2 WHERE id = @id AND ordre = 2;",
-                @"UPDATE point SET x = @x3, y = @y3 WHERE id = @id AND ordre = 3;"
-            };
-
-
-            foreach (String r in tabRequete)
-            {
-                //Définition de la requete
-                this._command.CommandText = r;
-
-                try
-                {
-                    //Execution de la requete
-                    this._command.ExecuteNonQuery();
-                }
-                catch (MySqlException ex)
-                {
-                    Console.WriteLine("Error: {0}", ex.ToString());
-                    throw ex;
-                }
-            }
-        }
-
-        public override Triangle  find(int id)
+        public override Forme_simple find(int id)
         {
             MySqlDataReader rdr = null;
 
-            //Définition de la requete
+            //Définition des variables
             this._command.Parameters.Clear();
             this._command.Parameters.AddWithValue("@id", id);
-            this._command.CommandText = @"SELECT nom, couleur, x AS x1, y AS y1, x2, y2, x3, y3 
-                                        FROM (
-	                                        SELECT x AS x2, y AS y2
-                                            FROM point
-                                            WHERE id = @id
-                                            AND ordre = 2
-                                            ) R1, (
-	                                        SELECT x AS x3, y AS y3
-                                            FROM point
-                                            WHERE id = @id
-                                            AND ordre = 3
-                                            ) R3, forme f, formesimple fs, point p, triangle
-                                        WHERE f.id = fs.id 
-                                        AND fs.id = p.id
-                                        AND fs.id = e.id 
-                                        AND triangle.id = @id
-                                        AND ordre = 1;";
+
+            String requete = @"SELECT nom, couleur, x AS x1, y AS y1, x2, y2";
+            for (int i = 3; i <= 3; i++) //Commence a 3 car Point 1 et 2 déjà traités dans la requete principale
+            {
+                requete += ", x" + i + ", y" + i;
+            }
+            requete += " FROM ";
+            for (int i = 2; i <= 3; i++) //Commence a 2 car Sous requete necésaire dès qu'il y a plus de 1 point
+            {
+                requete += @"(
+                                SELECT x AS x" + i + ", y AS y" + i + @"
+                                FROM point
+                                WHERE id = @id
+                                AND ordre = " + i + @"
+                                ) R" + i + @", ";
+            }
+            requete += @"forme f, formesimple fs, point pt, triangle t
+                            WHERE f.id = fs.id 
+                            AND fs.id = pt.id
+                            AND fs.id = t.id 
+                            AND t.id = @id
+                            AND ordre = 1;";
+
+            this._command.CommandText = requete;
 
             try
             {
                 //Execution de la requete
                 rdr = this._command.ExecuteReader();
-
                 //Extraction des données
                 rdr.Read();
+                
 
                 String nom = rdr.GetString(0);
                 int couleur = rdr.GetInt32(1);
-                int x1 = rdr.GetInt32(2);
-                int y1 = rdr.GetInt32(3);
-                int x2 = rdr.GetInt32(4);
-                int y2 = rdr.GetInt32(5);
-                int x3 = rdr.GetInt32(6);
-                int y3 = rdr.GetInt32(7);
+                //int count = rdr.FieldCount; //nombre de points
+                Point[] tab_point = new Point[3];
 
-                Point p1 = new Point(x1, y1);
-                Point p2 = new Point(x2, y2);
-                Point p3 = new Point(x3, y3);
-                Point[] tab_point = {p1, p2, p3};
+                int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
+                for (int i = 0; i <= 3 + 1; i += 2) //de 2 en 2, car x et y en meme temps
+                {
+                    tab_point[j] = new Point(rdr.GetInt32(i + 2), rdr.GetInt32(i + 3));
+                    j++;
+                }
+
                 //Resultat
                 return new Triangle(id, nom, couleur, tab_point);
-
             }
             catch (MySqlException ex)
             {
