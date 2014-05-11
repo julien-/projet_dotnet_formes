@@ -8,31 +8,24 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DAOPolygone : DAO<Polygone>
+    class DAOPolygone : DAOFormeSimple
     {
-        public override void create(Polygone entry)
+        public override void create(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-         
+            base.create(entry);
+            Polygone p = (Polygone)entry;
+       
             //Définition des requetes
-            List<String> tabRequete = new List<String>();
-            //forme
-            tabRequete.Add(@"INSERT INTO forme(id, nom) VALUES (@id, @nom);");
-            //forme simple
-            tabRequete.Add(@"INSERT INTO formesimple(id, couleur) VALUES (@id, @couleur);");
+            List<String> tabRequete_poly = new List<String>();
             //polygone
-            tabRequete.Add(@"INSERT INTO polygone(id) VALUES (@id);");
+            tabRequete_poly.Add(@"INSERT INTO polygone(id) VALUES (@id);");
             //point
-            for (int i = 1; i <= entry.Tableau_points.Length; i++)
+            for (int i = 1; i <= p.Tableau_points.Length; i++)
             { 
-                tabRequete.Add(@"INSERT INTO point(id, ordre, x, y) VALUES (@id, "+i+", "+entry.Tableau_points[i-1].X+", "+entry.Tableau_points[i-1].Y+");");
+                tabRequete_poly.Add(@"INSERT INTO point(id, ordre, x, y) VALUES (@id, "+i+", "+p.Tableau_points[i-1].X+", "+p.Tableau_points[i-1].Y+");");
             }
 
-            foreach (String r in tabRequete)
+            foreach (String r in tabRequete_poly)
             {
                 //Définition de la requete
                 this._command.CommandText = r;
@@ -50,53 +43,21 @@ namespace Projet_Formes
             }
         }
 
-
-        public override void delete(Polygone entry)
+        public override void update(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-
-            //Définition de la requete
-            this._command.CommandText = @"DELETE FROM forme WHERE id = @id;";
-
-            try
-            {
-                //Execution de la requete
-                this._command.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                throw ex;
-            }
-        }
-
-
-        public override void update(Polygone entry)
-        {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-
+            base.update(entry);
+            Polygone p = (Polygone)entry;
 
             //Définition des requetes
-            List<String> tabRequete = new List<String>();
-            //forme
-            tabRequete.Add(@"UPDATE forme SET nom = @nom WHERE id = @id;");
-            //forme simple
-            tabRequete.Add(@"UPDATE formesimple SET couleur = @couleur WHERE id = @id;");
+            List<String> tabRequete_poly = new List<String>();
+ 
             //point
-            for (int i = 1; i <= entry.Tableau_points.Length; i++)
+            for (int i = 1; i <= p.Tableau_points.Length; i++)
             {
-                tabRequete.Add(@"UPDATE point SET x = " + entry.Tableau_points[i - 1].X + ", y = " + entry.Tableau_points[i - 1].Y + " WHERE id = @id AND ordre = " + i + ";");
+                tabRequete_poly.Add(@"UPDATE point SET x = " + p.Tableau_points[i - 1].X + ", y = " + p.Tableau_points[i - 1].Y + " WHERE id = @id AND ordre = " + i + ";");
             }
-            
 
-
-            foreach (String r in tabRequete)
+            foreach (String r in tabRequete_poly)
             {
                 //Définition de la requete
                 this._command.CommandText = r;
@@ -115,7 +76,7 @@ namespace Projet_Formes
 
         }
 
-        public override Polygone find(int id)
+        public override Forme_simple find(int id)
         {
             MySqlDataReader rdr = null;
 
@@ -133,7 +94,7 @@ namespace Projet_Formes
                 //Extraction des données
                 rdr.Read();
                 int nb = rdr.GetInt32(0);   //Nombre de points
-
+                rdr.Close();
 
                 //Construction de la requete
                 //SELECT nom, couleur, x AS x1, y AS y1, x2, y2
@@ -163,13 +124,19 @@ namespace Projet_Formes
                                 AND ordre = " + i + @"
                                 ) R" + i + @", ";
                 }
-                requete += @"forme f, formesimple fs, point p, polygone 
+                requete += @"forme f, formesimple fs, point pt, polygone p
                             WHERE f.id = fs.id 
-                            AND fs.id = p.id
-                            AND fs.id = e.id 
-                            AND polygone.id = @id
+                            AND fs.id = pt.id
+                            AND fs.id = p.id 
+                            AND p.id = @id
                             AND ordre = 1;";
 
+                this._command.CommandText = requete;
+
+                //Execution de la requete
+                rdr = this._command.ExecuteReader();
+                //Extraction des données
+                rdr.Read();
 
                 String nom = rdr.GetString(0);
                 int couleur = rdr.GetInt32(1);
@@ -177,9 +144,9 @@ namespace Projet_Formes
                 Point[] tab_point = new Point[nb];
 
                 int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
-                for (int i = 0; i <= nb; i += 2) //de 2 en 2, car x et y en meme temps
+                for (int i = 0; i <= nb + 1; i += 2) //de 2 en 2, car x et y en meme temps
                 {
-                    tab_point[j] = new Point(rdr.GetInt32(i), rdr.GetInt32(i + 1));
+                    tab_point[j] = new Point(rdr.GetInt32(i + 2), rdr.GetInt32(i + 3));
                     j++;
                 }
 
@@ -197,9 +164,7 @@ namespace Projet_Formes
                 {
                     rdr.Close();
                 }
-            }
-
-            
+            }            
         }
     }
 }

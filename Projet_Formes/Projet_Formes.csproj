@@ -49,12 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AbstractDAOFactory.cs" />
-    <Compile Include="DAO\DAO.cs" />
     <Compile Include="DAO\DAOEllipse.cs" />
     <Compile Include="DAO\DAOFactory.cs" />
+    <Compile Include="DAO\DAOForme.cs" />
+    <Compile Include="DAO\DAOFormeComposee.cs" />
+    <Compile Include="DAO\DAOFormeSimple.cs" />
     <Compile Include="DAO\DAOPolygone.cs" />
+    <Compile Include="DAO\DAORectangle.cs" />
     <Compile Include="DAO\DAOSegment.cs" />
     <Compile Include="DAO\DAOTriangle.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="vue\DessinEllipse.cs" />
     <Compile Include="vue\DessinFormeSimple.cs" />
     <Compile Include="vue\DessinPolygone.cs" />
@@ -62,7 +66,6 @@
     <Compile Include="vue\DessinSegment.cs" />
     <Compile Include="vue\DessinTriangle.cs" />
     <Compile Include="SingletonConnexion.cs" />
-    <Compile Include="DAO\DAORectangle.cs" />
     <Compile Include="metier\Ellipse.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -74,7 +77,6 @@
     <Compile Include="metier\Forme_composee.cs" />
     <Compile Include="metier\Forme_simple.cs" />
     <Compile Include="metier\Polygone.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="metier\Rectangle.cs" />
     <Compile Include="metier\Segment.cs" />

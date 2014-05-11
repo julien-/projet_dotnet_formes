@@ -8,26 +8,19 @@ using System.Drawing;
 
 namespace Projet_Formes
 {
-    class DAORectangle : DAO <Rectangle>
+    class DAORectangle : DAOFormeSimple
     {
-        public override void create(Rectangle entry)
+        public override void create(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Point1.X);
-            this._command.Parameters.AddWithValue("@y1", entry.Point1.Y);
-            this._command.Parameters.AddWithValue("@hauteur", entry.Hauteur);
-            this._command.Parameters.AddWithValue("@largeur", entry.Largeur);
+            base.create(entry);
+            Rectangle re = (Rectangle)entry;
+            this._command.Parameters.AddWithValue("@x1", re.Point1.X);
+            this._command.Parameters.AddWithValue("@y1", re.Point1.Y);
+            this._command.Parameters.AddWithValue("@hauteur", re.Hauteur);
+            this._command.Parameters.AddWithValue("@largeur", re.Largeur);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
-                //forme
-                @"INSERT INTO forme(id, nom) VALUES (@id, @nom);", 
-                //forme simple
-                @"INSERT INTO formesimple(id, couleur) VALUES (@id, @couleur);",
                 //rectangle
                 @"INSERT INTO rectangle(id, hauteur, largeur) VALUES (@id, @hauteur, @largeur);",
                 //point
@@ -53,46 +46,17 @@ namespace Projet_Formes
             }
         }
 
-        public override void delete(Rectangle entry)
+        public override void update(Forme_simple entry)
         {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-
-            //Définition de la requete
-            this._command.CommandText = @"DELETE FROM forme WHERE id = @id;";
-
-            try
-            {
-                //Execution de la requete
-                this._command.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                throw ex;
-            }
-
-        }
-
-        public override void update(Rectangle entry)
-        {
-            //Données membres
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.Parameters.AddWithValue("@nom", entry.Nom);
-            this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
-            this._command.Parameters.AddWithValue("@x1", entry.Point1.X);
-            this._command.Parameters.AddWithValue("@y1", entry.Point1.Y);
-            this._command.Parameters.AddWithValue("@hauteur", entry.Hauteur);
-            this._command.Parameters.AddWithValue("@largeur", entry.Largeur);
+            base.update(entry);
+            Rectangle re = (Rectangle)entry;
+            this._command.Parameters.AddWithValue("@x1", re.Point1.X);
+            this._command.Parameters.AddWithValue("@y1", re.Point1.Y);
+            this._command.Parameters.AddWithValue("@hauteur", re.Hauteur);
+            this._command.Parameters.AddWithValue("@largeur", re.Largeur);
 
             //Définition des requetes
             String[] tabRequete = new String[] {
-                //forme
-                @"UPDATE forme SET nom = @nom WHERE id = @id;", 
-                //forme simple
-                @"UPDATE formesimple SET couleur = @couleur WHERE id = @id;", 
                 //rectangle
                 @"UPDATE rectangle SET hauteur = @hauteur, largeur = @largeur WHERE id = @id;",
                 //point
@@ -118,7 +82,7 @@ namespace Projet_Formes
             }
         }
 
-        public override Rectangle find(int id)
+        public override Forme_simple find(int id)
         {
             MySqlDataReader rdr = null;
 

@@ -8,25 +8,29 @@ namespace Projet_Formes
 {
     class DAOFactory : AbstractDAOFactory
     {
-        public override DAO<Rectangle> getDAORectangle()
+        public override DAOFormeSimple getDAORectangle()
         {
             return new DAORectangle();
         }
-        public override DAO<Segment> getDAOSegment()
+        public override DAOFormeSimple getDAOSegment()
         {
             return new DAOSegment();
         }
-        public override DAO<Ellipse> getDAOEllipse()
+        public override DAOFormeSimple getDAOEllipse()
         {
             return new DAOEllipse();
         }
-        public override DAO<Triangle> getDAOTriangle()
+        public override DAOFormeSimple getDAOTriangle()
         {
             return new DAOTriangle();
         }
-        public override DAO<Polygone> getDAOPolygone()
+        public override DAOFormeSimple getDAOPolygone()
         {
             return new DAOPolygone();
+        }
+        public override DAOFormeComposee getDAOFormeComposee()
+        {
+            return new DAOFormeComposee();
         }
     }
 }

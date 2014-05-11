@@ -40,7 +40,6 @@ namespace Projet_Formes
 
         public override void translation(Point point1, Point point2)
         {
-            Point point3 = new Point { };
             foreach (Forme_simple liste_formes in _liste_formes)
             {
                 if (liste_formes.recuperer(point1.X, point1.Y))
