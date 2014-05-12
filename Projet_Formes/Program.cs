@@ -41,7 +41,7 @@ namespace Projet_Formes
             int largeur_ell = 10;
             
 
-            Ellipse ellipse1 = new Ellipse(0, nom_ellipse, couleur_ellipse, point1, longueur_ell, largeur_ell);
+            Forme_simple ellipse1 = new Ellipse(0, nom_ellipse, couleur_ellipse, point1, longueur_ell, largeur_ell);
 
             //test polygone
 
@@ -118,7 +118,7 @@ namespace Projet_Formes
             Forme_simple test;
             Forme_composee test2;
             
-            /*DAOFormeSimple ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
+            DAOFormeSimple ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
             ellipsedao.create(ellipse1);
 
             ellipse1.Nom = "ellipse2";
@@ -127,7 +127,7 @@ namespace Projet_Formes
 
             test = ellipsedao.find(ellipse1.Id);
 
-            test.Write();*/
+            test.Write();
 
 
 

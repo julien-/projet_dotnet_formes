@@ -53,7 +53,7 @@ namespace Projet_Formes
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Ellipse
         {
             textBox_nom.Clear();
-            this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0);
+            this.forme_active = new Ellipse(id, "Ellipse " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
             forme_active.Dessinateur = new DessinEllipse();
             this.id++;
             activer_dessin();
@@ -63,7 +63,7 @@ namespace Projet_Formes
         {
             this.nb_points_poly = 3;
             this.tabcoord = new Point[this.nb_points_poly];
-            this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
+            this.forme_active = new Triangle(id, "Triangle " + id, Color.Black.ToArgb(), tabcoord);
             forme_active.Dessinateur = new DessinTriangle();
             this.id++;
             activer_dessin();
@@ -71,7 +71,7 @@ namespace Projet_Formes
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)   //attaché à l'item Dessin Rectangle
         {
-            this.forme_active = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0);
+            this.forme_active = new Rectangle(id, "Rectangle " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
             forme_active.Dessinateur = new DessinRectangle();
             this.id++;
             activer_dessin();
@@ -79,7 +79,7 @@ namespace Projet_Formes
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Segment
         {
-            this.forme_active = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), new Point(0, 0));
+            this.forme_active = new Segment(id, "Segment " + id, Color.Black.ToArgb(), new Point(0, 0), new Point(0, 0));
             forme_active.Dessinateur = new DessinSegment();
             this.id++;
             activer_dessin();
@@ -87,7 +87,7 @@ namespace Projet_Formes
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)    //attaché à l'item Dessin Polygone
         {
-            this.forme_active = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
+            this.forme_active = new Polygone(id, "Polygone " + id, Color.Black.ToArgb(), tabcoord);
             forme_active.Dessinateur = new DessinPolygone();
             this.id++;
             label10.Visible = true;
@@ -149,9 +149,21 @@ namespace Projet_Formes
                 {
                     if (forme.recuperer(point_depart.X, point_depart.Y))
                     {
-                        selected = true;
-                        forme_active = forme;
-                        break;
+                        if (this.GroupeActif != -1)
+                        {
+                            if(forme.IdGroupe == this.GroupeActif)
+                            {
+                                selected = true;
+                                forme_active = forme;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            selected = true;
+                            forme_active = forme;
+                            break;
+                        }
                     }
                 }
             }
@@ -214,40 +226,17 @@ namespace Projet_Formes
         {//CHOIX COULEUR
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                //Forme Simple
-                if (forme_active != null && this.GroupeActif == -1)
-                {   //DONNEES
-                    Console.WriteLine("Changement de couleur d'une forme simple");
-                    //modif forme active
-                    forme_active.Couleur = colorDialog1.Color.ToArgb();
-                    //modif dans listFormes
-                    this.ListFormes.Find(item => item.Id == this.forme_active.Id).Couleur = colorDialog1.Color.ToArgb();
-                    //modif dans listGroupes
-                    foreach (Forme_composee g in this.ListGroupes)
-                    {
-                        if (g.Liste_formes != null)
-                            g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Couleur = colorDialog1.Color.ToArgb();
-                    }
-
-                    //VISUEL
-                    //redessine la Forme Simple
-                    representer(forme_active, forme_active.Dessinateur);
-                }
-                //Forme Composée
-                if(this.GroupeActif != -1)
+                //DONNEES
+                //forme active
+                if (forme_active != null)
                 {
-                    Console.WriteLine("Changement de couleur d'une forme composée");
-                    //list forme composee
-                    foreach (Forme_simple f in this.ListGroupes.Find(item => item.Id == this.GroupeActif).Liste_formes)
-                    {
-                        f.Couleur = colorDialog1.Color.ToArgb();    //modif dans liste groupe
-                        this.ListFormes.Find(item2 => item2.Id == f.Id).Couleur = colorDialog1.Color.ToArgb();  //modif dans list forme
-                        representer(f, f.Dessinateur);
-                    }
+                    forme_active.Couleur = colorDialog1.Color.ToArgb();
                 }
                 //VISUEL
                 //fond du panel de choix de couleur
                 panel_couleur.BackColor = colorDialog1.Color;
+                //redessine la forme
+                representer(forme_active, forme_active.Dessinateur);
                 panel1.Invalidate();
 
             }
