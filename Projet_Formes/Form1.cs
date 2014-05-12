@@ -43,51 +43,51 @@ namespace Projet_Formes
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e) //attaché au Formulaire
         {
             g = this.panel1.CreateGraphics();
             bm = new Bitmap(this.panel1.Width, this.panel1.Height);
             g2 = Graphics.FromImage(bm);
         }
 
-        private void ellipseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ellipseToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Ellipse
         {
             textBox_nom.Clear();
-            this.forme_active = new Ellipse(id, "Ellipse " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
+            this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0);
             forme_active.Dessinateur = new DessinEllipse();
             this.id++;
             activer_dessin();
         }
 
-        private void triangleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void triangleToolStripMenuItem_Click(object sender, EventArgs e)    //attaché à l'item Dessin Triangle
         {
             this.nb_points_poly = 3;
             this.tabcoord = new Point[this.nb_points_poly];
-            this.forme_active = new Triangle(id, "Triangle " + id, Color.Black.ToArgb(), tabcoord);
+            this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
             forme_active.Dessinateur = new DessinTriangle();
             this.id++;
             activer_dessin();
         }
 
-        private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
+        private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)   //attaché à l'item Dessin Rectangle
         {
-            this.forme_active = new Rectangle(id, "Rectangle " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
+            this.forme_active = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0);
             forme_active.Dessinateur = new DessinRectangle();
             this.id++;
             activer_dessin();
         }
 
-        private void segmentToolStripMenuItem_Click(object sender, EventArgs e)
+        private void segmentToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Segment
         {
-            this.forme_active = new Segment(id, "Segment " + id, Color.Black.ToArgb(), new Point(0, 0), new Point(0, 0));
+            this.forme_active = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), new Point(0, 0));
             forme_active.Dessinateur = new DessinSegment();
             this.id++;
             activer_dessin();
         }
 
-        private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)
+        private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)    //attaché à l'item Dessin Polygone
         {
-            this.forme_active = new Polygone(id, "Polygone " + id, Color.Black.ToArgb(), tabcoord);
+            this.forme_active = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord);
             forme_active.Dessinateur = new DessinPolygone();
             this.id++;
             label10.Visible = true;
@@ -109,12 +109,12 @@ namespace Projet_Formes
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)  //attaché au panel de dessin
         {
             g.DrawImage(bm, 0, 0);
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void panel1_MouseDown(object sender, MouseEventArgs e)  //attaché à panel de dessin
         {
             point_depart = e.Location;
             labelNom.Focus();   //enleve le focus à textBoxNom
@@ -157,7 +157,7 @@ namespace Projet_Formes
             }
         }
 
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        private void panel1_MouseUp(object sender, MouseEventArgs e)    //attaché à panel de dessin
         {
             point_arrivee = e.Location;
             if (bouton_Mouse_left && PeutDessiner)
@@ -210,27 +210,50 @@ namespace Projet_Formes
             majListeAjoutGroupes();
         }
 
-        private void panel_couleur_Click(object sender, EventArgs e)
+        private void panel_couleur_Click(object sender, EventArgs e)    //attaché au panel de selection de couleur
         {//CHOIX COULEUR
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                //DONNEES
-                //forme active
-                if (forme_active != null)
-                {
+                //Forme Simple
+                if (forme_active != null && this.GroupeActif == -1)
+                {   //DONNEES
+                    Console.WriteLine("Changement de couleur d'une forme simple");
+                    //modif forme active
                     forme_active.Couleur = colorDialog1.Color.ToArgb();
+                    //modif dans listFormes
+                    this.ListFormes.Find(item => item.Id == this.forme_active.Id).Couleur = colorDialog1.Color.ToArgb();
+                    //modif dans listGroupes
+                    foreach (Forme_composee g in this.ListGroupes)
+                    {
+                        if (g.Liste_formes != null)
+                            g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Couleur = colorDialog1.Color.ToArgb();
+                    }
+
+                    //VISUEL
+                    //redessine la Forme Simple
+                    representer(forme_active, forme_active.Dessinateur);
+                }
+                //Forme Composée
+                if(this.GroupeActif != -1)
+                {
+                    Console.WriteLine("Changement de couleur d'une forme composée");
+                    //list forme composee
+                    foreach (Forme_simple f in this.ListGroupes.Find(item => item.Id == this.GroupeActif).Liste_formes)
+                    {
+                        f.Couleur = colorDialog1.Color.ToArgb();    //modif dans liste groupe
+                        this.ListFormes.Find(item2 => item2.Id == f.Id).Couleur = colorDialog1.Color.ToArgb();  //modif dans list forme
+                        representer(f, f.Dessinateur);
+                    }
                 }
                 //VISUEL
                 //fond du panel de choix de couleur
                 panel_couleur.BackColor = colorDialog1.Color;
-                //redessine la forme
-                representer(forme_active, forme_active.Dessinateur);
                 panel1.Invalidate();
 
             }
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)   //attaché au formulaire
         {
             ///Ctrl+G (Controler le groupe de la forme active)
             if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
@@ -240,6 +263,7 @@ namespace Projet_Formes
                     labelGroupeActif.Text = "Groupe Actif";
                     this.GroupeActif = this.forme_active.IdGroupe;
                     lierGroupeToolStripMenuItem.Text = "Lier le groupe actif à un groupe";
+                    textBox_nom.Text = this.ListGroupes.Find(item => item.Id == this.GroupeActif).Nom;
                 }
                 else
                 {   //sinon on desactive
@@ -360,7 +384,7 @@ namespace Projet_Formes
 
 
 
-        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)    //attaché à l'ajout de point de polygone
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -373,14 +397,14 @@ namespace Projet_Formes
             }
         }
 
-        private void ajouterUnGroupeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ajouterUnGroupeToolStripMenuItem_Click(object sender, EventArgs e) //attaché au menu ajouter un groupe
         {
             labelCreationGroupe.Visible = true;
             textBoxCreationGroupe.Visible = true;
             textBoxCreationGroupe.Focus();
         }
 
-        private void textBoxCreationGroupe_KeyDown(object sender, KeyEventArgs e)
+        private void textBoxCreationGroupe_KeyDown(object sender, KeyEventArgs e)   //attaché à la saisie d'un nouveau groupe
         {//Creation de Groupe
             if (e.KeyCode == Keys.Enter)
             {
@@ -397,7 +421,7 @@ namespace Projet_Formes
             }
         }
 
-        private void toolStripComboBoxGroupes_SelectedIndexChanged(object sender, EventArgs e)
+        private void toolStripComboBoxGroupes_SelectedIndexChanged(object sender, EventArgs e)  //attaché au choix d'un groupe
         {//Selection d'un Groupe Actif différent que celui actif
             if (toolStripComboBoxGroupes.SelectedIndex != 0)
             {   //Selection autre que Aucun : Affectation
@@ -460,7 +484,7 @@ namespace Projet_Formes
             
         }
 
-        private void SupprimerGroupetoolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void SupprimerGroupetoolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)  //attaché à la suppression d'un groupe
         {//Suppression de groupe
             int IDdugroupe = this.ListGroupes.Find(item => item.Nom == SupprimerGroupetoolStripComboBox.SelectedItem.ToString()).Id;
             String NOMdugroupe = this.ListGroupes.Find(item => item.Nom == SupprimerGroupetoolStripComboBox.SelectedItem.ToString()).Nom;
@@ -498,7 +522,7 @@ namespace Projet_Formes
             this.toolStripComboBoxGroupes.Items.Add("Aucun");
             foreach (Forme_composee g in ListGroupes)
             {
-                if (this.forme_active.IdGroupe == g.Id && this.GroupeActif != -1)
+                if (this.forme_active != null && this.forme_active.IdGroupe == g.Id && this.GroupeActif != -1)
                 {//Un groupe ne peut pas se lier à soi-même
                     //On ne fait donc rien
                    // this.toolStripComboBoxGroupes.Items.Remove(this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom);
@@ -514,6 +538,16 @@ namespace Projet_Formes
                 this.toolStripComboBoxGroupes.SelectedText = "Aucun";
         }
 
+        public void majListeSupprGroupes()
+        {
+            SupprimerGroupetoolStripComboBox.Items.Clear();
+            foreach(Forme_composee g in ListGroupes)
+            {
+                SupprimerGroupetoolStripComboBox.Items.Add(g.Nom);
+            }
+            
+        }
+
         public void refreshPanel()
         {
             g2.Clear(Color.White);
@@ -524,6 +558,35 @@ namespace Projet_Formes
                 forme.Dessinateur.dessiner(forme, g2);
             }
             panel1.Invalidate();
+        }
+
+        private void textBox_nom_KeyUp(object sender, KeyEventArgs e)   //attaché au nom de la forme
+        {//Renommer une forme
+            //FORME SIMPLE
+            if (this.forme_active != null && this.GroupeActif == -1)
+            {
+                Console.WriteLine("Changement du nom d'une forme simple");
+                this.forme_active.Nom = textBox_nom.Text;
+                //modif dans listFormes
+                this.ListFormes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
+                //modif dans listGroupes
+                foreach(Forme_composee g in this.ListGroupes)
+                {
+                    if (g.Liste_formes != null)
+                        g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
+                }
+            }
+
+            //FORME COMPOSEE
+            if (this.GroupeActif != -1)
+            {
+                Console.WriteLine("Changement du nom d'une forme composée");
+                //list forme composee
+                this.ListGroupes.Find(item => item.Id == this.GroupeActif).Nom = textBox_nom.Text;
+                labelNomGroupeActif.Text = textBox_nom.Text;
+                this.majListeAjoutGroupes();
+                this.majListeSupprGroupes();
+            }
         }
 
     }

@@ -45,6 +45,13 @@
             this.toolStripComboBoxGroupes = new System.Windows.Forms.ToolStripComboBox();
             this.supprimerUnGroupeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SupprimerGroupetoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxNbPoints = new System.Windows.Forms.TextBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.labelCreationGroupe = new System.Windows.Forms.Label();
+            this.textBoxCreationGroupe = new System.Windows.Forms.TextBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelNom = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,13 +59,13 @@
             this.labelGroupeActif = new System.Windows.Forms.Label();
             this.panel_couleur = new System.Windows.Forms.Panel();
             this.labelNomGroupeActif = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBoxNbPoints = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.labelCreationGroupe = new System.Windows.Forms.Label();
-            this.textBoxCreationGroupe = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,7 +127,7 @@
             // 
             this.ellipseToolStripMenuItem.Image = global::Projet_Formes.Properties.Resources.cercle;
             this.ellipseToolStripMenuItem.Name = "ellipseToolStripMenuItem";
-            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.ellipseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ellipseToolStripMenuItem.Text = "Ellipse";
             this.ellipseToolStripMenuItem.Click += new System.EventHandler(this.ellipseToolStripMenuItem_Click);
             // 
@@ -128,7 +135,7 @@
             // 
             this.triangleToolStripMenuItem.Image = global::Projet_Formes.Properties.Resources.triangle;
             this.triangleToolStripMenuItem.Name = "triangleToolStripMenuItem";
-            this.triangleToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.triangleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.triangleToolStripMenuItem.Text = "Triangle";
             this.triangleToolStripMenuItem.Click += new System.EventHandler(this.triangleToolStripMenuItem_Click);
             // 
@@ -136,7 +143,7 @@
             // 
             this.rectangleToolStripMenuItem.Image = global::Projet_Formes.Properties.Resources.rectangle;
             this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rectangleToolStripMenuItem.Text = "Rectangle";
             this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.rectangleToolStripMenuItem_Click);
             // 
@@ -144,7 +151,7 @@
             // 
             this.segmentToolStripMenuItem.Image = global::Projet_Formes.Properties.Resources.segment;
             this.segmentToolStripMenuItem.Name = "segmentToolStripMenuItem";
-            this.segmentToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.segmentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.segmentToolStripMenuItem.Text = "Segment";
             this.segmentToolStripMenuItem.Click += new System.EventHandler(this.segmentToolStripMenuItem_Click);
             // 
@@ -152,7 +159,7 @@
             // 
             this.polygoneToolStripMenuItem.Image = global::Projet_Formes.Properties.Resources.polygone;
             this.polygoneToolStripMenuItem.Name = "polygoneToolStripMenuItem";
-            this.polygoneToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.polygoneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.polygoneToolStripMenuItem.Text = "Polygone";
             this.polygoneToolStripMenuItem.Click += new System.EventHandler(this.polygoneToolStripMenuItem_Click);
             // 
@@ -205,106 +212,6 @@
             this.SupprimerGroupetoolStripComboBox.Size = new System.Drawing.Size(121, 23);
             this.SupprimerGroupetoolStripComboBox.SelectedIndexChanged += new System.EventHandler(this.SupprimerGroupetoolStripComboBox_SelectedIndexChanged);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.10646F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.89354F));
-            this.tableLayoutPanel1.Controls.Add(this.labelNom, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox_nom, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelGroupeActif, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel_couleur, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelNomGroupeActif, 1, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(802, 26);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(263, 250);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // labelNom
-            // 
-            this.labelNom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelNom.AutoSize = true;
-            this.labelNom.Location = new System.Drawing.Point(2, 0);
-            this.labelNom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelNom.Name = "labelNom";
-            this.labelNom.Size = new System.Drawing.Size(111, 83);
-            this.labelNom.TabIndex = 0;
-            this.labelNom.Text = "Nom";
-            this.labelNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 83);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 83);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Couleur";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBox_nom
-            // 
-            this.textBox_nom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_nom.Location = new System.Drawing.Point(117, 31);
-            this.textBox_nom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox_nom.Name = "textBox_nom";
-            this.textBox_nom.Size = new System.Drawing.Size(144, 20);
-            this.textBox_nom.TabIndex = 6;
-            // 
-            // labelGroupeActif
-            // 
-            this.labelGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelGroupeActif.AutoSize = true;
-            this.labelGroupeActif.Location = new System.Drawing.Point(2, 166);
-            this.labelGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelGroupeActif.Name = "labelGroupeActif";
-            this.labelGroupeActif.Size = new System.Drawing.Size(111, 84);
-            this.labelGroupeActif.TabIndex = 5;
-            this.labelGroupeActif.Text = "Groupe Inactif";
-            this.labelGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel_couleur
-            // 
-            this.panel_couleur.BackColor = System.Drawing.Color.Black;
-            this.panel_couleur.Location = new System.Drawing.Point(118, 86);
-            this.panel_couleur.Name = "panel_couleur";
-            this.panel_couleur.Size = new System.Drawing.Size(139, 60);
-            this.panel_couleur.TabIndex = 11;
-            this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
-            // 
-            // labelNomGroupeActif
-            // 
-            this.labelNomGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelNomGroupeActif.AutoSize = true;
-            this.labelNomGroupeActif.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNomGroupeActif.Location = new System.Drawing.Point(117, 166);
-            this.labelNomGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelNomGroupeActif.Name = "labelNomGroupeActif";
-            this.labelNomGroupeActif.Size = new System.Drawing.Size(144, 84);
-            this.labelNomGroupeActif.TabIndex = 8;
-            this.labelNomGroupeActif.Text = "Aucun";
-            this.labelNomGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -320,25 +227,12 @@
             // textBoxNbPoints
             // 
             this.textBoxNbPoints.Location = new System.Drawing.Point(319, 4);
-            this.textBoxNbPoints.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNbPoints.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNbPoints.Name = "textBoxNbPoints";
             this.textBoxNbPoints.Size = new System.Drawing.Size(18, 20);
             this.textBoxNbPoints.TabIndex = 4;
             this.textBoxNbPoints.Visible = false;
             this.textBoxNbPoints.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel1.Location = new System.Drawing.Point(9, 25);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(565, 409);
-            this.panel1.TabIndex = 5;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // labelCreationGroupe
             // 
@@ -355,33 +249,183 @@
             // textBoxCreationGroupe
             // 
             this.textBoxCreationGroupe.Location = new System.Drawing.Point(450, 4);
-            this.textBoxCreationGroupe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreationGroupe.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreationGroupe.Name = "textBoxCreationGroupe";
             this.textBoxCreationGroupe.Size = new System.Drawing.Size(124, 20);
             this.textBoxCreationGroupe.TabIndex = 7;
             this.textBoxCreationGroupe.Visible = false;
             this.textBoxCreationGroupe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxCreationGroupe_KeyDown);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.panel1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Size = new System.Drawing.Size(1065, 542);
+            this.splitContainer1.SplitterDistance = 859;
+            this.splitContainer1.TabIndex = 8;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(198, 538);
+            this.panel2.TabIndex = 9;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.92696F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.07304F));
+            this.tableLayoutPanel1.Controls.Add(this.labelNom, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBox_nom, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel_couleur, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelGroupeActif, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelNomGroupeActif, 0, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(196, 538);
+            this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // labelNom
+            // 
+            this.labelNom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNom.AutoSize = true;
+            this.labelNom.Location = new System.Drawing.Point(2, 0);
+            this.labelNom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNom.Name = "labelNom";
+            this.labelNom.Size = new System.Drawing.Size(64, 179);
+            this.labelNom.TabIndex = 0;
+            this.labelNom.Text = "Nom";
+            this.labelNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(2, 179);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 179);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Couleur";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox_nom
+            // 
+            this.textBox_nom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_nom.Location = new System.Drawing.Point(70, 79);
+            this.textBox_nom.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_nom.Name = "textBox_nom";
+            this.textBox_nom.Size = new System.Drawing.Size(124, 20);
+            this.textBox_nom.TabIndex = 6;
+            this.textBox_nom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_nom_KeyUp);
+            // 
+            // labelGroupeActif
+            // 
+            this.labelGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelGroupeActif.AutoSize = true;
+            this.labelGroupeActif.Location = new System.Drawing.Point(70, 358);
+            this.labelGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelGroupeActif.Name = "labelGroupeActif";
+            this.labelGroupeActif.Size = new System.Drawing.Size(124, 180);
+            this.labelGroupeActif.TabIndex = 5;
+            this.labelGroupeActif.Text = "Groupe Inactif";
+            this.labelGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel_couleur
+            // 
+            this.panel_couleur.BackColor = System.Drawing.Color.Black;
+            this.panel_couleur.Location = new System.Drawing.Point(71, 182);
+            this.panel_couleur.Name = "panel_couleur";
+            this.panel_couleur.Size = new System.Drawing.Size(122, 154);
+            this.panel_couleur.TabIndex = 11;
+            this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
+            // 
+            // labelNomGroupeActif
+            // 
+            this.labelNomGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelNomGroupeActif.AutoSize = true;
+            this.labelNomGroupeActif.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNomGroupeActif.Location = new System.Drawing.Point(2, 358);
+            this.labelNomGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNomGroupeActif.Name = "labelNomGroupeActif";
+            this.labelNomGroupeActif.Size = new System.Drawing.Size(64, 180);
+            this.labelNomGroupeActif.TabIndex = 8;
+            this.labelNomGroupeActif.Text = "Aucun";
+            this.labelNomGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(855, 538);
+            this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 457);
+            this.ClientSize = new System.Drawing.Size(1065, 571);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.textBoxCreationGroupe);
             this.Controls.Add(this.labelCreationGroupe);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBoxNbPoints);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -399,19 +443,12 @@
         private System.Windows.Forms.ToolStripMenuItem segmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem polygoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem groupeToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label labelGroupeActif;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxNbPoints;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem fichierToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nouveauToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sauvegarderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importerToolStripMenuItem;
-        private System.Windows.Forms.Label labelNom;
-        private System.Windows.Forms.TextBox textBox_nom;
-        private System.Windows.Forms.Panel panel_couleur;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ToolStripMenuItem ajouterUnGroupeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lierGroupeToolStripMenuItem;
@@ -420,6 +457,15 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxGroupes;
         private System.Windows.Forms.ToolStripMenuItem supprimerUnGroupeToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox SupprimerGroupetoolStripComboBox;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label labelNom;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox_nom;
+        private System.Windows.Forms.Panel panel_couleur;
+        private System.Windows.Forms.Label labelGroupeActif;
         private System.Windows.Forms.Label labelNomGroupeActif;
 
     }
