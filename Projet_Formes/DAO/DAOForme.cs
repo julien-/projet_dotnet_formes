@@ -7,10 +7,10 @@ using MySql.Data.MySqlClient;
 
 namespace Projet_Formes
 {
-    public abstract class DAOForme<T>
+    abstract class DAOForme<T>
     {
-        public MySqlConnection _connect = SingletonConnexion.InitConnection();
-        public MySqlCommand _command = SingletonConnexion.InitCommand();
+        protected MySqlConnection _connect = SingletonConnexion.InitConnection();
+        protected MySqlCommand _command = SingletonConnexion.InitCommand();
 
         public abstract void create(T entry);
 
@@ -18,6 +18,8 @@ namespace Projet_Formes
 
         public abstract void update(T entry);
 
-        public abstract T find(int id);
+        public abstract T find(T entry);
+
+        public abstract bool presente(T entry);
     }
 }

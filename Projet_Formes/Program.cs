@@ -29,7 +29,17 @@ namespace Projet_Formes
 
         static void test()
         {
-     
+            DAOFormeSimple Fs1 = new DAORectangle();
+            DAOFormeSimple Fs2 = new DAOSegment();
+            DAOFormeSimple Fs3 = new DAOEllipse();
+            DAOFormeSimple Fs4 = new DAOTriangle();
+            DAOFormeSimple Fs5 = new DAOPolygone();
+
+            Fs1.SetSuccessor(Fs2);
+            Fs2.SetSuccessor(Fs3);
+            Fs3.SetSuccessor(Fs4);
+            Fs4.SetSuccessor(Fs5);
+
             //test ellipse
 
             string nom_ellipse = "elipse1";
@@ -98,7 +108,7 @@ namespace Projet_Formes
 
             string nom_groupe = "groupe1";
 
-
+            List<Forme_simple> liste_formes2 = new List<Forme_simple>();
 
             List<Forme_simple> liste_formes = new List<Forme_simple>();
             liste_formes.Add(ellipse1);
@@ -110,83 +120,18 @@ namespace Projet_Formes
             Forme_composee groupe1 = new Forme_composee(5, nom_groupe);
             groupe1.Liste_formes = liste_formes;
 
+            Forme_simple forme;
 
-            
+            foreach(Forme_simple list in liste_formes)
+            {
+                   forme = Fs1.find(list);
+            }
 
-            //Test Base de donnée
-
-            Forme_simple test;
-            Forme_composee test2;
-            
-            DAOFormeSimple ellipsedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOEllipse();
-            ellipsedao.create(ellipse1);
-
-            ellipse1.Nom = "ellipse2";
-
-            ellipsedao.update(ellipse1);
-
-            test = ellipsedao.find(ellipse1.Id);
-
-            test.Write();
-
-
-
-            /*DAOFormeSimple rectangledao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAORectangle();
-            rectangledao.create(rectangle1);
-
-            rectangle1.Nom = "rectangle2";
-
-            rectangledao.update(rectangle1);
-
-            test = rectangledao.find(rectangle1.Id);
-
-            test.Write();*/
-
-            /*DAOFormeSimple polygonedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOPolygone();
-            polygonedao.create(polygone1);
-
-            polygone1.Nom = "polygone2";
-
-            polygonedao.update(polygone1);
-
-            test = polygonedao.find(polygone1.Id);
-
-            test.Write();*/
-
-            /*DAOFormeSimple triangledao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOTriangle();
-            triangledao.create(triangle1);
-
-            triangle1.Nom = "triangle2";
-
-            triangledao.update(triangle1);
-
-            test = triangledao.find(triangle1.Id);
-
-            test.Write();*/
-
-            /*DAOFormeSimple segmentdao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOSegment();
-            segmentdao.create(segment1);
-
-            segment1.Nom = "triangle2";
-
-            segmentdao.update(segment1);
-
-            test = segmentdao.find(segment1.Id);
-
-            test.Write();*/
-
-            /*DAOFormeComposee groupedao = AbstractDAOFactory.getFactory(FactoryType.DAO_FACTORY).getDAOFormeComposee();
-            groupedao.create(groupe1);
-
-            groupe1.Nom = "groupe2";
-
-            groupedao.update(groupe1);
-
-            test2 = groupedao.find(groupe1.Id);
-
-            Console.WriteLine(test2.Id);
-            Console.WriteLine(test2.Nom);*/
-
+            /*foreach (Forme_simple list2 in liste_formes2)
+            {
+                if(liste_formes2 != null)
+                    list2.Write();
+            }*/
 
             Console.ReadLine();
         }

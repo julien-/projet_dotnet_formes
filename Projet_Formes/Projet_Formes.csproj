@@ -48,9 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAO\AbstractDAOFactory.cs" />
     <Compile Include="DAO\DAOEllipse.cs" />
-    <Compile Include="DAO\DAOFactory.cs" />
     <Compile Include="DAO\DAOForme.cs" />
     <Compile Include="DAO\DAOFormeComposee.cs" />
     <Compile Include="DAO\DAOFormeSimple.cs" />

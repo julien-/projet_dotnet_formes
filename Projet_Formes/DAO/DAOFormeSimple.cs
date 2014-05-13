@@ -7,8 +7,15 @@ using MySql.Data.MySqlClient;
 
 namespace Projet_Formes
 {
-    public class DAOFormeSimple : DAOForme<Forme_simple>
+    abstract class DAOFormeSimple : DAOForme<Forme_simple>
     {
+        protected DAOFormeSimple successor;
+
+        public void SetSuccessor(DAOFormeSimple successor)
+        {
+            this.successor = successor;
+        }
+
         public override void create(Forme_simple entry)
         {
             //Données membres
@@ -97,9 +104,49 @@ namespace Projet_Formes
             }
         }
 
-        public override Forme_simple find(int id)
+        public override Forme_simple find(Forme_simple entry)
         {
             return null;
+        }
+
+        public override bool presente(Forme_simple entry)
+        {
+            MySqlDataReader rdr = null;
+
+            //Définition de la requete
+            this._command.Parameters.Clear();
+            this._command.Parameters.AddWithValue("@id", entry.Id);
+            this._command.CommandText = @"SELECT id
+                                            FROM forme f
+                                            WHERE f.id = @id";
+
+            try
+            {
+                //Execution de la requete
+                rdr = this._command.ExecuteReader();
+
+                
+
+                //Extraction des données
+                rdr.Read();
+
+                if (rdr == null)
+                    return false;
+                else
+                    return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                throw ex;
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
         }
     }
 }

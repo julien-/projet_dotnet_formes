@@ -93,13 +93,13 @@ namespace Projet_Formes
             }
         }
 
-        public override Forme_composee find(int id)
+        public override Forme_composee find(Forme_composee entry)
         {
             MySqlDataReader rdr = null;
 
             //Définition de la requete
             this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", id);
+            this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.CommandText = @"SELECT nom
                                         FROM forme f";
 
@@ -114,7 +114,7 @@ namespace Projet_Formes
                 String nom = rdr.GetString(0);
 
                 //Resultat
-                return new Forme_composee(id, nom);
+                return new Forme_composee(entry.Id, nom);
 
             }
             catch (MySqlException ex)
@@ -129,6 +129,11 @@ namespace Projet_Formes
                     rdr.Close();
                 }
             }
+        }
+
+        public override bool presente(Forme_composee entry)
+        {
+            return false;
         }
     }
 }

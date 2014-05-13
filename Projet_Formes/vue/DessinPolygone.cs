@@ -11,9 +11,18 @@ namespace Projet_Formes
     {
         public override void dessiner(Forme_simple entry, Graphics g)
         {
-            Polygone p = (Polygone)entry;
-            SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
-            g.FillPolygon(brush, p.Tableau_points);
+            Type t = typeof(Polygone);
+            Type t2 = entry.GetType();
+            if (t.Equals(t2))
+            {
+                Polygone p = (Polygone)entry;
+                SolidBrush brush = new SolidBrush(Color.FromArgb(entry.Couleur));
+                g.FillPolygon(brush, p.Tableau_points);
+            }
+            else if (successor != null)
+            {
+                successor.dessiner(entry, g);
+            }
         }
     }
 }

@@ -101,14 +101,16 @@
             // sauvegarderToolStripMenuItem
             // 
             this.sauvegarderToolStripMenuItem.Name = "sauvegarderToolStripMenuItem";
-            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
+            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.sauvegarderToolStripMenuItem.Text = "Sauvegarder";
+            this.sauvegarderToolStripMenuItem.Click += new System.EventHandler(this.sauvegarderToolStripMenuItem_Click);
             // 
             // importerToolStripMenuItem
             // 
             this.importerToolStripMenuItem.Name = "importerToolStripMenuItem";
-            this.importerToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
+            this.importerToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.importerToolStripMenuItem.Text = "Importer";
+            this.importerToolStripMenuItem.Click += new System.EventHandler(this.importerToolStripMenuItem_Click);
             // 
             // dessinerToolStripMenuItem
             // 

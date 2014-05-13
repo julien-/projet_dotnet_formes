@@ -22,8 +22,7 @@ namespace Projet_Formes
 
         bool bouton_Mouse_left;
         bool bouton_Mouse_middle;
-        bool selected;
-        
+        bool selected;        
         bool PeutDessiner = false;
 
         Forme_simple forme_active;
@@ -38,9 +37,37 @@ namespace Projet_Formes
         List<Forme_composee> ListGroupes = new List<Forme_composee>();
         List<Forme_simple> ListFormes = new List<Forme_simple>();
 
+        //DAO
+        DAOFormeSimple Fs1 = new DAORectangle();
+        DAOFormeSimple Fs2 = new DAOSegment();
+        DAOFormeSimple Fs3 = new DAOEllipse();
+        DAOFormeSimple Fs4 = new DAOTriangle();
+        DAOFormeSimple Fs5 = new DAOPolygone();
+
+        DAOFormeComposee Fc = new DAOFormeComposee();
+
+        //Dessin
+        DessinFormeSimple D1 = new DessinRectangle();
+        DessinFormeSimple D2 = new DessinSegment();
+        DessinFormeSimple D3 = new DessinEllipse();
+        DessinFormeSimple D4 = new DessinTriangle();
+        DessinFormeSimple D5 = new DessinPolygone();
+
         public Form1()
         {
             InitializeComponent();
+
+            //Successeurs DAO
+            Fs1.SetSuccessor(Fs2);
+            Fs2.SetSuccessor(Fs3);
+            Fs3.SetSuccessor(Fs4);
+            Fs4.SetSuccessor(Fs5);
+
+            //Successeurs Dessin
+            D1.SetSuccessor(D2);
+            D2.SetSuccessor(D3);
+            D3.SetSuccessor(D4);
+            D4.SetSuccessor(D5);
         }
 
         private void Form1_Load(object sender, EventArgs e) //attaché au Formulaire
@@ -54,7 +81,6 @@ namespace Projet_Formes
         {
             textBox_nom.Clear();
             this.forme_active = new Ellipse(id, "Ellipse " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
-            forme_active.Dessinateur = new DessinEllipse();
             this.id++;
             activer_dessin();
         }
@@ -64,7 +90,6 @@ namespace Projet_Formes
             this.nb_points_poly = 3;
             this.tabcoord = new Point[this.nb_points_poly];
             this.forme_active = new Triangle(id, "Triangle " + id, Color.Black.ToArgb(), tabcoord);
-            forme_active.Dessinateur = new DessinTriangle();
             this.id++;
             activer_dessin();
         }
@@ -72,7 +97,6 @@ namespace Projet_Formes
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)   //attaché à l'item Dessin Rectangle
         {
             this.forme_active = new Rectangle(id, "Rectangle " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
-            forme_active.Dessinateur = new DessinRectangle();
             this.id++;
             activer_dessin();
         }
@@ -80,7 +104,6 @@ namespace Projet_Formes
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Segment
         {
             this.forme_active = new Segment(id, "Segment " + id, Color.Black.ToArgb(), new Point(0, 0), new Point(0, 0));
-            forme_active.Dessinateur = new DessinSegment();
             this.id++;
             activer_dessin();
         }
@@ -88,7 +111,6 @@ namespace Projet_Formes
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)    //attaché à l'item Dessin Polygone
         {
             this.forme_active = new Polygone(id, "Polygone " + id, Color.Black.ToArgb(), tabcoord);
-            forme_active.Dessinateur = new DessinPolygone();
             this.id++;
             label10.Visible = true;
             textBoxNbPoints.Visible = true;
@@ -99,13 +121,10 @@ namespace Projet_Formes
         {
             panel1.Cursor = System.Windows.Forms.Cursors.Cross;   //PASSE EN MODE DESSIN
             this.PeutDessiner = true;
-        }
-
-        private void representer(Forme_simple forme, DessinFormeSimple dessin)
-        {
-            if (forme != null)
+            if (this.GroupeActif != -1)
             {
-                dessin.dessiner(forme, g2);
+                labelGroupeActif.Text = "Groupe Inactif";
+                this.GroupeActif = -1;
             }
         }
 
@@ -128,7 +147,7 @@ namespace Projet_Formes
                     tabcoord[i] = point_depart;
                     forme_active.maj(tabcoord);
                     ListFormes.Add(this.forme_active);
-                    representer(forme_active, forme_active.Dessinateur);
+                    D1.dessiner(forme_active, g2);
                     panel1.Invalidate();
                     this.i = 0;
                     this.PeutDessiner = false;
@@ -180,7 +199,7 @@ namespace Projet_Formes
                 {   //Dessin de Segments, Ellipse, Rectangle
                     forme_active.maj(point_depart, point_arrivee);
                     ListFormes.Add(this.forme_active);
-                    representer(forme_active, forme_active.Dessinateur);
+                    D1.dessiner(forme_active, g2);
                     this.GroupeActif = -1;
                     this.labelNomGroupeActif.Text = "Aucun";
                     this.toolStripComboBoxGroupes.SelectedItem = "Aucun";
@@ -236,7 +255,7 @@ namespace Projet_Formes
                 //fond du panel de choix de couleur
                 panel_couleur.BackColor = colorDialog1.Color;
                 //redessine la forme
-                representer(forme_active, forme_active.Dessinateur);
+                D1.dessiner(forme_active, g2);
                 panel1.Invalidate();
 
             }
@@ -544,7 +563,7 @@ namespace Projet_Formes
 
             foreach (Forme_simple forme in ListFormes)
             {
-                forme.Dessinateur.dessiner(forme, g2);
+                D1.dessiner(forme, g2);
             }
             panel1.Invalidate();
         }
@@ -576,6 +595,24 @@ namespace Projet_Formes
                 this.majListeAjoutGroupes();
                 this.majListeSupprGroupes();
             }
+        }
+
+        private void sauvegarderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Forme_simple list in ListFormes)
+            {
+                if (!Fs1.presente(list))
+                {
+                    Fs1.create(list);
+                    Console.WriteLine("test");
+                }
+                else
+                    Fs1.update(list);
+            }
+        }
+
+        private void importerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
         }
 
     }

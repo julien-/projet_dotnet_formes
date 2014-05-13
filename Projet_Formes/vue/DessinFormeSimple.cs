@@ -9,6 +9,13 @@ namespace Projet_Formes
 {
     public abstract class DessinFormeSimple
     {
+        protected DessinFormeSimple successor;
+
+        public void SetSuccessor(DessinFormeSimple successor)
+        {
+            this.successor = successor;
+        }
+
         public abstract void dessiner(Forme_simple entry, Graphics g);
     }
 

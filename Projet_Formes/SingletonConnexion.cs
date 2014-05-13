@@ -9,56 +9,72 @@ namespace Projet_Formes
 {
     public class SingletonConnexion
     {
+        
         private static String connectionString = "SERVER=localhost; UID=root; PASSWORD=;";
 
-        private static MySqlConnection _connection;
-        private static MySqlCommand _cmd;
+        private static MySqlConnection _connection = null;
+        private static MySqlCommand _command = null;
+
+        private static readonly object myLock = new object();
 
         public static MySqlConnection InitConnection()
         {
-            //creation de la connection à la base de données (on ne se connect pas encore, on créé seulement l'instance)
-            _connection = new MySqlConnection(connectionString);
-            return _connection;
+            lock (myLock)
+            {
+                // Si on demande une instance qui n’existe pas, alors on crée notre SqlConnexion.
+                if (_connection == null)
+                    _connection = new MySqlConnection(connectionString);
+
+                // Dans tous les cas on retourne l’unique instance de notre SqlConnexion.
+                return _connection;
+            }
         }
 
         public static MySqlCommand InitCommand()
         {
-            //instancie la classe MySqlCommand
-            _cmd = new MySqlCommand();
-            try
+            lock (myLock)
             {
-                //Creation de la connexion
-                _cmd.Connection = _connection;
+                // Si on demande une instance qui n’existe pas, alors on crée notre SqlCommand.
+                if (_command == null)
+                {
+                    _command = new MySqlCommand();
+                    try
+                    {
+                        //Creation de la connexion
+                        _command.Connection = _connection;
 
-                //On se connecte
-                _cmd.Connection.Open();
+                        //On se connecte
+                        _command.Connection.Open();
 
-                creerBDD();
-                creerTables();
-
-                return _cmd;
+                        creerBDD();
+                        creerTables();
+                    }
+                    catch (NullReferenceException ex)
+                    {
+                        Console.WriteLine("Error: (0)", ex.ToString());
+                        throw ex;
+                    }
+                }
+                // Dans tous les cas on retourne l’unique instance de notre SqlCommand.
+                return _command;
             }
-            catch (NullReferenceException ex)
-            {
-                Console.WriteLine("Error: (0)", ex.ToString());
-                throw ex;
-            }
+           
         }
 
-        public static void CloseConnection()
+        /*public static void CloseConnection()
         {
             _cmd.Connection.Close();
             Console.WriteLine("Connexion fermée");
-        }
+        }*/
 
         public static void creerBDD()
         {
             //Définition de la requete
-            _cmd.CommandText = "CREATE DATABASE IF NOT EXISTS db_form;";
+            _command.CommandText = "CREATE DATABASE IF NOT EXISTS db_form;";
             try
             {
                 //Execution de la requete
-                _cmd.ExecuteNonQuery();
+                _command.ExecuteNonQuery();
 
                 Console.WriteLine("Base de données créée");
             }
@@ -143,11 +159,11 @@ namespace Projet_Formes
             foreach (String r in tabRequete)
             {
                 //Définition de la requete
-                _cmd.CommandText = r;
+                _command.CommandText = r;
                 try
                 {
                     //Execution de la requete
-                    _cmd.ExecuteNonQuery();
+                    _command.ExecuteNonQuery();
                 }
                 catch (MySqlException ex)
                 {
