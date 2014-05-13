@@ -580,8 +580,8 @@ namespace Projet_Formes
                 //modif dans listGroupes
                 foreach(Forme_composee g in this.ListGroupes)
                 {
-                    if (g.Liste_formes != null)
-                        g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
+                    if (g.Liste_formes != null && g.Liste_formes.Find(item => item.Id == this.forme_active.Id) != null)
+                            g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
                 }
             }
 
