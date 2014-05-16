@@ -151,7 +151,8 @@ namespace Projet_Formes
                     Point p1 = new Point(x, y);
 
                     //Resultat
-                    return new Rectangle(entry.Id, nom, couleur, p1, hauteur, largeur);
+                    Forme_simple rectangle = new Rectangle(entry.Id, nom, couleur, p1, hauteur, largeur);
+                    return rectangle;
                 }
 
                 catch (MySqlException ex)
@@ -178,19 +179,18 @@ namespace Projet_Formes
             }            
         }
 
-        public override bool presente(Forme_simple entry)
+        public override void createorupdate(Forme_simple entry)
         {
             Type t = typeof(Rectangle);
             Type t2 = entry.GetType();
             if (t.Equals(t2))
             {
-                base.presente(entry);
+                base.createorupdate(entry);
             }
             else if (successor != null)
             {
-                successor.presente(entry);
+                successor.createorupdate(entry);
             }
-            return false;
         }
     }
 }

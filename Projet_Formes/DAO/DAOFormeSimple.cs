@@ -109,14 +109,15 @@ namespace Projet_Formes
             return null;
         }
 
-        public override bool presente(Forme_simple entry)
+
+        public override void createorupdate(Forme_simple entry)
         {
             MySqlDataReader rdr = null;
 
             //Définition de la requete
             this._command.Parameters.Clear();
             this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.CommandText = @"SELECT id
+            this._command.CommandText = @"SELECT COUNT(*)
                                             FROM forme f
                                             WHERE f.id = @id";
 
@@ -125,27 +126,21 @@ namespace Projet_Formes
                 //Execution de la requete
                 rdr = this._command.ExecuteReader();
 
-                
-
-                //Extraction des données
                 rdr.Read();
 
-                if (rdr == null)
-                    return false;
+                int val = rdr.GetInt32(0);
+
+                rdr.Close();
+
+                if (val == 0)
+                    create(entry);
                 else
-                    return true;
+                    update(entry);
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error: {0}", ex.ToString());
                 throw ex;
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
             }
         }
     }

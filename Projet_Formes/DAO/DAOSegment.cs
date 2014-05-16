@@ -156,7 +156,8 @@ namespace Projet_Formes
                     Point p1 = new Point(x1, y1);
                     Point p2 = new Point(x2, y2);
                     //Resultat
-                    return new Segment(entry.Id, nom, couleur, p1, p2);
+                    Forme_simple segment = new Segment(entry.Id, nom, couleur, p1, p2);
+                    return segment;
 
                 }
                 catch (MySqlException ex)
@@ -183,19 +184,18 @@ namespace Projet_Formes
             }    
         }
 
-        public override bool presente(Forme_simple entry)
+        public override void createorupdate(Forme_simple entry)
         {
             Type t = typeof(Segment);
             Type t2 = entry.GetType();
             if (t.Equals(t2))
             {
-                base.presente(entry);
+                base.createorupdate(entry);
             }
             else if (successor != null)
             {
-                successor.presente(entry);
+                successor.createorupdate(entry);
             }
-            return false;
         }
     }
 }

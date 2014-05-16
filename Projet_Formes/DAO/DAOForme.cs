@@ -20,6 +20,7 @@ namespace Projet_Formes
 
         public abstract T find(T entry);
 
-        public abstract bool presente(T entry);
+        public abstract void createorupdate(T entry);
+
     }
 }

@@ -131,9 +131,9 @@ namespace Projet_Formes
             }
         }
 
-        public override bool presente(Forme_composee entry)
+        public override void createorupdate(Forme_composee entry)
         {
-            return false;
+
         }
     }
 }

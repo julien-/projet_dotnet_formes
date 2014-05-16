@@ -122,15 +122,21 @@ namespace Projet_Formes
 
             Forme_simple forme;
 
+            foreach (Forme_simple list1 in liste_formes)
+            {
+                Fs1.create(list1);
+            }
+
             foreach(Forme_simple list in liste_formes)
             {
                    forme = Fs1.find(list);
+                   forme.Write();
+                   //liste_formes2.Add(forme);
             }
 
             /*foreach (Forme_simple list2 in liste_formes2)
             {
-                if(liste_formes2 != null)
-                    list2.Write();
+                Console.WriteLine(list2.Id);
             }*/
 
             Console.ReadLine();

@@ -601,18 +601,15 @@ namespace Projet_Formes
         {
             foreach (Forme_simple list in ListFormes)
             {
-                if (!Fs1.presente(list))
-                {
-                    Fs1.create(list);
-                    Console.WriteLine("test");
-                }
-                else
-                    Fs1.update(list);
+                Fs1.createorupdate(list);
             }
         }
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.ListFormes.Clear();
+            g2.Clear(Color.White);
+            panel1.Invalidate();
         }
 
     }

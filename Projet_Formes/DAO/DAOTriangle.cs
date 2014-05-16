@@ -165,7 +165,8 @@ namespace Projet_Formes
                     }
 
                     //Resultat
-                    return new Triangle(entry.Id, nom, couleur, tab_point);
+                    Forme_simple triangle = new Triangle(entry.Id, nom, couleur, tab_point);
+                    return triangle;
                 }
                 catch (MySqlException ex)
                 {
@@ -191,19 +192,18 @@ namespace Projet_Formes
             }
         }
 
-        public override bool presente(Forme_simple entry)
+        public override void createorupdate(Forme_simple entry)
         {
             Type t = typeof(Triangle);
             Type t2 = entry.GetType();
             if (t.Equals(t2))
             {
-                base.presente(entry);
+                base.createorupdate(entry);
             }
             else if (successor != null)
             {
-                successor.presente(entry);
+                successor.createorupdate(entry);
             }
-            return false;
         }
     }
 }

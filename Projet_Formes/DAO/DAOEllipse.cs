@@ -154,7 +154,8 @@ namespace Projet_Formes
                     Point p1 = new Point(x, y);
 
                     //Resultat
-                    return new Ellipse(entry.Id, nom, couleur, p1, hauteur, largeur);
+                    Forme_simple ellipse = new Ellipse(entry.Id, nom, couleur, p1, hauteur, largeur);
+                    return ellipse;
 
                 }
                 catch (MySqlException ex)
@@ -181,19 +182,18 @@ namespace Projet_Formes
             }
         }
 
-        public override bool presente(Forme_simple entry)
+        public override void createorupdate(Forme_simple entry)
         {
             Type t = typeof(Ellipse);
             Type t2 = entry.GetType();
             if (t.Equals(t2))
             {
-                base.presente(entry);
+                base.createorupdate(entry);
             }
             else if (successor != null)
             {
-                successor.presente(entry);
+                successor.createorupdate(entry);
             }
-            return false;
         }
     }
 }
