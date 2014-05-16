@@ -13,10 +13,11 @@ namespace Projet_Formes
         protected int _groupe = -1;
         protected int _id = 0;
 
-        public Forme(int id, string nom)
+        public Forme(int id, string nom, int groupe)
         {
             this._id = id;
             this._nom = nom;
+            this._groupe = groupe;
         }
 
         public string Nom

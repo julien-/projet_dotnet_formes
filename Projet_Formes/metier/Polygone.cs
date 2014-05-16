@@ -11,7 +11,7 @@ namespace Projet_Formes
     {
         protected Point []_tab_points;
 
-        public Polygone(int id, string nom, int couleur, Point []tab_points) : base(id, nom, couleur)
+        public Polygone(int id, string nom, int couleur, Point []tab_points, int idgroupe) : base(id, nom, couleur, idgroupe)
         {
             this._tab_points = tab_points;
         }

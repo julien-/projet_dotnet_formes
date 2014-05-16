@@ -93,6 +93,7 @@ namespace Projet_Formes
                                 //forme
                                 @"CREATE TABLE IF NOT EXISTS forme (
                                   id int(11) NOT NULL,
+                                  id_groupe int(11) NOT NULL,
                                   nom varchar(60) NOT NULL,
                                   PRIMARY KEY (id)
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;",

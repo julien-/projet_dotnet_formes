@@ -49,9 +49,9 @@ namespace Projet_Formes
             Point point1 = new Point(12, 13);
             int longueur_ell = 12;
             int largeur_ell = 10;
-            
 
-            Forme_simple ellipse1 = new Ellipse(0, nom_ellipse, couleur_ellipse, point1, longueur_ell, largeur_ell);
+
+            Forme_simple ellipse1 = new Ellipse(0, nom_ellipse, couleur_ellipse, point1, longueur_ell, largeur_ell, -1);
 
             //test polygone
 
@@ -65,7 +65,7 @@ namespace Projet_Formes
 
             Point []tableau_points = new Point[3]{point3, point4, point5};
 
-            Polygone polygone1 = new Polygone(1, nom_polygone, couleur_polygone, tableau_points);
+            Polygone polygone1 = new Polygone(1, nom_polygone, couleur_polygone, tableau_points, -1);
 
             //test triangle
 
@@ -79,7 +79,7 @@ namespace Projet_Formes
 
             Point[] tableau_points2 = new Point[3] { point3, point4, point5 };
 
-            Triangle triangle1 = new Triangle(3, nom_triangle, couleur_triangle, tableau_points2);
+            Triangle triangle1 = new Triangle(3, nom_triangle, couleur_triangle, tableau_points2, -1);
 
             //test rectangle
 
@@ -91,7 +91,7 @@ namespace Projet_Formes
             int longueur_rect = 12;
             int largeur_rect = 10;
 
-            Rectangle rectangle1 = new Rectangle(2, nom_rectangle, couleur_rectangle, point6, longueur_rect, largeur_rect);
+            Rectangle rectangle1 = new Rectangle(2, nom_rectangle, couleur_rectangle, point6, longueur_rect, largeur_rect, -1);
 
             //test segment
 
@@ -102,7 +102,7 @@ namespace Projet_Formes
             Point point10 = new Point(22, 23);
             Point point11 = new Point(24, 25);
 
-            Segment segment1 = new Segment(4, nom_segment, couleur_segment, point10, point11);
+            Segment segment1 = new Segment(4, nom_segment, couleur_segment, point10, point11, -1);
 
             //test groupe
 
@@ -110,17 +110,15 @@ namespace Projet_Formes
 
             List<Forme_simple> liste_formes2 = new List<Forme_simple>();
 
-            List<Forme_simple> liste_formes = new List<Forme_simple>();
+            List<Forme> liste_formes = new List<Forme>();
             liste_formes.Add(ellipse1);
             liste_formes.Add(polygone1);
             liste_formes.Add(rectangle1);
             liste_formes.Add(segment1);
             liste_formes.Add(triangle1);
 
-            Forme_composee groupe1 = new Forme_composee(5, nom_groupe);
-            groupe1.Liste_formes = liste_formes;
+            Forme_composee groupe1 = new Forme_composee(5, nom_groupe, -1, liste_formes);
 
-            Forme_simple forme;
 
             foreach (Forme_simple list1 in liste_formes)
             {

@@ -129,7 +129,7 @@ namespace Projet_Formes
                 this._command.Parameters.Clear();
 
                 String condition = @"";
-                String requete = @"SELECT p.id, nom, couleur, x AS x1, y AS y1, x2, y2";
+                String requete = @"SELECT p.id, nom, couleur, id_groupe, x AS x1, y AS y1, x2, y2";
                 for (int i = 3; i <= nb; i++) //Commence a 3 car Point 1 et 2 déjà traités dans la requete principale
                 {
                     requete += ", x" + i + ", y" + i;
@@ -167,16 +167,17 @@ namespace Projet_Formes
                         int id = rdr.GetInt32(0);
                         String nom = rdr.GetString(1);
                         int couleur = rdr.GetInt32(2);
+                        int idgroupe = rdr.GetInt32(3);
                         Point[] tab_point = new Point[nb];
 
                         int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
                         for (int i = 1; i < nb *2; i += 2) //de 2 en 2, car x et y en meme temps
                         {
-                            tab_point[j] = new Point(rdr.GetInt32(i + 2), rdr.GetInt32(i + 3));
+                            tab_point[j] = new Point(rdr.GetInt32(i + 3), rdr.GetInt32(i + 4));
                             j++;
                         }
 
-                        maliste.Add(new Polygone(id, nom, couleur, tab_point));
+                        maliste.Add(new Polygone(id, nom, couleur, tab_point, idgroupe));
                     }
                 }
 

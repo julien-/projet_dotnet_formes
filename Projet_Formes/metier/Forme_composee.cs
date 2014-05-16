@@ -9,13 +9,14 @@ namespace Projet_Formes
 {
     class Forme_composee : Forme
     {
-        protected List<Forme_simple> _liste_formes;
+        protected List<Forme> _liste_formes;
 
-        public Forme_composee(int id, string nom) : base(id, nom)
+        public Forme_composee(int id, string nom, int idgroupe, List<Forme> listformes) : base(id, nom, idgroupe)
         {
+            this._liste_formes = listformes;
         }
 
-        public List<Forme_simple> Liste_formes
+        public List<Forme> Liste_formes
         {
             get
             {

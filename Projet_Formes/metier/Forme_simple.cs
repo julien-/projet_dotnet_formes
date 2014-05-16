@@ -11,7 +11,7 @@ namespace Projet_Formes
     {
         protected int _couleur;
 
-        public Forme_simple(int id, string nom, int couleur) : base (id, nom)
+        public Forme_simple(int id, string nom, int couleur, int idgroupe) : base (id, nom, idgroupe)
         {
             this._couleur = couleur;
         }

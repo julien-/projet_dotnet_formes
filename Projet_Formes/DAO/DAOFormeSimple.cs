@@ -23,11 +23,12 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
+            this._command.Parameters.AddWithValue("@idgroupe", entry.IdGroupe);
 
             //Définition des requetes
             List<String> tabRequete = new List<String>();
             //forme
-            tabRequete.Add(@"INSERT INTO forme(id, nom) VALUES (@id, @nom);");
+            tabRequete.Add(@"INSERT INTO forme(id, nom, id_groupe) VALUES (@id, @nom, @idgroupe);");
             //forme simple
             tabRequete.Add(@"INSERT INTO formesimple(id, couleur) VALUES (@id, @couleur);");
 
@@ -77,14 +78,15 @@ namespace Projet_Formes
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
             this._command.Parameters.AddWithValue("@couleur", entry.Couleur);
+            this._command.Parameters.AddWithValue("@idgroupe", entry.IdGroupe);
 
             //Définition des requetes
             List<String> tabRequete = new List<String>();
 
             //forme
-            tabRequete.Add(@"UPDATE forme SET nom = @nom WHERE id = @id;");
+            tabRequete.Add(@"UPDATE forme SET nom = @nom , id_groupe = @idgroupe WHERE id = @id;");
             //forme simple
-            tabRequete.Add(@"UPDATE formesimple SET couleur = @couleur WHERE id = @id;");
+            tabRequete.Add(@"UPDATE formesimple SET couleur = @couleurWHERE id = @id;");
 
             foreach (String r in tabRequete)
             {

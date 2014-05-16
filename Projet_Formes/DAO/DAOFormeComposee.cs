@@ -15,11 +15,12 @@ namespace Projet_Formes
             this._command.Parameters.Clear();
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
+            this._command.Parameters.AddWithValue("@idgroupe", entry.IdGroupe);
 
             //Définition des requetes
             List<String> tabRequete = new List<String>();
             //forme
-            tabRequete.Add(@"INSERT INTO forme(id, nom) VALUES (@id, @nom);");
+            tabRequete.Add(@"INSERT INTO forme(id, nom, id_groupe) VALUES (@id, @nom, @idgroupe);");
             //forme composee
             tabRequete.Add(@"INSERT INTO formecompos(id) VALUES (@id);");
 
@@ -68,12 +69,13 @@ namespace Projet_Formes
             this._command.Parameters.Clear();
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.Parameters.AddWithValue("@nom", entry.Nom);
+            this._command.Parameters.AddWithValue("@idgroupe", entry.IdGroupe);
 
             //Définition des requetes
             List<String> tabRequete = new List<String>();
 
             //forme
-            tabRequete.Add(@"UPDATE forme SET nom = @nom WHERE id = @id;");
+            tabRequete.Add(@"UPDATE forme SET nom = @nom , id_groupe = @idgroupe WHERE id = @id;");
 
             foreach (String r in tabRequete)
             {
@@ -136,13 +138,20 @@ namespace Projet_Formes
             MySqlDataReader rdr = null;
             List<Forme_composee> maliste = new List<Forme_composee>();
 
-            //Définition de la requete
-            this._command.Parameters.Clear();
-            this._command.CommandText = @"SELECT * FROM forme f, formecompos fc
-                                        WHERE f.id = fc.id;";
-
             try
             {
+                List<Forme> malisteforme = new List<Forme>();
+
+
+                //////////////
+                ///// 2 //////
+                //////////////
+
+                //Définition de la requete
+                this._command.Parameters.Clear();
+                this._command.CommandText = @"SELECT fc.id, nom, id_groupe FROM forme f, formecompos fc WHERE f.id = fc.id;";
+
+            
                 //Execution de la requete
                 rdr = this._command.ExecuteReader();
 
@@ -153,7 +162,23 @@ namespace Projet_Formes
                     {
                         int id = rdr.GetInt32(0);
                         String nom = rdr.GetString(1);
-                        maliste.Add(new Forme_composee(id, nom));
+                        int idgroupe = rdr.GetInt32(2);
+
+
+                        //////////////
+                        ///// 1 //////
+                        //////////////
+
+                        //definir la liste des formes ici du groupe
+                        //Définition de la requete
+                        //this._command.Parameters.Clear();
+                        //this._command.CommandText = @"SELECT fc.id, nom, id_groupe FROM forme f, formecompos fc WHERE f.id = fc.id;";
+
+
+
+
+
+                        maliste.Add(new Forme_composee(id, nom, idgroupe, new List<Forme> () ));
                     }
                 }
 

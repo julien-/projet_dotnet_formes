@@ -161,7 +161,8 @@ namespace Projet_Formes
                         int couleur = rdr.GetInt32(2);
                         Point p1 = new Point(rdr.GetInt32(3), rdr.GetInt32(4));
                         Point p2 = new Point(rdr.GetInt32(5), rdr.GetInt32(6));
-                        maliste.Add(new Segment(id, nom, couleur, p1, p2));
+                        int idgroupe = rdr.GetInt32(7);
+                        maliste.Add(new Segment(id, nom, couleur, p1, p2, idgroupe));
                     }
                 }
 

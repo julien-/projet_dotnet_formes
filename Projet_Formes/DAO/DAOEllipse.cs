@@ -124,7 +124,7 @@ namespace Projet_Formes
 
             //Définition de la requete
             this._command.Parameters.Clear();
-            this._command.CommandText = @"SELECT e.id, nom, couleur, x, y, largeur, hauteur "+
+            this._command.CommandText = @"SELECT e.id, nom, couleur, x, y, largeur, hauteur , id_groupe "+
                                         @"FROM forme f, formesimple fs, ellipse e, point p "+
                                         @"WHERE f.id = fs.id AND fs.id = e.id AND e.id = p.id";
 
@@ -144,7 +144,8 @@ namespace Projet_Formes
                         Point p1 = new Point(rdr.GetInt32(3), rdr.GetInt32(4));
                         int largeur = rdr.GetInt32(5);
                         int hauteur = rdr.GetInt32(6);
-                        maliste.Add(new Ellipse(id, nom, couleur, p1, hauteur, largeur));
+                        int idgroupe = rdr.GetInt32(7);
+                        maliste.Add(new Ellipse(id, nom, couleur, p1, hauteur, largeur, idgroupe));
                     }
                 }
 

@@ -80,7 +80,7 @@ namespace Projet_Formes
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Ellipse
         {
             textBox_nom.Clear();
-            this.forme_active = new Ellipse(id, "Ellipse " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
+            this.forme_active = new Ellipse(id, "Ellipse " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0, -1);
             this.id++;
             activer_dessin();
         }
@@ -89,28 +89,28 @@ namespace Projet_Formes
         {
             this.nb_points_poly = 3;
             this.tabcoord = new Point[this.nb_points_poly];
-            this.forme_active = new Triangle(id, "Triangle " + id, Color.Black.ToArgb(), tabcoord);
+            this.forme_active = new Triangle(id, "Triangle " + id, Color.Black.ToArgb(), tabcoord, -1);
             this.id++;
             activer_dessin();
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)   //attaché à l'item Dessin Rectangle
         {
-            this.forme_active = new Rectangle(id, "Rectangle " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0);
+            this.forme_active = new Rectangle(id, "Rectangle " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0, -1);
             this.id++;
             activer_dessin();
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Segment
         {
-            this.forme_active = new Segment(id, "Segment " + id, Color.Black.ToArgb(), new Point(0, 0), new Point(0, 0));
+            this.forme_active = new Segment(id, "Segment " + id, Color.Black.ToArgb(), new Point(0, 0), new Point(0, 0), -1);
             this.id++;
             activer_dessin();
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)    //attaché à l'item Dessin Polygone
         {
-            this.forme_active = new Polygone(id, "Polygone " + id, Color.Black.ToArgb(), tabcoord);
+            this.forme_active = new Polygone(id, "Polygone " + id, Color.Black.ToArgb(), tabcoord, -1);
             this.id++;
             label10.Visible = true;
             textBoxNbPoints.Visible = true;
@@ -416,7 +416,7 @@ namespace Projet_Formes
         {//Creation de Groupe
             if (e.KeyCode == Keys.Enter)
             {
-                this.ListGroupes.Add(new Forme_composee(this.id, textBoxCreationGroupe.Text));
+                this.ListGroupes.Add(new Forme_composee(this.id, textBoxCreationGroupe.Text, -1, new List<Forme>() ) );
                 labelCreationGroupe.Visible = false;
                 textBoxCreationGroupe.Visible = false;
                 //Ajouts
@@ -455,7 +455,7 @@ namespace Projet_Formes
                         this.forme_active.IdGroupe = this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Id; //ID dans ListeGroupes du groupe séléctionné dans la liste déroulante
                         if (this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Liste_formes == null)
                         {
-                            this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Liste_formes = new List<Forme_simple>();
+                            this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Liste_formes = new List<Forme>();
                         }
                         this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Liste_formes.Add(this.forme_active);
                         Console.WriteLine("Affectation FORMEACTIVE(" + this.forme_active.Id + ") au GROUPE(" + this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Id + ", " + this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Nom + ")");
@@ -618,11 +618,15 @@ namespace Projet_Formes
             this.ListGroupes.Clear();
 
             //PARTIE DONNEES
+            //Formes Simples
             this.ListFormes.AddRange(Fs1.find());   //Rectangle
             this.ListFormes.AddRange(Fs2.find());   //Segment
             this.ListFormes.AddRange(Fs3.find());   //Ellipse
             this.ListFormes.AddRange(Fs4.find());   //Triangle
             this.ListFormes.AddRange(Fs5.find());   //Polygone
+
+            //Formes Composees
+            this.ListGroupes.AddRange(Fc.find());
 
             //PARTIE VISUELLE
             refreshPanel();

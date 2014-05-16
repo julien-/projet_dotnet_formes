@@ -141,7 +141,8 @@ namespace Projet_Formes
                         Point p1 = new Point(rdr.GetInt32(3), rdr.GetInt32(4));
                         int largeur = rdr.GetInt32(5);
                         int hauteur = rdr.GetInt32(6);
-                        maliste.Add(new Rectangle(id, nom, couleur, p1, hauteur, largeur));
+                        int idgroupe = rdr.GetInt32(7);
+                        maliste.Add(new Rectangle(id, nom, couleur, p1, hauteur, largeur, idgroupe));
                     }
                 }
 
