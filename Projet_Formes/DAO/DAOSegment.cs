@@ -135,7 +135,7 @@ namespace Projet_Formes
 
             //Définition de la requete
             this._command.Parameters.Clear();
-            this._command.CommandText = @"SELECT s.id, nom, couleur, x AS x1, y AS y1, x2, y2 
+            this._command.CommandText = @"SELECT s.id, nom, couleur, x AS x1, y AS y1, x2, y2, id_groupe
                                         FROM (SELECT id, x AS x2, y AS y2 
                                                 FROM point 
                                                 WHERE ordre = 2)

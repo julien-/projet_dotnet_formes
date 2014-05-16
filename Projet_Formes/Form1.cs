@@ -599,8 +599,10 @@ namespace Projet_Formes
 
         private void sauvegarderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             foreach (Forme_simple forme in ListFormes)
             {
+                forme.Write();
                 Fs1.createorupdate(forme);
             }
 
@@ -630,6 +632,8 @@ namespace Projet_Formes
 
             //PARTIE VISUELLE
             refreshPanel();
+
+            this.id = this.ListFormes.Count + 1;
             
         }
 

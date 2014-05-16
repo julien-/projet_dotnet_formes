@@ -86,7 +86,7 @@ namespace Projet_Formes
             //forme
             tabRequete.Add(@"UPDATE forme SET nom = @nom , id_groupe = @idgroupe WHERE id = @id;");
             //forme simple
-            tabRequete.Add(@"UPDATE formesimple SET couleur = @couleurWHERE id = @id;");
+            tabRequete.Add(@"UPDATE formesimple SET couleur = @couleur WHERE id = @id;");
 
             foreach (String r in tabRequete)
             {
@@ -142,6 +142,13 @@ namespace Projet_Formes
             {
                 Console.WriteLine("Error: {0}", ex.ToString());
                 throw ex;
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
             }
         }
     }
