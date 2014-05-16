@@ -192,6 +192,11 @@ namespace Projet_Formes
             }
         }
 
+        public override List<Forme_simple> find()
+        {
+            return new List<Forme_simple>();
+        }
+
         public override void createorupdate(Forme_simple entry)
         {
             Type t = typeof(Triangle);

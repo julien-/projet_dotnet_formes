@@ -182,6 +182,54 @@ namespace Projet_Formes
             }
         }
 
+        public override List<Forme_simple> find()
+        {
+            MySqlDataReader rdr = null;
+            List<Forme_simple> maliste = new List<Forme_simple>();
+
+            //Définition de la requete
+            this._command.Parameters.Clear();
+            this._command.CommandText = @"SELECT e.id, nom, couleur, x, y, largeur, hauteur "+
+                                        @"FROM forme f, formesimple fs, ellipse e, point p "+
+                                        @"WHERE f.id = fs.id AND fs.id = e.id AND e.id = p.id";
+
+            try
+            {
+                //Execution de la requete
+                rdr = this._command.ExecuteReader();
+
+                //Extraction des données
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        int id = rdr.GetInt32(0);
+                        String nom = rdr.GetString(1);
+                        int couleur = rdr.GetInt32(2);
+                        Point p1 = new Point(rdr.GetInt32(3), rdr.GetInt32(4));
+                        int largeur = rdr.GetInt32(5);
+                        int hauteur = rdr.GetInt32(6);
+                        maliste.Add(new Ellipse(id, nom, couleur, p1, hauteur, largeur));
+                    }
+                }
+
+                //Resultat
+                return maliste;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                throw ex;
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
+        }
+
         public override void createorupdate(Forme_simple entry)
         {
             Type t = typeof(Ellipse);

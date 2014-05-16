@@ -599,17 +599,32 @@ namespace Projet_Formes
 
         private void sauvegarderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Forme_simple list in ListFormes)
+            foreach (Forme_simple forme in ListFormes)
             {
-                Fs1.createorupdate(list);
+                Fs1.createorupdate(forme);
             }
         }
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ListFormes.Clear();
+            this.ListGroupes.Clear();
             g2.Clear(Color.White);
+            g.Clear(Color.White);
             panel1.Invalidate();
+
+            //PARTIE DONNEES
+            this.ListFormes.AddRange(Fs1.find());   //Rectangle
+            this.ListFormes.AddRange(Fs2.find());   //Segment
+            this.ListFormes.AddRange(Fs3.find());   //Ellipse
+            this.ListFormes.AddRange(Fs4.find());   //Triangle
+            this.ListFormes.AddRange(Fs5.find());   //Polygone
+
+            //PARTIE VISUELLE
+            foreach (Forme_simple forme in ListFormes)
+            {
+                D1.dessiner(forme, g2);
+            }
         }
 
     }

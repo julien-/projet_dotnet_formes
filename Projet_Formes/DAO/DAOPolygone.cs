@@ -226,5 +226,10 @@ namespace Projet_Formes
                 successor.createorupdate(entry);
             }
         }
+
+        public override List<Forme_simple> find()
+        {
+            return new List<Forme_simple>();
+        }
     }
 }

@@ -109,6 +109,10 @@ namespace Projet_Formes
             return null;
         }
 
+        //public override List<Forme_simple> find()
+        //{
+        //    return null;
+        //}
 
         public override void createorupdate(Forme_simple entry)
         {

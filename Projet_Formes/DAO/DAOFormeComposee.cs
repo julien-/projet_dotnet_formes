@@ -101,7 +101,7 @@ namespace Projet_Formes
             this._command.Parameters.Clear();
             this._command.Parameters.AddWithValue("@id", entry.Id);
             this._command.CommandText = @"SELECT nom
-                                        FROM forme f";
+                                        FROM forme";
 
             try
             {
@@ -116,6 +116,49 @@ namespace Projet_Formes
                 //Resultat
                 return new Forme_composee(entry.Id, nom);
 
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                throw ex;
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
+        }
+
+        public override List<Forme_composee> find()
+        {
+            MySqlDataReader rdr = null;
+            List<Forme_composee> maliste = new List<Forme_composee>();
+
+            //Définition de la requete
+            this._command.Parameters.Clear();
+            this._command.CommandText = @"SELECT * FROM forme f, formecompos fc
+                                        WHERE f.id = fc.id;";
+
+            try
+            {
+                //Execution de la requete
+                rdr = this._command.ExecuteReader();
+
+                //Extraction des données
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        int id = rdr.GetInt32(0);
+                        String nom = rdr.GetString(1);
+                        maliste.Add(new Forme_composee(id, nom));
+                    }
+                }
+
+                //Resultat
+                return maliste;
             }
             catch (MySqlException ex)
             {
