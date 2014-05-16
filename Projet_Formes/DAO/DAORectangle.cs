@@ -121,7 +121,7 @@ namespace Projet_Formes
 
             //Définition de la requete
             this._command.Parameters.Clear();
-            this._command.CommandText = @"SELECT r.id, nom, couleur, x, y, largeur, hauteur " +
+            this._command.CommandText = @"SELECT r.id, nom, couleur, x, y, largeur, hauteur , id_groupe " +
                                         @"FROM forme f, formesimple fs, rectangle r, point p " +
                                         @"WHERE f.id = fs.id AND fs.id = r.id AND r.id = p.id";
 

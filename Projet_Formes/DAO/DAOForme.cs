@@ -20,6 +20,8 @@ namespace Projet_Formes
 
         public abstract List<T> find();   //SELECT *
 
+        //public abstract List<T> find(int id);
+
         public abstract void createorupdate(T entry);
 
     }

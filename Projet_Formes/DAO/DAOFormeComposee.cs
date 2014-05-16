@@ -169,11 +169,22 @@ namespace Projet_Formes
                         ///// 1 //////
                         //////////////
 
+                        List<Forme> maliste_formes = new List<Forme>();
                         //definir la liste des formes ici du groupe
                         //Définition de la requete
-                        //this._command.Parameters.Clear();
-                        //this._command.CommandText = @"SELECT fc.id, nom, id_groupe FROM forme f, formecompos fc WHERE f.id = fc.id;";
+                        this._command.Parameters.Clear();
+                        this._command.CommandText = @"SELECT * FROM forme WHERE id_groupe = "+idgroupe+";";
+                        //Execution de la requete
+                        rdr = this._command.ExecuteReader();
 
+                        //Extraction des données
+                        if (rdr.HasRows)
+                        {
+                            while (rdr.Read())
+                            {   //mise en place de COR pour les find
+                                //maliste_formes.Add( );
+                            }
+                        }
 
 
 

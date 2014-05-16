@@ -124,63 +124,64 @@ namespace Projet_Formes
                 rdr.Close();
 
                 List<Forme_simple> maliste = new List<Forme_simple>();
-
-                //Définition de la requete
-                this._command.Parameters.Clear();
-
-                String condition = @"";
-                String requete = @"SELECT p.id, nom, couleur, id_groupe, x AS x1, y AS y1, x2, y2";
-                for (int i = 3; i <= nb; i++) //Commence a 3 car Point 1 et 2 déjà traités dans la requete principale
+                if(nb > 0)
                 {
-                    requete += ", x" + i + ", y" + i;
-                }
+                    //Définition de la requete
+                    this._command.Parameters.Clear();
+
+                    String condition = @"";
+                    String requete = @"SELECT p.id, nom, couleur, id_groupe, x AS x1, y AS y1, x2, y2";
+                    for (int i = 3; i <= nb; i++) //Commence a 3 car Point 1 et 2 déjà traités dans la requete principale
+                    {
+                        requete += ", x" + i + ", y" + i;
+                    }
 
 
-                requete += " FROM ";
-                for (int i = 2; i <= nb; i++) //Commence a 2 car Sous requete necésaire dès qu'il y a plus de 1 point
-                {
-                    condition += @" AND R" + i + @".id = p.id";
-                    requete +=  @" (SELECT id, x AS x" + i + ", y AS y" + i + 
-                                @" FROM point "+
-                                @" WHERE ordre = " + i + 
-                                @" ) R" + i + @", ";
+                    requete += " FROM ";
+                    for (int i = 2; i <= nb; i++) //Commence a 2 car Sous requete necésaire dès qu'il y a plus de 1 point
+                    {
+                        condition += @" AND R" + i + @".id = p.id";
+                        requete +=  @" (SELECT id, x AS x" + i + ", y AS y" + i + 
+                                    @" FROM point "+
+                                    @" WHERE ordre = " + i + 
+                                    @" ) R" + i + @", ";
                     
-                }
-                requete += @" forme f, formesimple fs, point pt, polygone p "+
-                           @" WHERE f.id = fs.id "+
-                           @" AND fs.id = pt.id "+
-                           @" AND fs.id = p.id " +
-                            condition +
-                            @" AND ordre = 1;";
+                    }
+                    requete += @" forme f, formesimple fs, point pt, polygone p "+
+                               @" WHERE f.id = fs.id "+
+                               @" AND fs.id = pt.id "+
+                               @" AND fs.id = p.id " +
+                                condition +
+                                @" AND ordre = 1;";
 
-                this._command.CommandText = requete;
+                    this._command.CommandText = requete;
 
            
-                //Execution de la requete
-                rdr = this._command.ExecuteReader();
+                    //Execution de la requete
+                    rdr = this._command.ExecuteReader();
 
-                //Extraction des données
-                if (rdr.HasRows)
-                {
-                    while (rdr.Read())
+                    //Extraction des données
+                    if (rdr.HasRows)
                     {
-                        int id = rdr.GetInt32(0);
-                        String nom = rdr.GetString(1);
-                        int couleur = rdr.GetInt32(2);
-                        int idgroupe = rdr.GetInt32(3);
-                        Point[] tab_point = new Point[nb];
-
-                        int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
-                        for (int i = 1; i < nb *2; i += 2) //de 2 en 2, car x et y en meme temps
+                        while (rdr.Read())
                         {
-                            tab_point[j] = new Point(rdr.GetInt32(i + 3), rdr.GetInt32(i + 4));
-                            j++;
-                        }
+                            int id = rdr.GetInt32(0);
+                            String nom = rdr.GetString(1);
+                            int couleur = rdr.GetInt32(2);
+                            int idgroupe = rdr.GetInt32(3);
+                            Point[] tab_point = new Point[nb];
 
-                        maliste.Add(new Polygone(id, nom, couleur, tab_point, idgroupe));
+                            int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
+                            for (int i = 1; i < nb *2; i += 2) //de 2 en 2, car x et y en meme temps
+                            {
+                                tab_point[j] = new Point(rdr.GetInt32(i + 3), rdr.GetInt32(i + 4));
+                                j++;
+                            }
+
+                            maliste.Add(new Polygone(id, nom, couleur, tab_point, idgroupe));
+                        }
                     }
                 }
-
                 //Resultat
                 return maliste;
             }
