@@ -607,11 +607,10 @@ namespace Projet_Formes
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             this.ListFormes.Clear();
             this.ListGroupes.Clear();
-            g2.Clear(Color.White);
-            g.Clear(Color.White);
-            panel1.Invalidate();
+
 
             //PARTIE DONNEES
             this.ListFormes.AddRange(Fs1.find());   //Rectangle
@@ -621,10 +620,8 @@ namespace Projet_Formes
             this.ListFormes.AddRange(Fs5.find());   //Polygone
 
             //PARTIE VISUELLE
-            foreach (Forme_simple forme in ListFormes)
-            {
-                D1.dessiner(forme, g2);
-            }
+            refreshPanel();
+            
         }
 
     }

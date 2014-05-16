@@ -116,72 +116,7 @@ namespace Projet_Formes
                 successor.update(entry);
             }
         }
-
-        public override Forme_simple find(Forme_simple entry)
-        {
-            Type t = typeof(Ellipse);
-            Type t2 = entry.GetType();
-            if (t.Equals(t2))
-            {
-                MySqlDataReader rdr = null;
-
-                //Définition de la requete
-                this._command.Parameters.Clear();
-                this._command.Parameters.AddWithValue("@id", entry.Id);
-                this._command.CommandText = @"SELECT nom, couleur, x, y, hauteur, largeur
-                                            FROM forme f, formesimple fs, point p, ellipse e
-                                            WHERE f.id = fs.id 
-                                            AND fs.id = p.id
-                                            AND fs.id = e.id 
-                                            AND e.id = @id
-                                            AND p.ordre = 1;";
-
-                try
-                {
-                    //Execution de la requete
-                    rdr = this._command.ExecuteReader();
-
-                    //Extraction des données
-                    rdr.Read();
-
-                    String nom = rdr.GetString(0);
-                    int couleur = rdr.GetInt32(1);
-                    int x = rdr.GetInt32(2);
-                    int y = rdr.GetInt32(3);
-                    int hauteur = rdr.GetInt32(4);
-                    int largeur = rdr.GetInt32(5);
-                    //Transmforme les données extraites en données membres
-                    Point p1 = new Point(x, y);
-
-                    //Resultat
-                    Forme_simple ellipse = new Ellipse(entry.Id, nom, couleur, p1, hauteur, largeur);
-                    return ellipse;
-
-                }
-                catch (MySqlException ex)
-                {
-                    Console.WriteLine("Error: {0}", ex.ToString());
-                    throw ex;
-                }
-                finally
-                {
-                    if (rdr != null)
-                    {
-                        rdr.Close();
-                    }
-                }
-            }
-            else if (successor != null)
-            {
-                successor.find(entry);
-                return null;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
+        
         public override List<Forme_simple> find()
         {
             MySqlDataReader rdr = null;

@@ -127,12 +127,12 @@ namespace Projet_Formes
                 Fs1.create(list1);
             }
 
-            foreach(Forme_simple list in liste_formes)
-            {
-                   forme = Fs1.find(list);
-                   forme.Write();
-                   //liste_formes2.Add(forme);
-            }
+            //foreach(Forme_simple list in liste_formes)
+            //{
+            //       forme = Fs1.find();
+            //       forme.Write();
+            //       //liste_formes2.Add(forme);
+            //}
 
             /*foreach (Forme_simple list2 in liste_formes2)
             {

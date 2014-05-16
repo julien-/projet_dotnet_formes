@@ -93,43 +93,43 @@ namespace Projet_Formes
             }
         }
 
-        public override Forme_composee find(Forme_composee entry)
-        {
-            MySqlDataReader rdr = null;
+//        public override Forme_composee find(Forme_composee entry)
+//        {
+//            MySqlDataReader rdr = null;
 
-            //Définition de la requete
-            this._command.Parameters.Clear();
-            this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.CommandText = @"SELECT nom
-                                        FROM forme";
+//            //Définition de la requete
+//            this._command.Parameters.Clear();
+//            this._command.Parameters.AddWithValue("@id", entry.Id);
+//            this._command.CommandText = @"SELECT nom
+//                                        FROM forme";
 
-            try
-            {
-                //Execution de la requete
-                rdr = this._command.ExecuteReader();
+//            try
+//            {
+//                //Execution de la requete
+//                rdr = this._command.ExecuteReader();
 
-                //Extraction des données
-                rdr.Read();
+//                //Extraction des données
+//                rdr.Read();
 
-                String nom = rdr.GetString(0);
+//                String nom = rdr.GetString(0);
 
-                //Resultat
-                return new Forme_composee(entry.Id, nom);
+//                //Resultat
+//                return new Forme_composee(entry.Id, nom);
 
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                throw ex;
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-            }
-        }
+//            }
+//            catch (MySqlException ex)
+//            {
+//                Console.WriteLine("Error: {0}", ex.ToString());
+//                throw ex;
+//            }
+//            finally
+//            {
+//                if (rdr != null)
+//                {
+//                    rdr.Close();
+//                }
+//            }
+//        }
 
         public override List<Forme_composee> find()
         {

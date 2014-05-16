@@ -104,11 +104,6 @@ namespace Projet_Formes
             }
         }
 
-        public override Forme_simple find(Forme_simple entry)
-        {
-            return null;
-        }
-
         //public override List<Forme_simple> find()
         //{
         //    return null;

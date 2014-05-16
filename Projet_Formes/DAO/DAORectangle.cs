@@ -114,69 +114,52 @@ namespace Projet_Formes
             }
         }
 
-        public override Forme_simple find(Forme_simple entry)
+        public override List<Forme_simple> find()
         {
-            Type t = typeof(Rectangle);
-            Type t2 = entry.GetType();
-            if (t.Equals(t2))
+            MySqlDataReader rdr = null;
+            List<Forme_simple> maliste = new List<Forme_simple>();
+
+            //Définition de la requete
+            this._command.Parameters.Clear();
+            this._command.CommandText = @"SELECT r.id, nom, couleur, x, y, largeur, hauteur " +
+                                        @"FROM forme f, formesimple fs, rectangle r, point p " +
+                                        @"WHERE f.id = fs.id AND fs.id = r.id AND r.id = p.id";
+
+            try
             {
-                MySqlDataReader rdr = null;
+                //Execution de la requete
+                rdr = this._command.ExecuteReader();
 
-                //Définition de la requete
-                this._command.Parameters.Clear();
-                this._command.Parameters.AddWithValue("@id", entry.Id);
-                this._command.CommandText = @"SELECT nom, couleur, x, y, hauteur, largeur
-                                            FROM forme f, formesimple fs, point p, rectangle r
-                                            WHERE f.id = fs.id 
-                                            AND fs.id = p.id
-                                            AND fs.id = r.id 
-                                            AND r.id = @id
-                                            AND p.ordre = 1;";
-
-                try
+                //Extraction des données
+                if (rdr.HasRows)
                 {
-                    //Execution de la requete
-                    rdr = this._command.ExecuteReader();
-
-                    //Extraction des données
-                    rdr.Read();
-
-                    String nom = rdr.GetString(0);
-                    int couleur = rdr.GetInt32(1);
-                    int x = rdr.GetInt32(2);
-                    int y = rdr.GetInt32(3);
-                    int hauteur = rdr.GetInt32(4);
-                    int largeur = rdr.GetInt32(5);
-                    //Transmforme les données extraites en données membres
-                    Point p1 = new Point(x, y);
-
-                    //Resultat
-                    Forme_simple rectangle = new Rectangle(entry.Id, nom, couleur, p1, hauteur, largeur);
-                    return rectangle;
-                }
-
-                catch (MySqlException ex)
-                {
-                    Console.WriteLine("Error: {0}", ex.ToString());
-                    throw ex;
-                }
-                finally
-                {
-                    if (rdr != null)
+                    while (rdr.Read())
                     {
-                        rdr.Close();
+                        int id = rdr.GetInt32(0);
+                        String nom = rdr.GetString(1);
+                        int couleur = rdr.GetInt32(2);
+                        Point p1 = new Point(rdr.GetInt32(3), rdr.GetInt32(4));
+                        int largeur = rdr.GetInt32(5);
+                        int hauteur = rdr.GetInt32(6);
+                        maliste.Add(new Rectangle(id, nom, couleur, p1, hauteur, largeur));
                     }
                 }
+
+                //Resultat
+                return maliste;
             }
-            else if (successor != null)
+            catch (MySqlException ex)
             {
-                successor.find(entry);
-                return null;
+                Console.WriteLine("Error: {0}", ex.ToString());
+                throw ex;
             }
-            else
+            finally
             {
-                return null;
-            }            
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
         }
 
         public override void createorupdate(Forme_simple entry)
@@ -191,11 +174,6 @@ namespace Projet_Formes
             {
                 successor.createorupdate(entry);
             }
-        }
-
-        public override List<Forme_simple> find()
-        {
-            return new List<Forme_simple>();
         }
     }
 }
