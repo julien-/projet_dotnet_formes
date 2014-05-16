@@ -176,7 +176,36 @@ namespace Projet_Formes
 
         public override void createorupdate(Forme_composee entry)
         {
+            MySqlDataReader rdr = null;
 
+            //Définition de la requete
+            this._command.Parameters.Clear();
+            this._command.Parameters.AddWithValue("@id", entry.Id);
+            this._command.CommandText = @"SELECT COUNT(*)
+                                            FROM forme f
+                                            WHERE f.id = @id";
+
+            try
+            {
+                //Execution de la requete
+                rdr = this._command.ExecuteReader();
+
+                rdr.Read();
+
+                int val = rdr.GetInt32(0);
+
+                rdr.Close();
+
+                if (val == 0)
+                    create(entry);
+                else
+                    update(entry);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                throw ex;
+            }
         }
     }
 }

@@ -107,112 +107,6 @@ namespace Projet_Formes
             }
         }
 
-//        public override Forme_simple find(Forme_simple entry)
-//        {
-//            Type t = typeof(Polygone);
-//            Type t2 = entry.GetType();
-//            if (t.Equals(t2))
-//            {
-//                MySqlDataReader rdr = null;
-
-//                //Définition des variables
-//                this._command.Parameters.Clear();
-//                this._command.Parameters.AddWithValue("@id", entry.Id);
-
-//                //Recherche du nombre de points
-//                this._command.CommandText = @"SELECT COUNT(*) AS nb FROM point WHERE id = @id";
-
-//                try
-//                {
-//                    //Execution de la requete
-//                    rdr = this._command.ExecuteReader();
-//                    //Extraction des données
-//                    rdr.Read();
-//                    int nb = rdr.GetInt32(0);   //Nombre de points
-//                    rdr.Close();
-
-//                    //Construction de la requete
-//                    //SELECT nom, couleur, x AS x1, y AS y1, x2, y2
-//                    //FROM (
-//                    //    SELECT x AS x2, y AS y2
-//                    //    FROM point
-//                    //    WHERE id = @id
-//                    //    AND ordre = 2
-//                    //    ) R1, ..Sous Requetes.., forme f, formesimple fs, point p, ellipse e
-//                    //WHERE f.id = fs.id 
-//                    //AND fs.id = p.id
-//                    //AND fs.id = e.id 
-//                    //AND e.id = @id
-//                    //AND ordre = 1;
-//                    String requete = @"SELECT nom, couleur, x AS x1, y AS y1, x2, y2";
-//                    for (int i = 3; i <= nb; i++) //Commence a 3 car Point 1 et 2 déjà traités dans la requete principale
-//                    {
-//                        requete += ", x" + i + ", y" + i;
-//                    }
-//                    requete += " FROM ";
-//                    for (int i = 2; i <= nb; i++) //Commence a 2 car Sous requete necésaire dès qu'il y a plus de 1 point
-//                    {
-//                        requete += @"(
-//                                    SELECT x AS x" + i + ", y AS y" + i + @"
-//                                    FROM point
-//                                    WHERE id = @id
-//                                    AND ordre = " + i + @"
-//                                    ) R" + i + @", ";
-//                    }
-//                    requete += @"forme f, formesimple fs, point pt, polygone p
-//                                WHERE f.id = fs.id 
-//                                AND fs.id = pt.id
-//                                AND fs.id = p.id 
-//                                AND p.id = @id
-//                                AND ordre = 1;";
-
-//                    this._command.CommandText = requete;
-
-//                    //Execution de la requete
-//                    rdr = this._command.ExecuteReader();
-//                    //Extraction des données
-//                    rdr.Read();
-
-//                    String nom = rdr.GetString(0);
-//                    int couleur = rdr.GetInt32(1);
-//                    //int count = rdr.FieldCount; //nombre de points
-//                    Point[] tab_point = new Point[nb];
-
-//                    int j = 0; //j:index dans le tableau de point  i:index dans le tableau des entiers de la requete (X1,Y1,X2,Y2,...)
-//                    for (int i = 0; i <= nb + 1; i += 2) //de 2 en 2, car x et y en meme temps
-//                    {
-//                        tab_point[j] = new Point(rdr.GetInt32(i + 2), rdr.GetInt32(i + 3));
-//                        j++;
-//                    }
-
-//                    //Resultat
-//                    Forme_simple polygone = new Polygone(entry.Id, nom, couleur, tab_point);
-//                    return polygone;
-//                }
-//                catch (MySqlException ex)
-//                {
-//                    Console.WriteLine("Error: {0}", ex.ToString());
-//                    throw ex;
-//                }
-//                finally
-//                {
-//                    if (rdr != null)
-//                    {
-//                        rdr.Close();
-//                    }
-//                }
-//            }
-//            else if (successor != null)
-//            {
-//                successor.find(entry);
-//                return null;
-//            }
-//            else
-//            {
-//                return null;
-//            }
-//        }
-
         public override List<Forme_simple> find()
         {
             MySqlDataReader rdr = null;
@@ -228,11 +122,6 @@ namespace Projet_Formes
                 rdr.Read();
                 int nb = rdr.GetInt32(0);   //Nombre de points
                 rdr.Close();
-            
-
-
-
-
 
                 List<Forme_simple> maliste = new List<Forme_simple>();
 

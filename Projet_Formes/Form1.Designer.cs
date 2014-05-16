@@ -95,8 +95,9 @@
             // nouveauToolStripMenuItem
             // 
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(161, 24);
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.nouveauToolStripMenuItem.Text = "Nouveau";
+            this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click);
             // 
             // sauvegarderToolStripMenuItem
             // 
@@ -263,7 +264,7 @@
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 33);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -274,7 +275,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Size = new System.Drawing.Size(1420, 667);
-            this.splitContainer1.SplitterDistance = 1213;
+            this.splitContainer1.SplitterDistance = 1212;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 8;
             // 
@@ -289,7 +290,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1140, 662);
+            this.panel1.Size = new System.Drawing.Size(1139, 662);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -302,7 +303,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(198, 663);
+            this.panel2.Size = new System.Drawing.Size(199, 663);
             this.panel2.TabIndex = 9;
             // 
             // tableLayoutPanel1
@@ -326,7 +327,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(195, 663);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(196, 663);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // labelNom
@@ -361,7 +362,7 @@
             this.textBox_nom.Location = new System.Drawing.Point(71, 99);
             this.textBox_nom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_nom.Name = "textBox_nom";
-            this.textBox_nom.Size = new System.Drawing.Size(121, 22);
+            this.textBox_nom.Size = new System.Drawing.Size(122, 22);
             this.textBox_nom.TabIndex = 6;
             this.textBox_nom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_nom_KeyUp);
             // 
@@ -370,9 +371,9 @@
             this.panel_couleur.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_couleur.BackColor = System.Drawing.Color.Black;
             this.panel_couleur.Location = new System.Drawing.Point(72, 301);
-            this.panel_couleur.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_couleur.Margin = new System.Windows.Forms.Padding(4);
             this.panel_couleur.Name = "panel_couleur";
-            this.panel_couleur.Size = new System.Drawing.Size(119, 60);
+            this.panel_couleur.Size = new System.Drawing.Size(120, 60);
             this.panel_couleur.TabIndex = 11;
             this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
             // 
@@ -384,7 +385,7 @@
             this.labelGroupeActif.AutoSize = true;
             this.labelGroupeActif.Location = new System.Drawing.Point(71, 442);
             this.labelGroupeActif.Name = "labelGroupeActif";
-            this.labelGroupeActif.Size = new System.Drawing.Size(121, 221);
+            this.labelGroupeActif.Size = new System.Drawing.Size(122, 221);
             this.labelGroupeActif.TabIndex = 5;
             this.labelGroupeActif.Text = "Groupe Inactif";
             this.labelGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

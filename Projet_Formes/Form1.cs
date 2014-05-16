@@ -603,6 +603,12 @@ namespace Projet_Formes
             {
                 Fs1.createorupdate(forme);
             }
+
+            foreach (Forme_composee formecomp in ListGroupes)
+            {
+                Fc.createorupdate(formecomp);
+            }
+
         }
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -610,7 +616,6 @@ namespace Projet_Formes
             
             this.ListFormes.Clear();
             this.ListGroupes.Clear();
-
 
             //PARTIE DONNEES
             this.ListFormes.AddRange(Fs1.find());   //Rectangle
@@ -622,6 +627,14 @@ namespace Projet_Formes
             //PARTIE VISUELLE
             refreshPanel();
             
+        }
+
+        private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ListFormes.Clear();
+            this.ListGroupes.Clear();
+
+            refreshPanel();
         }
 
     }
