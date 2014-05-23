@@ -620,6 +620,9 @@ namespace Projet_Formes
             this.ListGroupes.Clear();
 
             //PARTIE DONNEES
+            //Formes Composees
+            this.ListGroupes.AddRange(Fc.find());
+            
             //Formes Simples
             this.ListFormes.AddRange(Fs1.find());   //Rectangle
             this.ListFormes.AddRange(Fs2.find());   //Segment
@@ -627,8 +630,13 @@ namespace Projet_Formes
             this.ListFormes.AddRange(Fs4.find());   //Triangle
             this.ListFormes.AddRange(Fs5.find());   //Polygone
 
-            //Formes Composees
-            this.ListGroupes.AddRange(Fc.find());
+            foreach (Forme_simple f in ListFormes)
+            {
+                //si le groupe dont appartient à la fomre existe 
+                if (this.ListGroupes.Any(item => item.Id == f.IdGroupe) )
+                    //alors on l'ajoute dans ListForme du groupe
+                    this.ListGroupes.Find(item => item.Id == f.IdGroupe).Liste_formes.Add(f);
+            }
 
             //PARTIE VISUELLE
             refreshPanel();
