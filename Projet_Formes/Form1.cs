@@ -622,7 +622,15 @@ namespace Projet_Formes
             //PARTIE DONNEES
             //Formes Composees
             this.ListGroupes.AddRange(Fc.find());
-            
+
+            foreach (Forme_composee g in ListGroupes)
+            {
+                //si le groupe dont appartient à la fomre existe 
+                if (this.ListGroupes.Any(item => item.Id == g.IdGroupe))
+                    //alors on l'ajoute dans ListForme du groupe
+                    this.ListGroupes.Find(item => item.Id == g.IdGroupe).Liste_formes.Add(g);
+            }
+
             //Formes Simples
             this.ListFormes.AddRange(Fs1.find());   //Rectangle
             this.ListFormes.AddRange(Fs2.find());   //Segment
@@ -651,6 +659,17 @@ namespace Projet_Formes
             this.ListGroupes.Clear();
 
             refreshPanel();
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+
+            splitContainer1.Height = control.Size.Height -60;
+            splitContainer1.Width = control.Size.Width - 16;
+
+            panel1.Height = control.Size.Height - 60;
+            panel1.Width = control.Size.Width - 60;
         }
 
     }

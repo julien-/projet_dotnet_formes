@@ -95,21 +95,21 @@
             // nouveauToolStripMenuItem
             // 
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click);
             // 
             // sauvegarderToolStripMenuItem
             // 
             this.sauvegarderToolStripMenuItem.Name = "sauvegarderToolStripMenuItem";
-            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.sauvegarderToolStripMenuItem.Text = "Sauvegarder";
             this.sauvegarderToolStripMenuItem.Click += new System.EventHandler(this.sauvegarderToolStripMenuItem_Click);
             // 
             // importerToolStripMenuItem
             // 
             this.importerToolStripMenuItem.Name = "importerToolStripMenuItem";
-            this.importerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importerToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.importerToolStripMenuItem.Text = "Importer";
             this.importerToolStripMenuItem.Click += new System.EventHandler(this.importerToolStripMenuItem_Click);
             // 
@@ -230,7 +230,7 @@
             // textBoxNbPoints
             // 
             this.textBoxNbPoints.Location = new System.Drawing.Point(319, 4);
-            this.textBoxNbPoints.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNbPoints.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNbPoints.Name = "textBoxNbPoints";
             this.textBoxNbPoints.Size = new System.Drawing.Size(18, 20);
             this.textBoxNbPoints.TabIndex = 4;
@@ -252,7 +252,7 @@
             // textBoxCreationGroupe
             // 
             this.textBoxCreationGroupe.Location = new System.Drawing.Point(450, 4);
-            this.textBoxCreationGroupe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxCreationGroupe.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxCreationGroupe.Name = "textBoxCreationGroupe";
             this.textBoxCreationGroupe.Size = new System.Drawing.Size(124, 20);
             this.textBoxCreationGroupe.TabIndex = 7;
@@ -281,16 +281,14 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoSize = true;
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(801, 537);
+            this.panel1.Size = new System.Drawing.Size(853, 538);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -321,7 +319,7 @@
             this.tableLayoutPanel1.Controls.Add(this.labelGroupeActif, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelNomGroupeActif, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
@@ -362,7 +360,7 @@
             // 
             this.textBox_nom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_nom.Location = new System.Drawing.Point(71, 79);
-            this.textBox_nom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_nom.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_nom.Name = "textBox_nom";
             this.textBox_nom.Size = new System.Drawing.Size(125, 20);
             this.textBox_nom.TabIndex = 6;
@@ -419,11 +417,12 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
