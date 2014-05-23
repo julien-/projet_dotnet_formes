@@ -641,7 +641,7 @@ namespace Projet_Formes
             //PARTIE VISUELLE
             refreshPanel();
 
-            this.id = this.ListFormes.Count + 1;
+            this.id = this.ListGroupes.Count + this.ListFormes.Count + 1;
             
         }
 

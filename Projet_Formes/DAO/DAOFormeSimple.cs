@@ -118,9 +118,9 @@ namespace Projet_Formes
             //Définition de la requete
             this._command.Parameters.Clear();
             this._command.Parameters.AddWithValue("@id", entry.Id);
-            this._command.CommandText = @"SELECT COUNT(*)
-                                            FROM forme f
-                                            WHERE f.id = @id";
+            this._command.CommandText = @"SELECT COUNT(*) "+
+                                            "FROM forme f "+
+                                            "WHERE f.id = @id";
 
             try
             {
