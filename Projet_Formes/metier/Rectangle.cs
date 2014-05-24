@@ -66,8 +66,8 @@ namespace Projet_Formes
 
         public override void translation(Point point1, Point point2)
         {
-            _point1.X = point2.X - (this.Largeur / 2);
-            _point1.Y = point2.Y - (this.Hauteur / 2);
+            _point1.X += point2.X - point1.X;
+            _point1.Y += point2.Y - point1.Y;
         }
 
         public override void homothetie(int zoom)

@@ -266,7 +266,7 @@ namespace Projet_Formes
             ///Ctrl+G (Controler le groupe de la forme active)
             if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
             {
-                if ((this.GroupeActif == -1) && (this.forme_active != null))
+                if ((this.GroupeActif == -1) && (this.forme_active != null) && this.ListGroupes.Any(item => item.Id == this.forme_active.IdGroupe))
                 {   //si inactif, on active
                     labelGroupeActif.Text = "Groupe Actif";
                     this.GroupeActif = this.forme_active.IdGroupe;
@@ -540,7 +540,7 @@ namespace Projet_Formes
                     this.toolStripComboBoxGroupes.Items.Add(g.Nom);
                 }
             }
-            if (this.forme_active != null && this.forme_active.IdGroupe != -1)
+            if (this.forme_active != null && this.forme_active.IdGroupe != -1 && this.ListGroupes.Any(item => item.Id == this.forme_active.IdGroupe))
                 this.toolStripComboBoxGroupes.SelectedText =  this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom;
             if (this.forme_active != null && this.forme_active.IdGroupe == -1)
                 this.toolStripComboBoxGroupes.SelectedText = "Aucun";
@@ -625,10 +625,28 @@ namespace Projet_Formes
 
             foreach (Forme_composee g in ListGroupes)
             {
-                //si le groupe dont appartient à la fomre existe 
-                if (this.ListGroupes.Any(item => item.Id == g.IdGroupe))
-                    //alors on l'ajoute dans ListForme du groupe
-                    this.ListGroupes.Find(item => item.Id == g.IdGroupe).Liste_formes.Add(g);
+                //idGroupe de notre groupe
+                int IDG = g.IdGroupe;
+
+                //tant qu'un groupe est lié à un autre groupe existant
+                while (this.ListGroupes.Any(item => item.Id == IDG))
+                {
+                    Forme_composee supergroupe = this.ListGroupes.Find(item => item.Id == IDG);
+
+                    foreach(Forme_simple f in g.Liste_formes)
+                    {//On ajoute toutes les formes non encore existant 
+                        
+                        //si la forme simple n'existe pas dans la liste_formes du super groupe, on l'ajoute
+                        if(! supergroupe.Liste_formes.Any(item => item.Id == f.Id))
+                        {
+                            supergroupe.Liste_formes.Add(f);
+                        }
+
+                    }
+
+                    //récupère l'idGroupe pour la prochaine boucle: le groupe père est il lié?
+                    IDG = this.ListGroupes.Find(item => item.Id == g.IdGroupe).IdGroupe;
+                }
             }
 
             //Formes Simples
