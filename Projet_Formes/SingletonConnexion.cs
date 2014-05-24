@@ -54,6 +54,10 @@ namespace Projet_Formes
                         Console.WriteLine("Error: (0)", ex.ToString());
                         throw ex;
                     }
+                    catch (MySqlException)
+                    {
+                        Console.WriteLine("\n\nla BDD n'est pas accessible. Vous ne pourrez pas charger ou sauvegarder\n\n");
+                    }
                 }
                 // Dans tous les cas on retourne l’unique instance de notre SqlCommand.
                 return _command;

@@ -177,6 +177,11 @@ namespace Projet_Formes
                 Console.WriteLine("Error: {0}", ex.ToString());
                 throw ex;
             }
+            catch(InvalidOperationException)
+            {
+                Console.WriteLine("\nLa connexion doit être ouverte, ce n'est pas le cas.\n");
+                return null;
+            }
             finally
             {
                 if (rdr != null)

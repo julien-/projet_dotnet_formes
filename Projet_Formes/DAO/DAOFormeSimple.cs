@@ -143,6 +143,10 @@ namespace Projet_Formes
                 Console.WriteLine("Error: {0}", ex.ToString());
                 throw ex;
             }
+            catch(InvalidOperationException)
+            {
+                Console.WriteLine("\nLa connexion doit etre valide et ouverte\n");
+            }
             finally
             {
                 if (rdr != null)

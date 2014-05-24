@@ -623,49 +623,54 @@ namespace Projet_Formes
 
             //PARTIE DONNEES
             //Formes Composees
-            this.ListGroupes.AddRange(Fc.find());
-
-            foreach (Forme_composee g in ListGroupes)
+            if (this.ListGroupes.Count > 0)
             {
-                //idGroupe de notre groupe
-                int IDG = g.IdGroupe;
+                this.ListGroupes.AddRange(Fc.find());
 
-                //tant qu'un groupe est lié à un autre groupe existant
-                while (this.ListGroupes.Any(item => item.Id == IDG))
+                foreach (Forme_composee g in ListGroupes)
                 {
-                    Forme_composee supergroupe = this.ListGroupes.Find(item => item.Id == IDG);
+                    //idGroupe de notre groupe
+                    int IDG = g.IdGroupe;
 
-                    foreach(Forme_simple f in g.Liste_formes)
-                    {//On ajoute toutes les formes non encore existant 
-                        
-                        //si la forme simple n'existe pas dans la liste_formes du super groupe, on l'ajoute
-                        if(! supergroupe.Liste_formes.Any(item => item.Id == f.Id))
-                        {
-                            supergroupe.Liste_formes.Add(f);
+                    //tant qu'un groupe est lié à un autre groupe existant
+                    while (this.ListGroupes.Any(item => item.Id == IDG))
+                    {
+                        Forme_composee supergroupe = this.ListGroupes.Find(item => item.Id == IDG);
+
+                        foreach (Forme_simple f in g.Liste_formes)
+                        {//On ajoute toutes les formes non encore existant 
+
+                            //si la forme simple n'existe pas dans la liste_formes du super groupe, on l'ajoute
+                            if (!supergroupe.Liste_formes.Any(item => item.Id == f.Id))
+                            {
+                                supergroupe.Liste_formes.Add(f);
+                            }
+
                         }
 
+                        //récupère l'idGroupe pour la prochaine boucle: le groupe père est il lié?
+                        IDG = this.ListGroupes.Find(item => item.Id == g.IdGroupe).IdGroupe;
                     }
-
-                    //récupère l'idGroupe pour la prochaine boucle: le groupe père est il lié?
-                    IDG = this.ListGroupes.Find(item => item.Id == g.IdGroupe).IdGroupe;
                 }
             }
 
             //Formes Simples
-            this.ListFormes.AddRange(Fs1.find());   //Rectangle
-            this.ListFormes.AddRange(Fs2.find());   //Segment
-            this.ListFormes.AddRange(Fs3.find());   //Ellipse
-            this.ListFormes.AddRange(Fs4.find());   //Triangle
-            this.ListFormes.AddRange(Fs5.find());   //Polygone
-
-            foreach (Forme_simple f in ListFormes)
+            if (this.ListFormes.Count > 0)
             {
-                //si le groupe dont appartient à la fomre existe 
-                if (this.ListGroupes.Any(item => item.Id == f.IdGroupe) )
-                    //alors on l'ajoute dans ListForme du groupe
-                    this.ListGroupes.Find(item => item.Id == f.IdGroupe).Liste_formes.Add(f);
-            }
+                this.ListFormes.AddRange(Fs1.find());   //Rectangle
+                this.ListFormes.AddRange(Fs2.find());   //Segment
+                this.ListFormes.AddRange(Fs3.find());   //Ellipse
+                this.ListFormes.AddRange(Fs4.find());   //Triangle
+                this.ListFormes.AddRange(Fs5.find());   //Polygone
 
+                foreach (Forme_simple f in ListFormes)
+                {
+                    //si le groupe dont appartient à la fomre existe 
+                    if (this.ListGroupes.Any(item => item.Id == f.IdGroupe))
+                        //alors on l'ajoute dans ListForme du groupe
+                        this.ListGroupes.Find(item => item.Id == f.IdGroupe).Liste_formes.Add(f);
+                }
+            }
             //PARTIE VISUELLE
             majListeSupprGroupes();
             majListeAjoutGroupes();
