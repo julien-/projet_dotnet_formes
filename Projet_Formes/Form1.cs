@@ -619,6 +619,8 @@ namespace Projet_Formes
             this.ListFormes.Clear();
             this.ListGroupes.Clear();
 
+            this.clearTouteLappli();
+
             //PARTIE DONNEES
             //Formes Composees
             this.ListGroupes.AddRange(Fc.find());
@@ -665,18 +667,39 @@ namespace Projet_Formes
             }
 
             //PARTIE VISUELLE
+            majListeSupprGroupes();
+            majListeAjoutGroupes();
             refreshPanel();
 
             this.id = this.ListGroupes.Count + this.ListFormes.Count + 1;
             
         }
 
-        private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
+        private void clearTouteLappli()
         {
             this.ListFormes.Clear();
             this.ListGroupes.Clear();
 
             refreshPanel();
+
+            this.GroupeActif = -1;
+            this.forme_active = null;
+
+            //Visuel partie droite
+            textBox_nom.Clear();
+            panel_couleur.BackColor = Color.Black;
+            labelNomGroupeActif.Text = "Aucun";
+            labelGroupeActif.Text = "Groupe Inactif";
+
+            //Visuel Listes de groupe
+            majListeAjoutGroupes();
+            majListeSupprGroupes();
+        }
+
+        private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.clearTouteLappli();
+            
         }
 
         private void Form1_Resize(object sender, EventArgs e)
