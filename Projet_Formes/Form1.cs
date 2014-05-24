@@ -599,33 +599,39 @@ namespace Projet_Formes
 
         private void sauvegarderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            foreach (Forme_simple forme in ListFormes)
+            try
             {
-                forme.Write();
-                Fs1.createorupdate(forme);
+                foreach (Forme_simple forme in ListFormes)
+                {
+                    forme.Write();
+                    Fs1.createorupdate(forme);
+                }
+
+                foreach (Forme_composee formecomp in ListGroupes)
+                {
+                    Fc.createorupdate(formecomp);
+                }
             }
-
-            foreach (Forme_composee formecomp in ListGroupes)
+            catch (InvalidOperationException)
             {
-                Fc.createorupdate(formecomp);
+                Console.WriteLine("\nPour sauvegarder: La connexion doit etre valide et ouverte\n");
             }
 
         }
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            this.ListFormes.Clear();
-            this.ListGroupes.Clear();
-
-            this.clearTouteLappli();
-
-            //PARTIE DONNEES
-            //Formes Composees
-            if (this.ListGroupes.Count > 0)
+            try
             {
-                this.ListGroupes.AddRange(Fc.find());
+                this.ListFormes.Clear();
+                this.ListGroupes.Clear();
+
+                this.clearTouteLappli();
+
+                //PARTIE DONNEES
+                //Formes Composees
+                if (Fc.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListGroupes.AddRange(Fc.find());
 
                 foreach (Forme_composee g in ListGroupes)
                 {
@@ -652,16 +658,19 @@ namespace Projet_Formes
                         IDG = this.ListGroupes.Find(item => item.Id == g.IdGroupe).IdGroupe;
                     }
                 }
-            }
 
-            //Formes Simples
-            if (this.ListFormes.Count > 0)
-            {
-                this.ListFormes.AddRange(Fs1.find());   //Rectangle
-                this.ListFormes.AddRange(Fs2.find());   //Segment
-                this.ListFormes.AddRange(Fs3.find());   //Ellipse
-                this.ListFormes.AddRange(Fs4.find());   //Triangle
-                this.ListFormes.AddRange(Fs5.find());   //Polygone
+
+                //Formes Simples
+                if (Fs1.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs1.find());   //Rectangle
+                if (Fs2.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs2.find());   //Segment
+                if (Fs3.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs3.find());   //Ellipse
+                if (Fs4.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs4.find());   //Triangle
+                if (Fs5.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs5.find());   //Polygone
 
                 foreach (Forme_simple f in ListFormes)
                 {
@@ -670,13 +679,18 @@ namespace Projet_Formes
                         //alors on l'ajoute dans ListForme du groupe
                         this.ListGroupes.Find(item => item.Id == f.IdGroupe).Liste_formes.Add(f);
                 }
-            }
-            //PARTIE VISUELLE
-            majListeSupprGroupes();
-            majListeAjoutGroupes();
-            refreshPanel();
 
-            this.id = this.ListGroupes.Count + this.ListFormes.Count + 1;
+                //PARTIE VISUELLE
+                majListeSupprGroupes();
+                majListeAjoutGroupes();
+                refreshPanel();
+
+                this.id = this.ListGroupes.Count + this.ListFormes.Count + 1;
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("\nPour importer, la connexion doit être ouverte, ce n'est pas le cas.\n");
+            }
             
         }
 

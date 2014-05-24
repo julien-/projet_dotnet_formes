@@ -80,7 +80,7 @@ namespace Projet_Formes
                 //Execution de la requete
                 _command.ExecuteNonQuery();
 
-                Console.WriteLine("Base de données créée");
+                Console.WriteLine("Requete CREATE DATABASE IF NOT EXISTS envoyé au serveur");
             }
             catch (MySqlException ex)//erreur
             {
