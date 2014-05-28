@@ -734,6 +734,19 @@ namespace Projet_Formes
 
             panel1.Height = control.Size.Height - 60;
             panel1.Width = control.Size.Width - 60;
+
+            g = this.panel1.CreateGraphics();
+            bm = new Bitmap(this.panel1.Width, this.panel1.Height);
+            g2 = Graphics.FromImage(bm);
+
+            //redessine toutes les formes
+            this.refreshPanel();
+            
+        }
+
+        private void quitterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }
