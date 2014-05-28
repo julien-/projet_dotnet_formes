@@ -633,6 +633,28 @@ namespace Projet_Formes
                 if (Fc.find() != null)   //gère cas où la BDD n'est pas disponible
                     this.ListGroupes.AddRange(Fc.find());
 
+                //Formes Simples
+                if (Fs1.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs1.find());   //Rectangle
+                if (Fs2.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs2.find());   //Segment
+                if (Fs3.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs3.find());   //Ellipse
+                if (Fs4.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs4.find());   //Triangle
+                if (Fs5.find() != null)   //gère cas où la BDD n'est pas disponible
+                    this.ListFormes.AddRange(Fs5.find());   //Polygone
+
+                foreach (Forme_simple f in ListFormes)
+                {
+                    //si le groupe dont appartient à la fomre existe 
+                    if (this.ListGroupes.Any(item => item.Id == f.IdGroupe))
+                        //alors on l'ajoute dans ListForme du groupe
+                        this.ListGroupes.Find(item => item.Id == f.IdGroupe).Liste_formes.Add(f);
+                }
+
+
+                //Groupe de Groupe
                 foreach (Forme_composee g in ListGroupes)
                 {
                     //idGroupe de notre groupe
@@ -655,30 +677,12 @@ namespace Projet_Formes
                         }
 
                         //récupère l'idGroupe pour la prochaine boucle: le groupe père est il lié?
-                        IDG = this.ListGroupes.Find(item => item.Id == g.IdGroupe).IdGroupe;
+                        IDG = this.ListGroupes.Find(item => item.Id == IDG).IdGroupe;
                     }
                 }
 
 
-                //Formes Simples
-                if (Fs1.find() != null)   //gère cas où la BDD n'est pas disponible
-                    this.ListFormes.AddRange(Fs1.find());   //Rectangle
-                if (Fs2.find() != null)   //gère cas où la BDD n'est pas disponible
-                    this.ListFormes.AddRange(Fs2.find());   //Segment
-                if (Fs3.find() != null)   //gère cas où la BDD n'est pas disponible
-                    this.ListFormes.AddRange(Fs3.find());   //Ellipse
-                if (Fs4.find() != null)   //gère cas où la BDD n'est pas disponible
-                    this.ListFormes.AddRange(Fs4.find());   //Triangle
-                if (Fs5.find() != null)   //gère cas où la BDD n'est pas disponible
-                    this.ListFormes.AddRange(Fs5.find());   //Polygone
-
-                foreach (Forme_simple f in ListFormes)
-                {
-                    //si le groupe dont appartient à la fomre existe 
-                    if (this.ListGroupes.Any(item => item.Id == f.IdGroupe))
-                        //alors on l'ajoute dans ListForme du groupe
-                        this.ListGroupes.Find(item => item.Id == f.IdGroupe).Liste_formes.Add(f);
-                }
+                
 
                 //PARTIE VISUELLE
                 majListeSupprGroupes();
