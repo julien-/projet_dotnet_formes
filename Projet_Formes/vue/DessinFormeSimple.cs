@@ -17,6 +17,8 @@ namespace Projet_Formes
         }
 
         public abstract void dessiner(Forme_simple entry, Graphics g);
+
+        public abstract void contourSelection(Forme_simple forme, Graphics g);
     }
 
 }

@@ -21,13 +21,12 @@ namespace Projet_Formes
         Point point_arrivee = new Point(0, 0);
 
         bool bouton_Mouse_left;
-        bool bouton_Mouse_middle;
-        bool selected;        
+        bool selected;
         bool PeutDessiner = false;
 
         Forme_simple forme_active;
         int id = 1;
-        int GroupeActif = -1;   //-1 si non actif sinon valeur de l'id du groupe
+       
 
         //Gestion Polygones
         int i = 0;
@@ -80,7 +79,7 @@ namespace Projet_Formes
         private void ellipseToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Ellipse
         {
             textBox_nom.Clear();
-            this.forme_active = new Ellipse(id, "Ellipse " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0, -1);
+            this.forme_active = new Ellipse(id, "Ellipse " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0, -1);
             this.id++;
             activer_dessin();
         }
@@ -89,28 +88,28 @@ namespace Projet_Formes
         {
             this.nb_points_poly = 3;
             this.tabcoord = new Point[this.nb_points_poly];
-            this.forme_active = new Triangle(id, "Triangle " + id, Color.Black.ToArgb(), tabcoord, -1);
+            this.forme_active = new Triangle(id, "Triangle " + id, panel_couleur.BackColor.ToArgb(), tabcoord, -1);
             this.id++;
             activer_dessin();
         }
 
         private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)   //attaché à l'item Dessin Rectangle
         {
-            this.forme_active = new Rectangle(id, "Rectangle " + id, Color.Black.ToArgb(), new Point(0, 0), 0, 0, -1);
+            this.forme_active = new Rectangle(id, "Rectangle " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), 0, 0, -1);
             this.id++;
             activer_dessin();
         }
 
         private void segmentToolStripMenuItem_Click(object sender, EventArgs e) //attaché à l'item Dessin Segment
         {
-            this.forme_active = new Segment(id, "Segment " + id, Color.Black.ToArgb(), new Point(0, 0), new Point(0, 0), -1);
+            this.forme_active = new Segment(id, "Segment " + id, panel_couleur.BackColor.ToArgb(), new Point(0, 0), new Point(0, 0), -1);
             this.id++;
             activer_dessin();
         }
 
         private void polygoneToolStripMenuItem_Click(object sender, EventArgs e)    //attaché à l'item Dessin Polygone
         {
-            this.forme_active = new Polygone(id, "Polygone " + id, Color.Black.ToArgb(), tabcoord, -1);
+            this.forme_active = new Polygone(id, "Polygone " + id, panel_couleur.BackColor.ToArgb(), tabcoord, -1);
             this.id++;
             label10.Visible = true;
             textBoxNbPoints.Visible = true;
@@ -121,10 +120,10 @@ namespace Projet_Formes
         {
             panel1.Cursor = System.Windows.Forms.Cursors.Cross;   //PASSE EN MODE DESSIN
             this.PeutDessiner = true;
-            if (this.GroupeActif != -1)
+            if (this.forme_active.IdGroupe != -1)
             {
-                labelGroupeActif.Text = "Groupe Inactif";
-                this.GroupeActif = -1;
+                //labelGroupeActif.Text = "Groupe Inactif";
+                this.forme_active.IdGroupe = -1;
             }
         }
 
@@ -139,58 +138,71 @@ namespace Projet_Formes
             labelNom.Focus();   //enleve le focus à textBoxNom
 
             if (e.Button == MouseButtons.Left && this.PeutDessiner)
+            {
                 bouton_Mouse_left = true;
-            else if (e.Button == MouseButtons.Right && this.PeutDessiner)
-            {//Dessin de Triangle/Polygone
-                if (i == this.nb_points_poly - 1)
-                {
-                    tabcoord[i] = point_depart;
-                    forme_active.maj(tabcoord);
-                    ListFormes.Add(this.forme_active);
-                    D1.dessiner(forme_active, g2);
-                    panel1.Invalidate();
-                    this.i = 0;
-                    this.PeutDessiner = false;
-                    panel1.Cursor = System.Windows.Forms.Cursors.Default;
-                }
-                else
-                {
-                    tabcoord[i] = point_depart;
-                    this.i++;
+                //######
+                //DESSIN
+                //######
+                if (this.forme_active.GetType() == typeof(Triangle) | this.forme_active.GetType() == typeof(Polygone))
+                {//Dessin de Triangle/Polygone
+                    if (i == this.nb_points_poly - 1)
+                    {
+                        tabcoord[i] = point_depart;
+                        forme_active.maj(tabcoord);
+                        ListFormes.Add(this.forme_active);
+                        D1.contourSelection(forme_active, g2);
+                        D1.dessiner(forme_active, g2);
+                        panel1.Invalidate();
+                        this.i = 0;
+                        this.PeutDessiner = false;
+                        panel1.Cursor = System.Windows.Forms.Cursors.Default;
+                    }
+                    else
+                    {
+                        tabcoord[i] = point_depart;
+                        this.i++;
+                    }
                 }
             }
-            else if (e.Button == MouseButtons.Middle)
+            else if (e.Button == MouseButtons.Left && !this.PeutDessiner)
             {
-                bouton_Mouse_middle = true;
-                
+                bouton_Mouse_left = true;
                 //Selectionne une forme
                 foreach (Forme_simple forme in ListFormes)
                 {
                     if (forme.recuperer(point_depart.X, point_depart.Y))
                     {
-                        if (this.GroupeActif != -1)
-                        {
-                            if(forme.IdGroupe == this.GroupeActif)
-                            {
-                                selected = true;
-                                forme_active = forme;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            selected = true;
-                            forme_active = forme;
+                        //#########
+                        //SELECTION
+                        //#########
+
+                        //if (this.forme_active.IdGroupe != -1)
+                        //{//Appartient à un groupe
+                        //    if (forme.IdGroupe == this.forme_active.IdGroupe)
+                        //    {//selection que des formes appartenant au groupe
+                        //        selected = true;
+                        //        forme_active = forme;
+                        //        break;
+                        //    }
+                        //}
+                        //else
+                        //{//Forme simple (sans groupe)
+                            this.selected = true;
+                            this.forme_active = forme;
                             break;
-                        }
+                        //}
                     }
                 }
             }
+
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)    //attaché à panel de dessin
         {
             point_arrivee = e.Location;
+            //######
+            //DESSIN
+            //######
             if (bouton_Mouse_left && PeutDessiner)
             {
                 bouton_Mouse_left = false;
@@ -199,8 +211,8 @@ namespace Projet_Formes
                 {   //Dessin de Segments, Ellipse, Rectangle
                     forme_active.maj(point_depart, point_arrivee);
                     ListFormes.Add(this.forme_active);
+                    D1.contourSelection(forme_active, g2);
                     D1.dessiner(forme_active, g2);
-                    this.GroupeActif = -1;
                     this.labelNomGroupeActif.Text = "Aucun";
                     this.toolStripComboBoxGroupes.SelectedItem = "Aucun";
                     majPropriete(this.forme_active);
@@ -209,19 +221,21 @@ namespace Projet_Formes
                 this.PeutDessiner = false;
                 panel1.Cursor = System.Windows.Forms.Cursors.Default;
             }
-            else if (bouton_Mouse_middle && selected)
-            {//TRANSLATION
-                bouton_Mouse_middle = false;
+            else if (bouton_Mouse_left && this.selected)
+            {   //###########
+                //TRANSLATION
+                //###########
+                bouton_Mouse_left = false;
                 if (forme_active != null)
                 {
-                    if (GroupeActif != -1)
+                    if (forme_active.IdGroupe != -1)
                     {   //Bouge une forme composée (tout le groupe actif)
-                        this.ListGroupes.Find(item => item.Id == this.GroupeActif).translation(point_depart, point_arrivee);
+                        this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).translation(point_depart, point_arrivee);
 
                         //Bouge tous les groupes liés à cette forme composée (le groupe actif)
                         foreach (Forme_composee f in ListGroupes)
                         {
-                            if (f.IdGroupe == this.GroupeActif)//this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Id)
+                            if (f.IdGroupe == this.forme_active.IdGroupe)//this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Id)
                             {//Si le groupe parcouru est lié au groupe actif
                                 f.translation(point_depart, point_arrivee);
                             }
@@ -230,14 +244,13 @@ namespace Projet_Formes
                     else
                     {   //Bouge une forme simple (la forme active)
                         forme_active.translation(point_depart, point_arrivee);
-                        majPropriete(forme_active);
                     }
+                    majPropriete(forme_active);
                 }
 
-                this.refreshPanel();
-                
                 selected = false;
             }
+            this.refreshPanel();
             majListeAjoutGroupes();
         }
 
@@ -255,6 +268,7 @@ namespace Projet_Formes
                 //fond du panel de choix de couleur
                 panel_couleur.BackColor = colorDialog1.Color;
                 //redessine la forme
+                D1.contourSelection(forme_active, g2);
                 D1.dessiner(forme_active, g2);
                 panel1.Invalidate();
 
@@ -263,34 +277,15 @@ namespace Projet_Formes
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)   //attaché au formulaire
         {
-            ///Ctrl+G (Controler le groupe de la forme active)
-            if (e.KeyCode == Keys.G && e.Modifiers == Keys.Control)
-            {
-                if ((this.GroupeActif == -1) && (this.forme_active != null) && this.ListGroupes.Any(item => item.Id == this.forme_active.IdGroupe))
-                {   //si inactif, on active
-                    labelGroupeActif.Text = "Groupe Actif";
-                    this.GroupeActif = this.forme_active.IdGroupe;
-                    lierGroupeToolStripMenuItem.Text = "Lier le groupe actif à un groupe";
-                    textBox_nom.Text = this.ListGroupes.Find(item => item.Id == this.GroupeActif).Nom;
-                }
-                else
-                {   //sinon on desactive
-                    labelGroupeActif.Text = "Groupe Inactif";
-                    this.GroupeActif = -1;
-                    lierGroupeToolStripMenuItem.Text = "Lier la forme active à un groupe";
-                }
-                majListeAjoutGroupes();
-            }  
-
             ///Ctrl+HAUT (Controler le groupe du groupe de la forme active (son SUPERGROUPE))
             if (e.KeyCode == Keys.Up && e.Modifiers == Keys.Control)
             {
-                if((this.GroupeActif != -1))
+                if ((this.forme_active.IdGroupe != -1))
                 {//groupe actif, on controle le SUPERGROUPE
-                    labelGroupeActif.Text = "Groupe Actif";
-                    this.GroupeActif = this.ListGroupes.Find(item => item.Id == this.GroupeActif).IdGroupe;
-                    Console.WriteLine("Controle du SUPER GROUPE: (" + this.GroupeActif);
-                    majPropriete(this.ListGroupes.Find(item => item.Id == this.GroupeActif));
+                    //labelGroupeActif.Text = "Groupe Actif";
+                    this.forme_active.IdGroupe = this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).IdGroupe;
+                    Console.WriteLine("Controle du SUPER GROUPE: (" + this.forme_active.IdGroupe);
+                    majPropriete(this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe));
                     majListeAjoutGroupes();
                 }
             }
@@ -300,14 +295,14 @@ namespace Projet_Formes
             {
                 if (this.forme_active != null)
                 {
-                    if (GroupeActif != -1)
+                    if (forme_active.IdGroupe != -1)
                     {   //Homothetie sur une forme composée (tout le groupe actif)
-                        this.ListGroupes.Find(item => item.Id == this.GroupeActif).homothetie(1);
+                        this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).homothetie(1);
 
                         //Homothetie sur tous les groupes liés à cette forme composée (le groupe actif)
                         foreach (Forme_composee f in ListGroupes)
                         {
-                            if (f.IdGroupe == this.GroupeActif)
+                            if (f.IdGroupe == this.forme_active.IdGroupe)
                             {//Si le groupe parcouru est lié au groupe actif
                                 f.homothetie(1);
                             }
@@ -325,15 +320,15 @@ namespace Projet_Formes
             {
                 if (this.forme_active != null)
                 {
-                    if (GroupeActif != -1)
+                    if (forme_active.IdGroupe != -1)
                     {
                         //Homothetie sur une forme composée (tout le groupe actif)
-                        this.ListGroupes.Find(item => item.Id == this.GroupeActif).homothetie(-1);
+                        this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).homothetie(-1);
 
                         //Homothetie sur tous les groupes liés à cette forme composée (le groupe actif)
                         foreach (Forme_composee f in ListGroupes)
                         {
-                            if (f.IdGroupe == this.GroupeActif)
+                            if (f.IdGroupe == this.forme_active.IdGroupe)
                             {//Si le groupe parcouru est lié au groupe actif
                                 f.homothetie(-1);
                             }
@@ -349,7 +344,7 @@ namespace Projet_Formes
                 }
             }
             //Suppression d'une forme ou d'un groupe
-            if (e.KeyData == Keys.Delete && this.forme_active != null && GroupeActif == -1)
+            if (e.KeyData == Keys.Delete && this.forme_active != null && this.forme_active.IdGroupe == -1)
             {
                 Console.WriteLine("Suppression d'une forme simple");
                 this.ListFormes.Remove(this.forme_active);
@@ -384,9 +379,11 @@ namespace Projet_Formes
                     labelNomGroupeActif.Text = this.ListGroupes.Find(item => item.Id == forme.IdGroupe).Nom;
             }
         }
+
+
         private void majPropriete(Forme_composee forme)
-        {//Affiche les propriétes de la forme dans la partie DROITE de l'application
-            textBox_nom.Text = "GROUPE "+forme.Nom;
+        {//Affiche les propriétes du groupe dans la partie DROITE de l'application
+            textBox_nom.Text = "GROUPE " + forme.Nom;
             labelNomGroupeActif.Text = forme.Nom;
         }
 
@@ -416,13 +413,13 @@ namespace Projet_Formes
         {//Creation de Groupe
             if (e.KeyCode == Keys.Enter)
             {
-                this.ListGroupes.Add(new Forme_composee(this.id, textBoxCreationGroupe.Text, -1, new List<Forme>() ) );
+                this.ListGroupes.Add(new Forme_composee(this.id, textBoxCreationGroupe.Text, -1, new List<Forme>()));
                 labelCreationGroupe.Visible = false;
                 textBoxCreationGroupe.Visible = false;
                 //Ajouts
                 this.toolStripComboBoxGroupes.Items.Add(textBoxCreationGroupe.Text);
                 this.SupprimerGroupetoolStripComboBox.Items.Add(textBoxCreationGroupe.Text);
-                Console.WriteLine("CREATION GROUPE: "+this.id+" : "+this.textBoxCreationGroupe.Text);
+                Console.WriteLine("CREATION GROUPE: " + this.id + " : " + this.textBoxCreationGroupe.Text);
                 //Prepare pour les suivants
                 textBoxCreationGroupe.Clear();
                 this.id++;
@@ -435,15 +432,15 @@ namespace Projet_Formes
             {   //Selection autre que Aucun : Affectation
                 if (this.forme_active != null)
                 {
-                    if (this.GroupeActif != -1)
+                    if (this.forme_active.IdGroupe != -1)
                     {//Affectation d'un GROUPE à un SOUS-GROUPE
                         //Liaison du SOUS-GROUPE(groupe de la forme active) au GROUPE
                         this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).IdGroupe = this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Id; //ID dans ListeGroupes du groupe séléctionné dans la liste déroulante
-                        
+
                         //Ajoute toutes les formes du sous groupe à la liste des formes du SUPERgroupe
-                        foreach (Forme_simple f in this.ListGroupes.Find(item => item.Id == this.GroupeActif).Liste_formes)
+                        foreach (Forme_simple f in this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Liste_formes)
                         {//on ajoute chaque forme du groupe actif dans le SUPERGROUPE
-                            this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Liste_formes.Add(f);    
+                            this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Liste_formes.Add(f);
                         }
 
                         Console.WriteLine("Affectation SOUS-GROUPE(" + this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Id + ", " + this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom + ") au GROUPEMAITRE(" + this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Id + ", " + this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Nom + ")");
@@ -459,22 +456,42 @@ namespace Projet_Formes
                         }
                         this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Liste_formes.Add(this.forme_active);
                         Console.WriteLine("Affectation FORMEACTIVE(" + this.forme_active.Id + ") au GROUPE(" + this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Id + ", " + this.ListGroupes[toolStripComboBoxGroupes.SelectedIndex - 1].Nom + ")");
+
+                        //##################
+                        //Controle du groupe
+                        //##################
+                        this.forme_active.IdGroupe = this.forme_active.IdGroupe;
+
+                        if ((this.forme_active.IdGroupe != -1) && (this.forme_active != null) && this.ListGroupes.Any(item => item.Id == this.forme_active.IdGroupe))
+                        {   //si on choisit un groupe existant, on le controle
+                            //labelGroupeActif.Text = "Groupe Actif";
+                            lierGroupeToolStripMenuItem.Text = "Lier le groupe actif à un groupe";
+                            textBox_nom.Text = this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom;
+                        }
+                        else
+                        {   //sinon aucun controle
+                            //labelGroupeActif.Text = "Groupe Inactif";
+                            lierGroupeToolStripMenuItem.Text = "Lier la forme active à un groupe";
+                        }
+                        majListeAjoutGroupes();
+
                     }
                     majPropriete(this.forme_active);
+                    refreshPanel();
                 }
             }
             else
             {//Desaffectation
                 if (this.forme_active != null)
                 {
-                    if (this.GroupeActif != -1)
+                    if (this.forme_active.IdGroupe != -1)
                     {
                         //Liaison du Groupe de la FORMEACTIVE au GROUPE -1
                         this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).IdGroupe = -1; //ID dans ListeGroupes du groupe séléctionné dans la liste déroulante
-                        Console.WriteLine("Desaffectaction: SOUS-GROUPE(" + this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Id + ", "+ this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom +") au GROUPE -1");
+                        Console.WriteLine("Desaffectaction: SOUS-GROUPE(" + this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Id + ", " + this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom + ") au GROUPE -1");
 
                         //Supprime toutes les formes du sous groupe de la liste des formes de l'ancien SUPERgroupe
-                        foreach (Forme_simple f in this.ListGroupes.Find(item => item.Id == this.GroupeActif).Liste_formes)
+                        foreach (Forme_simple f in this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Liste_formes)
                         {//on supprime chaque forme du groupe actif de la liste de l'ancien SUPERGROUPE
                             this.ListGroupes.Find(item => item.Nom == toolStripComboBoxGroupes.SelectedItem.ToString()).Liste_formes.Remove(f);
                         }
@@ -483,13 +500,13 @@ namespace Projet_Formes
                     {
                         //Liaison de la FORMEACTIVE au GROUPE -1
                         this.forme_active.IdGroupe = -1;
-                        Console.WriteLine("Desaffectaction: FORMEACTIVE("+this.forme_active.Id + ") au GROUPE -1");
+                        Console.WriteLine("Desaffectaction: FORMEACTIVE(" + this.forme_active.Id + ") au GROUPE -1");
                         this.labelNomGroupeActif.Text = "Aucun";
 
                     }
                 }
             }
-            
+
         }
 
         private void SupprimerGroupetoolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)  //attaché à la suppression d'un groupe
@@ -504,7 +521,7 @@ namespace Projet_Formes
             //Modifie toutes les formes liées au groupe
             this.ListFormes.Where(item => item.IdGroupe == IDdugroupe).ToList().ForEach(g => g.IdGroupe = -1);
             //Modifie forme active
-            if(this.forme_active != null)
+            if (this.forme_active != null)
             {
                 if (this.forme_active.IdGroupe == IDdugroupe)
                     this.forme_active.IdGroupe = -1;
@@ -518,7 +535,7 @@ namespace Projet_Formes
             if (labelNomGroupeActif.Text == NOMdugroupe)
             {
                 this.labelNomGroupeActif.Text = "Aucun";
-                this.GroupeActif = -1;
+                this.forme_active.IdGroupe = -1;
             }
             //Supprime de la liste déroulante des groupes à supprimer
             this.SupprimerGroupetoolStripComboBox.Items.Remove(NOMdugroupe);
@@ -530,10 +547,10 @@ namespace Projet_Formes
             this.toolStripComboBoxGroupes.Items.Add("Aucun");
             foreach (Forme_composee g in ListGroupes)
             {
-                if (this.forme_active != null && this.forme_active.IdGroupe == g.Id && this.GroupeActif != -1)
+                if (this.forme_active != null && this.forme_active.IdGroupe == g.Id && this.forme_active.IdGroupe != -1)
                 {//Un groupe ne peut pas se lier à soi-même
                     //On ne fait donc rien
-                   // this.toolStripComboBoxGroupes.Items.Remove(this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom);
+                    // this.toolStripComboBoxGroupes.Items.Remove(this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom);
                 }
                 else
                 {
@@ -541,7 +558,7 @@ namespace Projet_Formes
                 }
             }
             if (this.forme_active != null && this.forme_active.IdGroupe != -1 && this.ListGroupes.Any(item => item.Id == this.forme_active.IdGroupe))
-                this.toolStripComboBoxGroupes.SelectedText =  this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom;
+                this.toolStripComboBoxGroupes.SelectedText = this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom;
             if (this.forme_active != null && this.forme_active.IdGroupe == -1)
                 this.toolStripComboBoxGroupes.SelectedText = "Aucun";
         }
@@ -549,11 +566,11 @@ namespace Projet_Formes
         public void majListeSupprGroupes()
         {
             SupprimerGroupetoolStripComboBox.Items.Clear();
-            foreach(Forme_composee g in ListGroupes)
+            foreach (Forme_composee g in ListGroupes)
             {
                 SupprimerGroupetoolStripComboBox.Items.Add(g.Nom);
             }
-            
+
         }
 
         public void refreshPanel()
@@ -563,6 +580,16 @@ namespace Projet_Formes
 
             foreach (Forme_simple forme in ListFormes)
             {
+                //#################
+                //DESSIN DU CONTOUR
+                //#################
+                //cas forme active
+                if(forme_active == forme)
+                    D1.contourSelection(forme, g2);
+                //cas des formes du meme grouep (autre que -1)
+                if(forme_active.IdGroupe == forme.IdGroupe && forme.IdGroupe != -1)
+                    D1.contourSelection(forme, g2);
+                //dessine toutes les formes
                 D1.dessiner(forme, g2);
             }
             panel1.Invalidate();
@@ -571,26 +598,26 @@ namespace Projet_Formes
         private void textBox_nom_KeyUp(object sender, KeyEventArgs e)   //attaché au nom de la forme
         {//Renommer une forme
             //FORME SIMPLE
-            if (this.forme_active != null && this.GroupeActif == -1)
+            if (this.forme_active != null && this.forme_active.IdGroupe == -1)
             {
                 Console.WriteLine("Changement du nom d'une forme simple");
                 this.forme_active.Nom = textBox_nom.Text;
                 //modif dans listFormes
                 this.ListFormes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
                 //modif dans listGroupes
-                foreach(Forme_composee g in this.ListGroupes)
+                foreach (Forme_composee g in this.ListGroupes)
                 {
                     if (g.Liste_formes != null && g.Liste_formes.Find(item => item.Id == this.forme_active.Id) != null)
-                            g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
+                        g.Liste_formes.Find(item => item.Id == this.forme_active.Id).Nom = textBox_nom.Text;
                 }
             }
 
             //FORME COMPOSEE
-            if (this.GroupeActif != -1)
+            if (this.forme_active.IdGroupe != -1)
             {
                 Console.WriteLine("Changement du nom d'une forme composée");
                 //list forme composee
-                this.ListGroupes.Find(item => item.Id == this.GroupeActif).Nom = textBox_nom.Text;
+                this.ListGroupes.Find(item => item.Id == this.forme_active.IdGroupe).Nom = textBox_nom.Text;
                 labelNomGroupeActif.Text = textBox_nom.Text;
                 this.majListeAjoutGroupes();
                 this.majListeSupprGroupes();
@@ -682,7 +709,7 @@ namespace Projet_Formes
                 }
 
 
-                
+
 
                 //PARTIE VISUELLE
                 majListeSupprGroupes();
@@ -695,7 +722,7 @@ namespace Projet_Formes
             {
                 Console.WriteLine("\nPour importer, la connexion doit être ouverte, ce n'est pas le cas.\n");
             }
-            
+
         }
 
         private void clearTouteLappli()
@@ -705,14 +732,14 @@ namespace Projet_Formes
 
             refreshPanel();
 
-            this.GroupeActif = -1;
+            this.forme_active.IdGroupe = -1;
             this.forme_active = null;
 
             //Visuel partie droite
             textBox_nom.Clear();
             panel_couleur.BackColor = Color.Black;
             labelNomGroupeActif.Text = "Aucun";
-            labelGroupeActif.Text = "Groupe Inactif";
+            //labelGroupeActif.Text = "Groupe Inactif";
 
             //Visuel Listes de groupe
             majListeAjoutGroupes();
@@ -722,14 +749,14 @@ namespace Projet_Formes
         private void nouveauToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.clearTouteLappli();
-            
+
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             Control control = (Control)sender;
 
-            splitContainer1.Height = control.Size.Height -60;
+            splitContainer1.Height = control.Size.Height - 60;
             splitContainer1.Width = control.Size.Width - 16;
 
             panel1.Height = control.Size.Height - 60;
@@ -741,7 +768,7 @@ namespace Projet_Formes
 
             //redessine toutes les formes
             this.refreshPanel();
-            
+
         }
 
         private void quitterToolStripMenuItem_Click(object sender, EventArgs e)

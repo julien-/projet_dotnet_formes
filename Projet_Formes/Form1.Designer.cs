@@ -33,6 +33,7 @@
             this.nouveauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sauvegarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dessinerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ellipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_nom = new System.Windows.Forms.TextBox();
             this.panel_couleur = new System.Windows.Forms.Panel();
-            this.labelGroupeActif = new System.Windows.Forms.Label();
             this.labelNomGroupeActif = new System.Windows.Forms.Label();
-            this.quitterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,23 +96,30 @@
             // nouveauToolStripMenuItem
             // 
             this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.nouveauToolStripMenuItem.Text = "Nouveau";
             this.nouveauToolStripMenuItem.Click += new System.EventHandler(this.nouveauToolStripMenuItem_Click);
             // 
             // sauvegarderToolStripMenuItem
             // 
             this.sauvegarderToolStripMenuItem.Name = "sauvegarderToolStripMenuItem";
-            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sauvegarderToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.sauvegarderToolStripMenuItem.Text = "Sauvegarder";
             this.sauvegarderToolStripMenuItem.Click += new System.EventHandler(this.sauvegarderToolStripMenuItem_Click);
             // 
             // importerToolStripMenuItem
             // 
             this.importerToolStripMenuItem.Name = "importerToolStripMenuItem";
-            this.importerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importerToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.importerToolStripMenuItem.Text = "Importer";
             this.importerToolStripMenuItem.Click += new System.EventHandler(this.importerToolStripMenuItem_Click);
+            // 
+            // quitterToolStripMenuItem
+            // 
+            this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
+            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.quitterToolStripMenuItem.Text = "Quitter";
+            this.quitterToolStripMenuItem.Click += new System.EventHandler(this.quitterToolStripMenuItem_Click);
             // 
             // dessinerToolStripMenuItem
             // 
@@ -318,7 +324,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox_nom, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel_couleur, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelGroupeActif, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelNomGroupeActif, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 2);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
@@ -378,20 +383,6 @@
             this.panel_couleur.TabIndex = 11;
             this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
             // 
-            // labelGroupeActif
-            // 
-            this.labelGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelGroupeActif.AutoSize = true;
-            this.labelGroupeActif.Location = new System.Drawing.Point(71, 358);
-            this.labelGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelGroupeActif.Name = "labelGroupeActif";
-            this.labelGroupeActif.Size = new System.Drawing.Size(125, 180);
-            this.labelGroupeActif.TabIndex = 5;
-            this.labelGroupeActif.Text = "Groupe Inactif";
-            this.labelGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // labelNomGroupeActif
             // 
             this.labelNomGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -406,13 +397,6 @@
             this.labelNomGroupeActif.TabIndex = 8;
             this.labelNomGroupeActif.Text = "Aucun";
             this.labelNomGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // quitterToolStripMenuItem
-            // 
-            this.quitterToolStripMenuItem.Name = "quitterToolStripMenuItem";
-            this.quitterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.quitterToolStripMenuItem.Text = "Quitter";
-            this.quitterToolStripMenuItem.Click += new System.EventHandler(this.quitterToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -479,7 +463,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_nom;
         private System.Windows.Forms.Panel panel_couleur;
-        private System.Windows.Forms.Label labelGroupeActif;
         private System.Windows.Forms.Label labelNomGroupeActif;
         private System.Windows.Forms.ToolStripMenuItem quitterToolStripMenuItem;
 

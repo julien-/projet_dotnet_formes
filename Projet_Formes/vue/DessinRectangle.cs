@@ -24,5 +24,21 @@ namespace Projet_Formes
                 successor.dessiner(entry, g);
             }
         }
+
+        public override void contourSelection(Forme_simple forme, Graphics g)
+        {
+            Type t = typeof(Rectangle);
+            Type t2 = forme.GetType();
+            if (t.Equals(t2))
+            {
+                Rectangle e = (Rectangle)forme;
+                Pen pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10); //Couleur de selection
+                g.DrawRectangle(pen, e.Point1.X, e.Point1.Y, e.Largeur, e.Hauteur);
+            }
+            else if (successor != null)
+            {
+                successor.contourSelection(forme, g);
+            }
+        }
     }
 }
