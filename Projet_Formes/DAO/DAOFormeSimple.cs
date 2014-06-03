@@ -106,11 +106,11 @@ namespace Projet_Formes
             }
         }
 
-        //public override List<Forme_simple> find()
-        //{
-        //    return null;
-        //}
-
+        public void deleteAll()
+        {
+            base.deleteAll();
+        }
+        
         public override void createorupdate(Forme_simple entry)
         {
             MySqlDataReader rdr = null;

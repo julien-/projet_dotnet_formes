@@ -35,13 +35,11 @@ namespace Projet_Formes
             Console.Out.WriteLine("Couleur : " + this._couleur);    
         }
 
-        public override void translation(Point point1, Point point2) { }
+        public override void translation(Point vecteur) { }
 
         public override void homothetie(int zoom){}
 
         public abstract Boolean recuperer(int x, int y);
-
-        public abstract void translation_comp(Point point1, Point point2);
 
         public abstract void maj(Point point1, Point point2);
 

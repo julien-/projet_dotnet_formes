@@ -39,18 +39,11 @@ namespace Projet_Formes
             }
         }
 
-        public override void translation(Point point1, Point point2)
+        public override void translation(Point vecteur)
         {
-            foreach (Forme_simple liste_formes in _liste_formes)
+            foreach (Forme_simple formes in _liste_formes)
             {
-                if (liste_formes.recuperer(point1.X, point1.Y))
-                {
-                    liste_formes.translation(point1, point2);
-                }
-                else
-                {
-                    liste_formes.translation_comp(point1, point2);
-                }
+                formes.translation(vecteur);
             }
         }
 

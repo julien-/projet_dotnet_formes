@@ -61,7 +61,7 @@ namespace Projet_Formes
             Console.Out.WriteLine("Nom : " + this._nom);
         }
 
-        public abstract void translation(Point point1, Point point2);
+        public abstract void translation(Point vecteur);
 
         public abstract void homothetie(int zoom);
     }

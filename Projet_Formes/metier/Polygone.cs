@@ -38,29 +38,12 @@ namespace Projet_Formes
             }
         }
 
-        public override void translation(Point point1, Point point2)
+        public override void translation(Point vecteur)
         {
-            int pointselected = -1;
             for (int i = 0; i < this._tab_points.Length; i++)
             {
-                if ((point1.X >= this._tab_points[i].X - 4 && point1.X <= this._tab_points[i].X + 4) && (point1.Y >= this._tab_points[i].Y - 4 && point1.Y <= this._tab_points[i].Y + 4))
-                {
-                    pointselected = i;
-                    break;
-                }
-            }
-            
-            if (pointselected != -1)
-            {
-                for (int i = 0; i < this._tab_points.Length; i++)
-                {
-                    if (i != pointselected)
-                    {
-                        this._tab_points[i].X += (point2.X - point1.X);
-                        this._tab_points[i].Y += (point2.Y - point1.Y);
-                    }
-                }
-                this._tab_points[pointselected] = point2;
+                this._tab_points[i].X += vecteur.X;
+                this._tab_points[i].Y += vecteur.Y;
             }
         }
 
@@ -121,15 +104,6 @@ namespace Projet_Formes
                 }
             }
             return trouve;
-        }
-
-        public override void translation_comp(Point point1, Point point2)
-        {
-            for (int i = 0; i < this._tab_points.Length; i++)
-            {
-                this._tab_points[i].X = (point2.X - (point1.X - this._tab_points[i].X));
-                this._tab_points[i].Y = (point2.Y - (point1.Y - this._tab_points[i].Y));
-            }   
         }
 
         public override void maj(Point point1, Point point2)

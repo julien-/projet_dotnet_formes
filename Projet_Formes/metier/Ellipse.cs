@@ -65,11 +65,10 @@ namespace Projet_Formes
             Console.WriteLine("Largeur : " + this._largeur);
         }
 
-        public override void translation(Point point1, Point point2)
+        public override void translation(Point vecteur)
         {
-            _point1.X += point2.X - point1.X;
-            _point1.Y += point2.Y - point1.Y;
-            
+            _point1.X += vecteur.X;
+            _point1.Y += vecteur.Y;
         }
 
         public override void homothetie(int zoom)
@@ -88,12 +87,6 @@ namespace Projet_Formes
             }
             else
                 return false;
-        }
-
-        public override void translation_comp(Point point1, Point point2)
-        {
-            this._point1.X = (point2.X - (point1.X - this._point1.X));
-            this._point1.Y = (point2.Y - (point1.Y - this._point1.Y));
         }
 
         public override void maj(Point point1, Point point2)

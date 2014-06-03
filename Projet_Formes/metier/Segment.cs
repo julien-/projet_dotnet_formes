@@ -49,21 +49,12 @@ namespace Projet_Formes
             Console.WriteLine("Point 2 : (" + this._point2.X + "," + this._point2.Y + ")");
         }
 
-        public override void translation(Point point1, Point point2)
+        public override void translation(Point vecteur)
         {
-            if ((point1.X >= this.Point1.X - 4 && point1.X <= this.Point1.X + 4) && (point1.Y >= this.Point1.Y - 4 && point1.Y <= this.Point1.Y + 4))
-            {
-                this._point2.X += (point2.X - point1.X);
-                this._point2.Y += (point2.Y - point1.Y);
-                this._point1 = point2;
-            }
-            else if ((point1.X >= this.Point2.X - 4 && point1.X <= this.Point2.X + 4) && (point1.Y >= this.Point2.Y - 4 && point1.Y <= this.Point2.Y + 4))
-            {
-
-                this._point1.X += (point2.X - point1.X);
-                this._point1.Y += (point2.Y - point1.Y);
-                this._point2 = point2;
-            }
+            _point1.X += vecteur.X;
+            _point1.Y += vecteur.Y;
+            _point2.X += vecteur.X;
+            _point2.Y += vecteur.Y;
         }
 
         public override void homothetie(int zoom)
@@ -120,14 +111,6 @@ namespace Projet_Formes
                 Console.WriteLine("Aucun point selectionné");
                 return false;
             }
-        }
-
-        public override void translation_comp(Point point1, Point point2)
-        {
-            this._point1.X = (point2.X - (point1.X - this._point1.X));
-            this._point1.Y = (point2.Y - (point1.Y - this._point1.Y));
-            this._point2.X = (point2.X - (point1.X - this._point2.X));
-            this._point2.Y = (point2.Y - (point1.Y - this._point2.Y));
         }
 
         public override void maj(Point point1, Point point2)

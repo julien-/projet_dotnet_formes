@@ -44,6 +44,7 @@
             this.ajouterUnGroupeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lierGroupeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBoxGroupes = new System.Windows.Forms.ToolStripComboBox();
+            this.délierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerUnGroupeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SupprimerGroupetoolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -179,6 +180,7 @@
             this.groupeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ajouterUnGroupeToolStripMenuItem,
             this.lierGroupeToolStripMenuItem,
+            this.délierToolStripMenuItem,
             this.supprimerUnGroupeToolStripMenuItem});
             this.groupeToolStripMenuItem.Image = global::Projet_Formes.Properties.Resources.groupe;
             this.groupeToolStripMenuItem.Name = "groupeToolStripMenuItem";
@@ -196,6 +198,7 @@
             // 
             this.lierGroupeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBoxGroupes});
+            this.lierGroupeToolStripMenuItem.Enabled = false;
             this.lierGroupeToolStripMenuItem.Name = "lierGroupeToolStripMenuItem";
             this.lierGroupeToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.lierGroupeToolStripMenuItem.Text = "Lier la forme active à un groupe";
@@ -208,6 +211,13 @@
             this.toolStripComboBoxGroupes.Name = "toolStripComboBoxGroupes";
             this.toolStripComboBoxGroupes.Size = new System.Drawing.Size(121, 23);
             this.toolStripComboBoxGroupes.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxGroupes_SelectedIndexChanged);
+            // 
+            // délierToolStripMenuItem
+            // 
+            this.délierToolStripMenuItem.Name = "délierToolStripMenuItem";
+            this.délierToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.délierToolStripMenuItem.Text = "Délier du groupe actif";
+            this.délierToolStripMenuItem.Click += new System.EventHandler(this.délierToolStripMenuItem_Click);
             // 
             // supprimerUnGroupeToolStripMenuItem
             // 
@@ -465,6 +475,7 @@
         private System.Windows.Forms.Panel panel_couleur;
         private System.Windows.Forms.Label labelNomGroupeActif;
         private System.Windows.Forms.ToolStripMenuItem quitterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem délierToolStripMenuItem;
 
     }
 }
