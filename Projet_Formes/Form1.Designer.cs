@@ -54,13 +54,14 @@
             this.textBoxCreationGroupe = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.listBoxGroupesLiés = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelNom = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_nom = new System.Windows.Forms.TextBox();
             this.panel_couleur = new System.Windows.Forms.Panel();
-            this.labelNomGroupeActif = new System.Windows.Forms.Label();
+            this.labelGroupe = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fichierToolStripMenuItem,
             this.dessinerToolStripMenuItem,
@@ -236,6 +238,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(230, 4);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -247,10 +250,14 @@
             // 
             // textBoxNbPoints
             // 
-            this.textBoxNbPoints.Location = new System.Drawing.Point(319, 4);
+            this.textBoxNbPoints.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxNbPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxNbPoints.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNbPoints.ForeColor = System.Drawing.SystemColors.MenuBar;
+            this.textBoxNbPoints.Location = new System.Drawing.Point(324, -1);
             this.textBoxNbPoints.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNbPoints.Name = "textBoxNbPoints";
-            this.textBoxNbPoints.Size = new System.Drawing.Size(18, 20);
+            this.textBoxNbPoints.Size = new System.Drawing.Size(18, 24);
             this.textBoxNbPoints.TabIndex = 4;
             this.textBoxNbPoints.Visible = false;
             this.textBoxNbPoints.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
@@ -258,6 +265,7 @@
             // labelCreationGroupe
             // 
             this.labelCreationGroupe.AutoSize = true;
+            this.labelCreationGroupe.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.labelCreationGroupe.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCreationGroupe.Location = new System.Drawing.Point(351, 4);
             this.labelCreationGroupe.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -269,10 +277,14 @@
             // 
             // textBoxCreationGroupe
             // 
-            this.textBoxCreationGroupe.Location = new System.Drawing.Point(450, 4);
-            this.textBoxCreationGroupe.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCreationGroupe.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxCreationGroupe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxCreationGroupe.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCreationGroupe.ForeColor = System.Drawing.SystemColors.MenuBar;
+            this.textBoxCreationGroupe.Location = new System.Drawing.Point(464, -1);
+            this.textBoxCreationGroupe.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxCreationGroupe.Name = "textBoxCreationGroupe";
-            this.textBoxCreationGroupe.Size = new System.Drawing.Size(124, 20);
+            this.textBoxCreationGroupe.Size = new System.Drawing.Size(124, 24);
             this.textBoxCreationGroupe.TabIndex = 7;
             this.textBoxCreationGroupe.Visible = false;
             this.textBoxCreationGroupe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxCreationGroupe_KeyDown);
@@ -292,6 +304,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Size = new System.Drawing.Size(1065, 542);
             this.splitContainer1.SplitterDistance = 857;
@@ -310,7 +323,16 @@
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
+            // listBoxGroupesLiés
+            // 
+            this.listBoxGroupesLiés.FormattingEnabled = true;
+            this.listBoxGroupesLiés.Location = new System.Drawing.Point(83, 361);
+            this.listBoxGroupesLiés.Name = "listBoxGroupesLiés";
+            this.listBoxGroupesLiés.Size = new System.Drawing.Size(112, 173);
+            this.listBoxGroupesLiés.TabIndex = 10;
             // 
             // panel2
             // 
@@ -328,13 +350,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.92696F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.07304F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.40404F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.59596F));
+            this.tableLayoutPanel1.Controls.Add(this.listBoxGroupesLiés, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelNom, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox_nom, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel_couleur, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelNomGroupeActif, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelGroupe, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 2);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -354,9 +377,9 @@
             this.labelNom.Location = new System.Drawing.Point(2, 0);
             this.labelNom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNom.Name = "labelNom";
-            this.labelNom.Size = new System.Drawing.Size(65, 179);
+            this.labelNom.Size = new System.Drawing.Size(76, 179);
             this.labelNom.TabIndex = 0;
-            this.labelNom.Text = "Nom";
+            this.labelNom.Text = "Forme active :";
             this.labelNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -368,18 +391,22 @@
             this.label2.Location = new System.Drawing.Point(2, 179);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 179);
+            this.label2.Size = new System.Drawing.Size(76, 179);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Couleur";
+            this.label2.Text = "Couleur :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox_nom
             // 
             this.textBox_nom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_nom.Location = new System.Drawing.Point(71, 79);
+            this.textBox_nom.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBox_nom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_nom.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_nom.ForeColor = System.Drawing.SystemColors.Control;
+            this.textBox_nom.Location = new System.Drawing.Point(82, 77);
             this.textBox_nom.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_nom.Name = "textBox_nom";
-            this.textBox_nom.Size = new System.Drawing.Size(125, 20);
+            this.textBox_nom.Size = new System.Drawing.Size(114, 24);
             this.textBox_nom.TabIndex = 6;
             this.textBox_nom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_nom_KeyUp);
             // 
@@ -387,26 +414,21 @@
             // 
             this.panel_couleur.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_couleur.BackColor = System.Drawing.Color.Black;
-            this.panel_couleur.Location = new System.Drawing.Point(72, 244);
+            this.panel_couleur.Location = new System.Drawing.Point(83, 244);
             this.panel_couleur.Name = "panel_couleur";
-            this.panel_couleur.Size = new System.Drawing.Size(123, 49);
+            this.panel_couleur.Size = new System.Drawing.Size(112, 49);
             this.panel_couleur.TabIndex = 11;
             this.panel_couleur.Click += new System.EventHandler(this.panel_couleur_Click);
             // 
-            // labelNomGroupeActif
+            // labelGroupe
             // 
-            this.labelNomGroupeActif.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelNomGroupeActif.AutoSize = true;
-            this.labelNomGroupeActif.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNomGroupeActif.Location = new System.Drawing.Point(2, 358);
-            this.labelNomGroupeActif.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelNomGroupeActif.Name = "labelNomGroupeActif";
-            this.labelNomGroupeActif.Size = new System.Drawing.Size(65, 180);
-            this.labelNomGroupeActif.TabIndex = 8;
-            this.labelNomGroupeActif.Text = "Aucun";
-            this.labelNomGroupeActif.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelGroupe.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelGroupe.AutoSize = true;
+            this.labelGroupe.Location = new System.Drawing.Point(3, 441);
+            this.labelGroupe.Name = "labelGroupe";
+            this.labelGroupe.Size = new System.Drawing.Size(48, 13);
+            this.labelGroupe.TabIndex = 12;
+            this.labelGroupe.Text = "Groupe :";
             // 
             // Form1
             // 
@@ -473,9 +495,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_nom;
         private System.Windows.Forms.Panel panel_couleur;
-        private System.Windows.Forms.Label labelNomGroupeActif;
         private System.Windows.Forms.ToolStripMenuItem quitterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem délierToolStripMenuItem;
+        private System.Windows.Forms.Label labelGroupe;
+        private System.Windows.Forms.ListBox listBoxGroupesLiés;
 
     }
 }

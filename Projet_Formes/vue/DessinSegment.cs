@@ -25,19 +25,19 @@ namespace Projet_Formes
             }
         }
 
-        public override void contourSelection(Forme_simple forme, Graphics g)
+        public override void contourSelection(Forme_simple forme, Graphics g, Color couleur)
         {
             Type t = typeof(Segment);
             Type t2 = forme.GetType();
             if (t.Equals(t2))
             {
                 Segment s = (Segment)forme;
-                Pen pen = new Pen(Color.FromArgb(255, 0, 255, 0), 10); //Couleur de selection
+                Pen pen = new Pen(couleur, 10); //Couleur de selection
                 g.DrawLine(pen, s.Point1.X, s.Point1.Y, s.Point2.X, s.Point2.Y);
             }
             else if (successor != null)
             {
-                successor.contourSelection(forme, g);
+                successor.contourSelection(forme, g, couleur);
             }
         }
     }
